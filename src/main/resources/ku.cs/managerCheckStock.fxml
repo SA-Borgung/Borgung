@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.ManagerCheckStock">
+   <children>
+      <Label layoutX="329.0" layoutY="52.0" text="Check Stock" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="372.0" layoutY="221.0" prefWidth="150.0" />
+      <Label layoutX="258.0" layoutY="219.0" text="เลือกบ่อ">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="86.0" fitWidth="121.0" layoutX="348.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/telephone.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="373.0" layoutY="297.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="73.0" text="next">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="50.0" layoutY="534.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="57.0" text="back" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.StaffUpadateShrimp">
+   <children>
+      <Label layoutX="227.0" layoutY="265.0" text="สถานะการเลี้ยงกุ้ง :">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="460.0" layoutY="268.0" prefHeight="30.0" prefWidth="150.0" text="แสดงข้อความตรงนี้" />
+      <ImageView fitHeight="64.0" fitWidth="71.0" layoutX="155.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/qc.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="349.0" layoutY="360.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="121.0" text="พร้อมขาย" />
+      <Button layoutX="59.0" layoutY="525.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" text="back" />
+   </children>
+</AnchorPane>
