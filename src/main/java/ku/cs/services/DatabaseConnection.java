@@ -12,6 +12,8 @@ public class DatabaseConnection {
         String databasePassword = "";
         String url = "jdbc:mysql://localhost:3306/" + databaseName;
 
+        //blaha adaduhawbdua bdad
+
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
