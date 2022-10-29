@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.PrepareBorgung">
+   <children>
+      <Pane id="frame1" layoutX="180.0" layoutY="68.0" prefHeight="469.0" prefWidth="480.0">
+         <children>
+            <Label layoutX="213.0" layoutY="-8.0" prefHeight="44.0" prefWidth="131.0" text="เตรียมบ่อ">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="139.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/complain.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="390.0" layoutY="428.0" mnemonicParsing="false" text="เตรียมบ่อ" />
+            <ChoiceBox layoutX="50.0" layoutY="249.0" prefWidth="150.0" />
+            <ChoiceBox layoutX="287.0" layoutY="248.0" prefWidth="150.0" />
+            <Label layoutX="76.0" layoutY="216.0" text="รหัสพนักงาน">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="339.0" layoutY="216.0" text="เลขบ่อ">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="145.0" fitWidth="256.0" layoutX="114.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/borgung1.jpg" />
+               </image>
+            </ImageView>
+            <TextArea layoutX="65.0" layoutY="301.0" prefHeight="119.0" prefWidth="356.0" />
+         </children>
+      </Pane>
+      <Button layoutX="57.0" layoutY="524.0" mnemonicParsing="false" text="back" />
+   </children>
+</AnchorPane>

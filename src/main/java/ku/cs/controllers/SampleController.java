@@ -24,14 +24,14 @@ public class SampleController {
 
         databaseConnection = new DatabaseConnection();
         Connection connectDB = databaseConnection.getConnection();
-        String connectQuery = "select * from เลี้ยงกุ้ง";
+        String connectQuery = "select * from prawn";
 
         try{
             Statement statement = connectDB.createStatement();
             ResultSet queryOutput = statement.executeQuery(connectQuery);
 
             while (queryOutput.next()){
-                showSampleView(queryOutput.getString("รหัสพันธุ์กุ้ง"));
+                showSampleView(queryOutput.getString("P_SPECIES"));
             }
         }catch (Exception e){
             e.printStackTrace();
