@@ -24,20 +24,31 @@ public class SampleController {
 
         databaseConnection = new DatabaseConnection();
         Connection connectDB = databaseConnection.getConnection();
-        String connectQuery = "select * from care";
+        String connectQuery = "SELECT * FROM care";
 
         try{
             Statement statement = connectDB.createStatement();
             ResultSet queryOutput = statement.executeQuery(connectQuery);
 
-            while (queryOutput.next()){
-                showSampleView(queryOutput.getString("D_ID"));
+            while (queryOutput != null && queryOutput.next()){
+                String careID = queryOutput.getString("D_ID");
+                String giveFoodStatus = queryOutput.getString("DF_STATUS");
+                String givePillsStatus = queryOutput.getString("DP_STATUS");
+                String measureWeight = queryOutput.getString("P_MEASUREWEIGHT");
+                String prawnID = queryOutput.getString("P_ID");
+                String pondID = queryOutput.getString("W_NO");
+                // ทดสอบ print ลง cmdline
+                System.out.println(careID + "\t\t" + giveFoodStatus
+                        + "\t\t" + givePillsStatus
+                        + "\t\t" + measureWeight
+                        + "\t\t" + prawnID
+                        + "\t\t" + pondID);
+                // อันเก่า
+                showSampleView(careID);
             }
-        }catch (Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void showSampleView(String string){
