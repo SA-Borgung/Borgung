@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.Login">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css">
+         <children>
+            <ImageView fitHeight="117.0" fitWidth="223.0" layoutX="273.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../image/Gung.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="351.0" layoutY="220.0" text="login ">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <VBox layoutX="216.0" layoutY="286.0" prefHeight="85.0" prefWidth="350.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="350.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/image/userProfile/user.png" />
+                           </image>
+                        </ImageView>
+                        <TextField id="inputArea" fx:id="usernameTextField" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" promptText="username" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="350.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/image/logo/password.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <PasswordField id="inputArea" fx:id="passwordField" alignment="CENTER" prefWidth="300.0" promptText="password" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </PasswordField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="235.0" layoutY="371.0" prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label id="errL" fx:id="errorTextLabel" alignment="CENTER" prefHeight="25.0" prefWidth="302.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button id="glass" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="25.0" prefWidth="100.0" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css" text="login">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Label layoutX="304.0" layoutY="39.0" text="Shrimp Farm">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

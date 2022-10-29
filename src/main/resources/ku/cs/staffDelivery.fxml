@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.StaffDelivery">
+   <children>
+      <Label layoutX="364.0" layoutY="59.0" prefHeight="35.0" prefWidth="127.0" text="ส่งของ">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="389.0" layoutY="144.0" prefWidth="150.0" />
+      <Label layoutX="241.0" layoutY="145.0" text="ใบ Sell order">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="29.0" layoutY="553.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="358.0" layoutY="205.0" mnemonicParsing="false" text="เสร็จสิ้น" />
+      <ImageView fitHeight="71.0" fitWidth="91.0" layoutX="275.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/qc.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
