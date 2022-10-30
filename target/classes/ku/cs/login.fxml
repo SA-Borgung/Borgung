@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.Login">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css">
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css">
          <children>
             <ImageView fitHeight="117.0" fitWidth="223.0" layoutX="273.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,23 +32,23 @@
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/image/userProfile/user.png" />
+                              <Image url="@../../image/user.png" />
                            </image>
                         </ImageView>
-                        <TextField id="inputArea" fx:id="usernameTextField" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" promptText="username" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css" />
+                        <TextField id="inputArea" fx:id="usernameTextField" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" promptText="username" stylesheets="@../../css/style1.css" />
                      </children>
                   </HBox>
                   <HBox prefHeight="30.0" prefWidth="350.0">
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/image/logo/password.png" />
+                              <Image url="@../../image/password.png" />
                            </image>
                            <HBox.margin>
                               <Insets top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <PasswordField id="inputArea" fx:id="passwordField" alignment="CENTER" prefWidth="300.0" promptText="password" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css">
+                        <PasswordField id="inputArea" fx:id="passwordField" alignment="CENTER" prefWidth="300.0" promptText="password" stylesheets="@../../css/style1.css">
                            <HBox.margin>
                               <Insets top="10.0" />
                            </HBox.margin>
@@ -65,7 +64,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button id="glass" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="25.0" prefWidth="100.0" stylesheets="@../../../../../../../project211-start-Finnish/src/main/resources/ku/cs/css/style1.css" text="login">
+                  <Button id="glass" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="login">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>

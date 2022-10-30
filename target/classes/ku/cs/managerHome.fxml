@@ -13,7 +13,7 @@
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../image/Mycomplaint%20icon.png" />
+                  <Image url="@../../image/Mycomplaint icon.png" />
                </image>
             </ImageView>
          </graphic>
@@ -28,7 +28,7 @@
          </graphic>
       </Button>
       <Button id="sideNavBtn1" layoutX="378.0" layoutY="531.0" mnemonicParsing="false" text="logout" />
-      <ImageView fitHeight="199.0" fitWidth="270.0" layoutX="92.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="199.0" fitWidth="270.0" layoutX="113.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../image/Borgung.jpg" />
          </image>

@@ -10,14 +10,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.OrderShrimp">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.OrderShrimp">
    <children>
       <Pane id="frame1" layoutX="185.0" layoutY="62.0" prefHeight="479.0" prefWidth="480.0">
          <children>
-            <TextField layoutX="62.0" layoutY="277.0" prefHeight="25.0" prefWidth="150.0" promptText="จำนวนกุ้ง" />
-            <TextField layoutX="268.0" layoutY="277.0" prefHeight="26.0" prefWidth="150.0" promptText="สายพันธุ์" />
-            <TextField layoutX="62.0" layoutY="321.0" prefHeight="26.0" prefWidth="150.0" promptText="ชื่อร้าน" />
-            <TextField layoutX="270.0" layoutY="321.0" prefHeight="26.0" prefWidth="150.0" promptText="สถานที่รับ" />
+            <TextField layoutX="171.0" layoutY="313.0" prefHeight="25.0" prefWidth="150.0" promptText="จำนวนกุ้ง" />
+            <TextField layoutX="171.0" layoutY="360.0" prefHeight="26.0" prefWidth="150.0" promptText="ชื่อร้าน" />
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="139.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/complain.png" />
@@ -40,6 +38,12 @@
                   <Image url="@../../image/Shrimp.jpg" />
                </image>
             </ImageView>
+            <ChoiceBox layoutX="173.0" layoutY="261.0" prefWidth="150.0" />
+            <Label layoutX="87.0" layoutY="263.0" text="สายพันธุ์">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Button layoutX="37.0" layoutY="544.0" mnemonicParsing="false" text="back" />
