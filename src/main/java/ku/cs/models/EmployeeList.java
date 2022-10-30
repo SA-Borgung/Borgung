@@ -21,4 +21,16 @@ public class EmployeeList {
         return employee;
     }
 
+    public boolean isCorrectPair(String username, String password){
+        for (Employee employee : employees){
+            if (employee.getId().equals(username)&&employee.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+
+
 }
