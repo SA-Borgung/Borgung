@@ -42,7 +42,7 @@ public class VendorOrderDataSource implements DataSource<VendorOrderList> {
                 list.addVendorOrder(
                         new VendorOrder(
                                 id,
-                                amount,
+                                Integer.parseInt(amount),
                                 sellerName,
                                 employeeID
 

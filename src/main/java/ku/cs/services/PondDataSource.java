@@ -40,8 +40,8 @@ public class PondDataSource implements DataSource<PondList> {
                 list.addPond(
                         new Pond(
                                 id,
-                                status,
-                                detail
+                                Integer.parseInt(status),
+                                Integer.parseInt(detail)
 
                         )
                 );

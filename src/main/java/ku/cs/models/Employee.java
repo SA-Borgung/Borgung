@@ -4,14 +4,14 @@ public class Employee {
     private String id;
     private String name;
     private String dateOfBirth;
-    private String sex;
+    private int sex;
     private String address;
     private String phoneNumber;
     private String startWorkingDate;
     private String password;
     private String role;
 
-    public Employee(String id, String name, String dateOfBirth, String sex, String address, String phoneNumber, String startWorkingDate, String password, String role) {
+    public Employee(String id, String name, String dateOfBirth, int sex, String address, String phoneNumber, String startWorkingDate, String password, String role) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -47,11 +47,11 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 

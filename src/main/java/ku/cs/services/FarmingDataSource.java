@@ -46,8 +46,8 @@ public class FarmingDataSource implements DataSource<FarmingList> {
                 list.addFarming(
                         new Farming(
                                 pondID,
-                                round,
-                                prawnAmount,
+                                Integer.parseInt(round),
+                                Integer.parseInt(prawnAmount),
                                 prawnID,
                                 getDate,
                                 sellDate,

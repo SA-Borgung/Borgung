@@ -3,8 +3,8 @@ package ku.cs.models;
 public class Farming {
 
     private String pondID;
-    private String round;
-    private String prawnAmount;
+    private int round;
+    private int prawnAmount;
     private String prawnID;
     private String getDate;
     private String sellDate;
@@ -12,7 +12,7 @@ public class Farming {
     private String getPrawnID;
     private String pondStatus;
 
-    public Farming(String pondID, String round, String prawnAmount, String prawnID, String getDate, String sellDate, String orderID, String getPrawnID, String pondStatus) {
+    public Farming(String pondID, int round, int prawnAmount, String prawnID, String getDate, String sellDate, String orderID, String getPrawnID, String pondStatus) {
         this.pondID = pondID;
         this.round = round;
         this.prawnAmount = prawnAmount;
@@ -32,19 +32,19 @@ public class Farming {
         this.pondID = pondID;
     }
 
-    public String getRound() {
+    public int getRound() {
         return round;
     }
 
-    public void setRound(String round) {
+    public void setRound(int round) {
         this.round = round;
     }
 
-    public String getPrawnAmount() {
+    public int getPrawnAmount() {
         return prawnAmount;
     }
 
-    public void setPrawnAmount(String prawnAmount) {
+    public void setPrawnAmount(int prawnAmount) {
         this.prawnAmount = prawnAmount;
     }
 

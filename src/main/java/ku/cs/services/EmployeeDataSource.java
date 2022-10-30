@@ -50,7 +50,7 @@ public class EmployeeDataSource implements DataSource<EmployeeList> {
                                 id,
                                 name,
                                 dateOfBirth,
-                                sex,
+                                Integer.parseInt(sex),
                                 address,
                                 phoneNumber,
                                 startWorkingDate,

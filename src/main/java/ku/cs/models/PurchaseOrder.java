@@ -2,9 +2,10 @@ package ku.cs.models;
 
 public class PurchaseOrder {
 
-    private String id,weight,species,age;
+    private String id,weight,species;
+    private int age;
 
-    public PurchaseOrder(String id, String weight, String species, String age) {
+    public PurchaseOrder(String id, String weight, String species, int age) {
         this.id = id;
         this.weight = weight;
         this.species = species;
@@ -35,11 +36,11 @@ public class PurchaseOrder {
         this.species = species;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

@@ -2,9 +2,10 @@ package ku.cs.models;
 
 public class VendorOrder {
 
-    String id,amount,sellerName,employeeID;
+    String id,sellerName,employeeID;
+    private int amount;
 
-    public VendorOrder(String id, String amount, String sellerName, String employeeID) {
+    public VendorOrder(String id, int amount, String sellerName, String employeeID) {
         this.id = id;
         this.amount = amount;
         this.sellerName = sellerName;
@@ -20,11 +21,11 @@ public class VendorOrder {
         this.id = id;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

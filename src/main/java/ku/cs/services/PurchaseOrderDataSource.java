@@ -43,7 +43,7 @@ public class PurchaseOrderDataSource implements DataSource<PurchaseOrderList> {
                                 id,
                                 weight,
                                 species,
-                                age
+                                Integer.parseInt(age)
 
                         )
                 );
