@@ -36,15 +36,19 @@ public class VendorOrderDataSource implements DataSource<VendorOrderList> {
                 String id = queryOutput.getString("R_ID");
                 String amount = queryOutput.getString("R_AMOUNT");
                 String sellerName = queryOutput.getString("R_SELLER");
+                String status = queryOutput.getString("R_STATUS");
                 String employeeID = queryOutput.getString("E_ID");
+
 
 
                 list.addVendorOrder(
                         new VendorOrder(
                                 id,
-                                amount,
+                                Integer.parseInt(amount),
                                 sellerName,
+                                status,
                                 employeeID
+
 
 
                         )

@@ -19,4 +19,13 @@ public class VendorOrderList {
         VendorOrder vendorOrder = vendorOrders.get(num);
         return vendorOrder;
     }
+
+    public VendorOrder searchVendorOrderById(String id){
+        for (VendorOrder vendorOrder : vendorOrders) {
+            if (vendorOrder.checkId(id)) {
+                return vendorOrder;
+            }
+        }
+        return null;
+    }
 }

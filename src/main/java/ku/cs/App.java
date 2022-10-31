@@ -22,12 +22,13 @@ public class App extends Application {
         //stage.show();
         com.github.saacsos.FXRouter.bind(this, stage, "SA Project", 900, 700);
         configRoute();
-        com.github.saacsos.FXRouter.goTo("sample");
+        com.github.saacsos.FXRouter.goTo("staffGetShrimp");
     }
 
     private static void configRoute() {
         String packageStr = "ku/cs/";
         com.github.saacsos.FXRouter.when("sample", packageStr+"sample.fxml");
+        com.github.saacsos.FXRouter.when("staffGetShrimp", packageStr+"staffGetShirmp.fxml");
 
     }
 
