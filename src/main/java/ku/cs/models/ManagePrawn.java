@@ -2,19 +2,18 @@ package ku.cs.models;
 
 public class ManagePrawn {
     private String id;
-    private int giveFoodStatus;
-    private int givePillsStatus;
-    private int isDead;
+    private boolean giveFoodStatus;
+    private boolean givePillsStatus;
+    private boolean isDead;
     private String measureWeight;
     private String prawnID;
     private String pondID;
 
-    public ManagePrawn(String id, int giveFoodStatus, int givePillsStatus, String measureWeight, String prawnID, String pondID) {
+    public ManagePrawn(String id, boolean giveFoodStatus, boolean givePillsStatus, String measureWeight, String prawnID, String pondID) {
         this.id = id;
         this.giveFoodStatus = giveFoodStatus;
         this.givePillsStatus = givePillsStatus;
         this.measureWeight = measureWeight;
-
         this.prawnID = prawnID;
         this.pondID = pondID;
     }
@@ -27,23 +26,23 @@ public class ManagePrawn {
         this.id = id;
     }
 
-    public int getGiveFoodStatus() {
+    public boolean getGiveFoodStatus() {
         return giveFoodStatus;
     }
 
-    public int getIsDead() {
+    public boolean getIsDead() {
         return isDead;
     }
 
-    public void setGiveFoodStatus(int giveFoodStatus) {
+    public void setGiveFoodStatus(boolean giveFoodStatus) {
         this.giveFoodStatus = giveFoodStatus;
     }
 
-    public int getGivePillsStatus() {
+    public boolean getGivePillsStatus() {
         return givePillsStatus;
     }
 
-    public void setGivePillsStatus(int givePillsStatus) {
+    public void setGivePillsStatus(boolean givePillsStatus) {
         this.givePillsStatus = givePillsStatus;
     }
 
@@ -71,7 +70,7 @@ public class ManagePrawn {
         this.pondID = pondID;
     }
 
-    public void setIsDead(int isDead) {
+    public void setIsDead(boolean isDead) {
         this.isDead = isDead;
     }
 }

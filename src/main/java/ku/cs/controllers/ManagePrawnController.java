@@ -3,7 +3,7 @@ package ku.cs.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import ku.cs.models.*;
@@ -13,12 +13,18 @@ import ku.cs.services.ManagePrawnDataSource;
 import java.util.ArrayList;
 
 public class ManagePrawnController {
-    @FXML private ChoiceBox<String> foodStatusChoiceBox;
-    @FXML private ChoiceBox<String> medicineStatusChoiceBox;
-    @FXML private ChoiceBox<String> isDeadChoiceBox;
+    @FXML private Button giveFoodButton;
+    @FXML private Button notGiveFoodButton;
+    @FXML private Button givePillsButton;
+    @FXML private Button notGivePillsButton;
+    @FXML private Button deadButton;
+    @FXML private Button notDeadButton;
     @FXML private TextArea textNote;
     @FXML private ListView<String> managePrawnListView;
 
+    private boolean foodStatus;
+    private boolean pillsStatus;
+    private boolean isDead;
     private ManagePrawn managePrawn;
     private ManagePrawnList managePrawnList;
     private DataSource<ManagePrawnList> dataSource = new ManagePrawnDataSource();
@@ -28,9 +34,6 @@ public class ManagePrawnController {
     public void initialize() {
         this.managePrawnList = dataSource.readData();
         this.showMangePrawnListView();
-        this.addFoodStatusChoiceBox();
-        this.addMedicineStatusChoiceBox();
-        this.addIsDeadChoiceBox();
         this.clearData();
     }
 
@@ -44,34 +47,46 @@ public class ManagePrawnController {
         System.out.println("บันทึกแล้ว");
     }
 
-    private void addFoodStatusChoiceBox() {
-        ArrayList<ManagePrawn> giveFoodStatus = new ArrayList<ManagePrawn>();
-        for (int i = managePrawnList.count()-1; i>=0; i--){
-            managePrawn = managePrawnList.getManagePrawnNumber(i);
-            giveFoodStatus.add(managePrawn);
-            this.observableList.add(Integer.toString(managePrawn.getGiveFoodStatus()));
-        }
-        this.foodStatusChoiceBox.setItems(observableList);
+    @FXML
+    private void pressYesOnFoodStatus() {
+        this.foodStatus = true;
+        this.giveFoodButton.setStyle("-fx-background-color: #FF8C00;");
+        this.notGiveFoodButton.setStyle("-fx-background-color: #FFD700;");
     }
 
-    private void addMedicineStatusChoiceBox() {
-        ArrayList<ManagePrawn> giveMedicineStatus = new ArrayList<ManagePrawn>();
-        for (int i = managePrawnList.count()-1; i>=0; i--){
-            managePrawn = managePrawnList.getManagePrawnNumber(i);
-            giveMedicineStatus.add(managePrawn);
-            this.observableList.add(Integer.toString(managePrawn.getGivePillsStatus()));
-        }
-        this.medicineStatusChoiceBox.setItems(observableList);
+    @FXML
+    private void pressNoOnFoodStatus() {
+        this.foodStatus = false;
+        this.notGiveFoodButton.setStyle("-fx-background-color: #FF8C00;");
+        this.giveFoodButton.setStyle("-fx-background-color: #FFD700;");
     }
 
-    private void addIsDeadChoiceBox() {
-        ArrayList<ManagePrawn> isDeadStatus = new ArrayList<ManagePrawn>();
-        for (int i = managePrawnList.count()-1; i>=0; i--){
-            managePrawn = managePrawnList.getManagePrawnNumber(i);
-            isDeadStatus.add(managePrawn);
-            this.observableList.add(Integer.toString(managePrawn.getIsDead()));
-        }
-        this.isDeadChoiceBox.setItems(observableList);
+    @FXML
+    private void pressYesOnPillsStatus() {
+        this.pillsStatus = true;
+        this.givePillsButton.setStyle("-fx-background-color: #FF8C00;");
+        this.notGivePillsButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    @FXML
+    private void pressNoOnPillsStatus() {
+        this.pillsStatus = false;
+        this.notGivePillsButton.setStyle("-fx-background-color: #FF8C00;");
+        this.givePillsButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    @FXML
+    private void pressYesOnIsDead() {
+        this.isDead = true;
+        this.deadButton.setStyle("-fx-background-color: #FF8C00;");
+        this.notDeadButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    @FXML
+    private void presNoOnIsDead() {
+        this.isDead = false;
+        this.notDeadButton.setStyle("-fx-background-color: #FF8C00;");
+        this.deadButton.setStyle("-fx-background-color: #FFD700;");
     }
 
     private void clearData() {

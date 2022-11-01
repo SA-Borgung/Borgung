@@ -42,8 +42,8 @@ public class ManagePrawnDataSource implements DataSource<ManagePrawnList> {
                 list.addManagePrawn(
                         new ManagePrawn(
                                 careID,
-                                Integer.parseInt(giveFoodStatus),
-                                Integer.parseInt(givePillsStatus),
+                                Boolean.parseBoolean(giveFoodStatus),
+                                Boolean.parseBoolean(givePillsStatus),
                                 measureWeight, ///ต้องเป็น double
                                 prawnID,
                                 pondID
@@ -62,5 +62,4 @@ public class ManagePrawnDataSource implements DataSource<ManagePrawnList> {
     public void insertData(ManagePrawnList managePrawnList) {
 
     }
-
 }

@@ -16,7 +16,7 @@ import ku.cs.services.QCDataSource;
 
 import java.util.ArrayList;
 
-public class StaffQualityControl {
+public class StaffQcController {
     @FXML private Button passedButton;
     @FXML private Button failedButton;
     @FXML private TextField failedReason;
@@ -29,45 +29,59 @@ public class StaffQualityControl {
     @FXML private ListView<String> qcListView;
 
     private ObservableList<String> observableList;
-    private QCList qualityControlList;
-    private boolean failedCheck;
+    private DataSource<QCList> datasource;
+    private QCList qcList;
+    private boolean checkBox;
 
     @FXML
     public void initialize() {
-        DataSource<QCList> datasource = new QCDataSource();
-        this.qualityControlList = datasource.readData();
+        String qcId = "QC001";
+        String qcTime = "12:00";
+        String qcRequirement = "Hi";
+        String employeeId = "EM001";
+        String pondId = "W0001";
+        QC qc = new QC(qcId,qcTime, qcRequirement, employeeId, pondId);
+        datasource = new QCDataSource();
+        qcList = datasource.readData();
+        System.out.println(qcList.getAllManagePrawn());
+        this.qcList.addQC(qc);
+        this.showListView();
         this.clearData();
-        this.showQualityControlListView();
         this.handleSelectedListView();
     }
 
     private void clearData() {
         this.failedReason.setText("");
         this.textMessage.setText("");
+        this.qcId.setText("");
+        this.qcTime.setText("");
+        this.qcRequirement.setText("");
+        this.employeeId.setText("");
+        this.pondId.setText("");
     }
 
     @FXML
     private void clickOnFailedButton() {
-        this.failedCheck = true;
+        this.checkBox = false;
         this.failedReason.setDisable(false);
         this.failedButton.setStyle("-fx-background-color: #FF8C00;");
         this.passedButton.setStyle("-fx-background-color: #FFD700;");
-        System.out.println(failedCheck);
+        System.out.println(checkBox);
     }
 
     @FXML
     private void clickOnPassedButton() {
-        this.failedCheck = false;
+        this.checkBox = true;
         this.failedReason.setDisable(true);
         this.passedButton.setStyle("-fx-background-color: #FF8C00;");
         this.failedButton.setStyle("-fx-background-color: #FFD700;");
         this.failedReason.clear();
-        System.out.println(failedCheck);
+        System.out.println(checkBox);
     }
 
     @FXML
     private void clickFinishedButton() {
-        if (failedCheck && failedReason.getText().equals("")) {
+        if (!checkBox && failedReason.getText().equals("")) {
             System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
             this.textMessage.setText("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
         } else {
@@ -80,12 +94,11 @@ public class StaffQualityControl {
         System.out.println("กลับไปหน้าก่อนหน้า");
     }
 
-    private void showQualityControlListView() {
-        ListView<String> listView = new ListView<>();
+    private void showListView() {
         observableList = FXCollections.observableArrayList();
-        ArrayList<QC> tempQcList = new ArrayList<QC>();
-        for (int i = qualityControlList.count()-1; i>=0; i--){
-            QC qualityControl = qualityControlList.getQCNumber(i);
+        ArrayList<QC> tempQcList = new ArrayList<>();
+        for (int i = qcList.count()-1; i>=0; i--){
+            QC qualityControl = qcList.getQCNumber(i);
             tempQcList.add(qualityControl);
             this.observableList.add(qualityControl.getId());
         }
@@ -96,7 +109,7 @@ public class StaffQualityControl {
         qcListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                QC selectedQc = qualityControlList.searchQcOrderById(newValue);
+                QC selectedQc = qcList.searchQcOrderById(newValue);
                 System.out.println(selectedQc + " is selected");
                 showSelectedQc(selectedQc);
             }
