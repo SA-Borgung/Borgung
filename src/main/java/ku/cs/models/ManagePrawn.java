@@ -4,6 +4,7 @@ public class ManagePrawn {
     private String id;
     private int giveFoodStatus;
     private int givePillsStatus;
+    private int isDead;
     private String measureWeight;
     private String prawnID;
     private String pondID;
@@ -13,6 +14,7 @@ public class ManagePrawn {
         this.giveFoodStatus = giveFoodStatus;
         this.givePillsStatus = givePillsStatus;
         this.measureWeight = measureWeight;
+
         this.prawnID = prawnID;
         this.pondID = pondID;
     }
@@ -27,6 +29,10 @@ public class ManagePrawn {
 
     public int getGiveFoodStatus() {
         return giveFoodStatus;
+    }
+
+    public int getIsDead() {
+        return isDead;
     }
 
     public void setGiveFoodStatus(int giveFoodStatus) {
@@ -63,5 +69,9 @@ public class ManagePrawn {
 
     public void setPondID(String pondID) {
         this.pondID = pondID;
+    }
+
+    public void setIsDead(int isDead) {
+        this.isDead = isDead;
     }
 }
