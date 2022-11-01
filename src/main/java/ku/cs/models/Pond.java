@@ -34,4 +34,8 @@ public class Pond {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
+    public boolean checkId(String id) {
+        return this.id.equals(id);
+    }
 }

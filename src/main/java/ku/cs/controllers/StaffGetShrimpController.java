@@ -8,9 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import ku.cs.models.Prawn;
+import ku.cs.models.PrawnList;
 import ku.cs.models.VendorOrder;
 import ku.cs.models.VendorOrderList;
 import ku.cs.services.DataSource;
+import ku.cs.services.PrawnDataSource;
 import ku.cs.services.VendorOrderDataSource;
 
 import java.util.ArrayList;
@@ -27,17 +30,23 @@ public class StaffGetShrimpController {
     private Label SellerIdLabel;
     @FXML
     private Label StatusLabel;
+    @FXML
+    private Label ShrimpNameLabel;
 
     private ObservableList<String> ObservableList;
     private VendorOrderList vendorOrderList;
-    private VendorOrder vendorOrder;
+    private PrawnList prawnList;
     private DataSource<VendorOrderList> dataSource;
+    private DataSource<PrawnList> prawnListDataSource;
 
     @FXML
     public void initialize() {
 
         dataSource = new VendorOrderDataSource();
         vendorOrderList = dataSource.readData();
+        prawnListDataSource = new PrawnDataSource();
+        prawnList = prawnListDataSource.readData();
+
 
         showListView();
         clearSelectedProduct();
@@ -102,6 +111,8 @@ public class StaffGetShrimpController {
         amountLabel.setText("");
         SellerIdLabel.setText("");
         StatusLabel.setText("");
+        ShrimpNameLabel.setText("");
+
 
     }
 
@@ -110,6 +121,8 @@ public class StaffGetShrimpController {
         amountLabel.setText(String.valueOf(vendorOrder.getAmount()));
         SellerIdLabel.setText(vendorOrder.getSellerName());
         StatusLabel.setText(vendorOrder.getStatus());
+        String prawnName = prawnList.getPrawnById(vendorOrder.getOrderType()).getSpecies();
+        ShrimpNameLabel.setText(prawnName);
     }
 
     @FXML

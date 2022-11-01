@@ -37,6 +37,7 @@ public class VendorOrderDataSource implements DataSource<VendorOrderList> {
                 String amount = queryOutput.getString("R_AMOUNT");
                 String sellerName = queryOutput.getString("R_SELLER");
                 String status = queryOutput.getString("R_STATUS");
+                String orderType = queryOutput.getString("R_ORDER");
                 String employeeID = queryOutput.getString("E_ID");
 
 
@@ -47,6 +48,7 @@ public class VendorOrderDataSource implements DataSource<VendorOrderList> {
                                 Integer.parseInt(amount),
                                 sellerName,
                                 status,
+                                orderType,
                                 employeeID
 
 

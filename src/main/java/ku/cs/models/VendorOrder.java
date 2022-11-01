@@ -2,16 +2,25 @@ package ku.cs.models;
 
 public class VendorOrder {
 
-    String id,sellerName,employeeID,status;
+    String id,sellerName,employeeID,status,orderType;
     int amount;
 
-    public VendorOrder(String id, int amount, String sellerName, String status, String employeeID) {
+    public VendorOrder(String id, int amount, String sellerName, String status,String orderType, String employeeID) {
         this.id = id;
         this.amount = amount;
         this.sellerName = sellerName;
         this.employeeID = employeeID;
+        this.orderType = orderType;
         this.status = status;
 
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public String getId() {

@@ -20,4 +20,13 @@ public class PrawnList {
         Prawn prawn = prawns.get(num);
         return prawn;
     }
+
+    public Prawn getPrawnById(String id){
+        for (Prawn prawn: prawns){
+            if (prawn.checkPrawnId(id)){
+                return prawn;
+            }
+        }
+        return null;
+    }
 }
