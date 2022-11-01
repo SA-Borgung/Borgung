@@ -20,7 +20,7 @@ public class VendorOrderList {
         return vendorOrder;
     }
 
-    public VendorOrder searchVendorOrderById(String id){
+    public VendorOrder getVendorOrderById(String id){
         for (VendorOrder vendorOrder : vendorOrders) {
             if (vendorOrder.checkId(id)) {
                 return vendorOrder;
