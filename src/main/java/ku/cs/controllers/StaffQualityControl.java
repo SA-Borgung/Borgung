@@ -14,22 +14,36 @@ import ku.cs.models.QCList;
 import ku.cs.services.DataSource;
 import ku.cs.services.QCDataSource;
 
+import java.util.ArrayList;
+
 public class StaffQualityControl {
     @FXML private Button passedButton;
     @FXML private Button failedButton;
     @FXML private TextField failedReason;
     @FXML private Label textMessage;
-    @FXML private ListView<QC> QcListView;
+    @FXML private Label qcId;
+    @FXML private Label qcTime;
+    @FXML private Label qcRequirement;
+    @FXML private Label employeeId;
+    @FXML private Label pondId;
+    @FXML private ListView<String> qcListView;
 
+    private ObservableList<String> observableList;
+    private QCList qualityControlList;
     private boolean failedCheck;
-    private QCList qualityControl;
 
     @FXML
     public void initialize() {
-        DataSource<QCList> datasource= new QCDataSource();
-        this.qualityControl = datasource.readData();
-        this.showQualityControlList();
-        this.addListViewListener();
+        DataSource<QCList> datasource = new QCDataSource();
+        this.qualityControlList = datasource.readData();
+        this.clearData();
+        this.showQualityControlListView();
+        this.handleSelectedListView();
+    }
+
+    private void clearData() {
+        this.failedReason.setText("");
+        this.textMessage.setText("");
     }
 
     @FXML
@@ -66,21 +80,34 @@ public class StaffQualityControl {
         System.out.println("กลับไปหน้าก่อนหน้า");
     }
 
-    private void showQualityControlList() {
-        ObservableList<QC> items = FXCollections.observableArrayList();
-        for (QC qualityControl: qualityControl.getAllManagePrawn()){
-            items.add(qualityControl);
+    private void showQualityControlListView() {
+        ListView<String> listView = new ListView<>();
+        observableList = FXCollections.observableArrayList();
+        ArrayList<QC> tempQcList = new ArrayList<QC>();
+        for (int i = qualityControlList.count()-1; i>=0; i--){
+            QC qualityControl = qualityControlList.getQCNumber(i);
+            tempQcList.add(qualityControl);
+            this.observableList.add(qualityControl.getId());
         }
-        this.QcListView.setItems(items);
-        this.QcListView.refresh();
+        this.qcListView.setItems(observableList);
     }
 
-    private void addListViewListener() {
-        QcListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<QC>() {
+    private void handleSelectedListView() {
+        qcListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends QC> observableValue, QC qc, QC t1) {
-                //
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                QC selectedQc = qualityControlList.searchQcOrderById(newValue);
+                System.out.println(selectedQc + " is selected");
+                showSelectedQc(selectedQc);
             }
         });
+    }
+
+    private void showSelectedQc(QC qualityControl) {
+        this.qcId.setText(qualityControl.getId());
+        this.qcTime.setText(qualityControl.getTime());
+        this.qcRequirement.setText(qualityControl.getRequirement());
+        this.employeeId.setText(qualityControl.getEmployeeID());
+        this.pondId.setText(qualityControl.getPondID());
     }
 }

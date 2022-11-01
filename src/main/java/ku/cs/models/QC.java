@@ -50,4 +50,8 @@ public class QC {
     public void setPondID(String pondID) {
         this.pondID = pondID;
     }
+
+    public boolean checkID(String id) {
+        return this.id.equals(id);
+    }
 }
