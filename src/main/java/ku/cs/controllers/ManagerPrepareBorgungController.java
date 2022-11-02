@@ -12,6 +12,7 @@ import ku.cs.models.*;
 import ku.cs.services.*;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManagerPrepareBorgungController {
@@ -160,7 +161,7 @@ public class ManagerPrepareBorgungController {
     }
 
     private void showSelectedEmployee(Employee employee) {
-        employeeLabel.setText(employee.getId());
+        employeeLabel.setText(employee.getName());
 
     }
 
@@ -171,7 +172,12 @@ public class ManagerPrepareBorgungController {
     }
 
     @FXML
-    public void Button(ActionEvent actionEvent){
-
+    public void backBtn(ActionEvent actionEvent) {
+        try {
+            com.github.saacsos.FXRouter.goTo("managerHome");
+        } catch (IOException ex) {
+            System.err.println(ex.toString());
+            System.err.println("ไม่สามารถเข้าหน้า managerHome");
+        }
     }
 }

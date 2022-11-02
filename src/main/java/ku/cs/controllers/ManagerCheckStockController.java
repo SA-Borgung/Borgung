@@ -3,6 +3,7 @@ package ku.cs.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -11,6 +12,7 @@ import ku.cs.models.ManagePrawnList;
 import ku.cs.services.DataSource;
 import ku.cs.services.ManagePrawnDataSource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManagerCheckStockController {
@@ -92,5 +94,15 @@ public class ManagerCheckStockController {
         //System.out.println(selectedVendorOrderString);
         ManagePrawn managePrawn = managePrawnList.getManagePrawnById(selectedManagePrawnString);
         return managePrawn;
+    }
+
+    @FXML
+    public void backBtn(ActionEvent actionEvent) {
+        try {
+            com.github.saacsos.FXRouter.goTo("managerHome");
+        } catch (IOException ex) {
+            System.err.println(ex.toString());
+            System.err.println("ไม่สามารถเข้าหน้า managerHome");
+        }
     }
 }

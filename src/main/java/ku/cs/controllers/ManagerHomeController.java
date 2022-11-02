@@ -10,10 +10,10 @@ public class ManagerHomeController {
     @FXML
     public void toPrepareBorgung(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("PrepareBorgung");
+            com.github.saacsos.FXRouter.goTo("managerPrepareBorgung");
         } catch (IOException ex) {
             System.err.println(ex.toString());
-            System.err.println("ไม่สามารถเข้าหน้า PrepareBorgung");
+            System.err.println("ไม่สามารถเข้าหน้า managerPrepareBorgung");
         }
     }
 

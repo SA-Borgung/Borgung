@@ -205,6 +205,15 @@ public class ManagerOrderShrimpController {
         }
 
     }
+    @FXML
+    public void backBtn(ActionEvent actionEvent) {
+        try {
+            com.github.saacsos.FXRouter.goTo("managerHome");
+        } catch (IOException ex) {
+            System.err.println(ex.toString());
+            System.err.println("ไม่สามารถเข้าหน้า managerHome");
+        }
+    }
 
 
 

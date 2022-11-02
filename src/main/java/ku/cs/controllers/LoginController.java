@@ -89,9 +89,9 @@ public class LoginController {
 
 
 
-//                com.github.saacsos.FXRouter.goTo("main");
+                com.github.saacsos.FXRouter.goTo("managerHome");
 
-//                setPassItem("main"); // will do later
+                setPassItem("managerHome"); // will do later
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -127,9 +127,20 @@ public class LoginController {
             System.err.println("โปรดตรวจสอบ username และ password ");
         }
     }
+
     private void setPassItem(String location) throws IOException {
         passItem.add(usernameField.getText());
         com.github.saacsos.FXRouter.goTo(location,passItem);
+    }
+
+    @FXML
+    public void backBtn(ActionEvent actionEvent) {
+        try {
+            com.github.saacsos.FXRouter.goTo("managerOrderShrimp");
+        } catch (IOException ex) {
+            System.err.println(ex.toString());
+            System.err.println("ไม่สามารถเข้าหน้า managerOrderShrimp");
+        }
     }
 
 
