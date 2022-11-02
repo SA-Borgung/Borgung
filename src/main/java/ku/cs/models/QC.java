@@ -1,12 +1,14 @@
 package ku.cs.models;
 
 public class QC {
-    private String id,requirement,time,employeeID,pondID;
+    private String id, requirement, time, manageStatus, note, employeeID,pondID;
 
-    public QC(String id, String requirement, String time, String employeeID, String pondID) {
+    public QC(String id, String requirement, String time, String manageStatus, String note, String employeeID, String pondID) {
         this.id = id;
         this.requirement = requirement;
         this.time = time;
+        this.manageStatus = manageStatus;
+        this.note = note;
         this.employeeID = employeeID;
         this.pondID = pondID;
     }
@@ -17,6 +19,22 @@ public class QC {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getManageStatus() {
+        return manageStatus;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setManageStatus(String manageStatus) {
+        this.manageStatus = manageStatus;
     }
 
     public String getRequirement() {

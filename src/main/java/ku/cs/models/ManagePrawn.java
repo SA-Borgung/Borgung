@@ -4,16 +4,17 @@ public class ManagePrawn {
     private String id;
     private boolean giveFoodStatus;
     private boolean givePillsStatus;
-    private boolean isDead;
+    private String manageStatus;
     private String measureWeight;
     private String prawnID;
     private String pondID;
 
-    public ManagePrawn(String id, boolean giveFoodStatus, boolean givePillsStatus, String measureWeight, String prawnID, String pondID) {
+    public ManagePrawn(String id, boolean giveFoodStatus, boolean givePillsStatus, String measureWeight, String manageStatus, String prawnID, String pondID) {
         this.id = id;
         this.giveFoodStatus = giveFoodStatus;
         this.givePillsStatus = givePillsStatus;
         this.measureWeight = measureWeight;
+        this.manageStatus = manageStatus;
         this.prawnID = prawnID;
         this.pondID = pondID;
     }
@@ -30,9 +31,6 @@ public class ManagePrawn {
         return giveFoodStatus;
     }
 
-    public boolean getIsDead() {
-        return isDead;
-    }
 
     public void setGiveFoodStatus(boolean giveFoodStatus) {
         this.giveFoodStatus = giveFoodStatus;
@@ -44,6 +42,10 @@ public class ManagePrawn {
 
     public void setGivePillsStatus(boolean givePillsStatus) {
         this.givePillsStatus = givePillsStatus;
+    }
+
+    public String getManageStatus() {
+        return manageStatus;
     }
 
     public String getMeasureWeight() {
@@ -70,7 +72,11 @@ public class ManagePrawn {
         this.pondID = pondID;
     }
 
-    public void setIsDead(boolean isDead) {
-        this.isDead = isDead;
+    public void setManageStatus(String manageStatus) {
+        this.manageStatus = manageStatus;
+    }
+
+    public boolean checkPrawnId(String id){
+        return this.id.equals(id);
     }
 }

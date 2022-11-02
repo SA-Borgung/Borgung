@@ -20,4 +20,13 @@ public class ManagePrawnList {
         ManagePrawn managePrawn = managePrawns.get(num);
         return managePrawn;
     }
+
+    public ManagePrawn getManagePrawnById (String id) {
+        for (ManagePrawn managePrawn: managePrawns) {
+            if (managePrawn.checkPrawnId(id)) {
+                return managePrawn;
+            }
+        }
+        return null;
+    }
 }

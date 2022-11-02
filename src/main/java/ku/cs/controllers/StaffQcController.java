@@ -9,9 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import ku.cs.models.ManagePrawnList;
 import ku.cs.models.QC;
 import ku.cs.models.QCList;
 import ku.cs.services.DataSource;
+import ku.cs.services.ManagePrawnDataSource;
 import ku.cs.services.QCDataSource;
 
 import java.util.ArrayList;
@@ -20,45 +22,35 @@ public class StaffQcController {
     @FXML private Button passedButton;
     @FXML private Button failedButton;
     @FXML private TextField failedReason;
-    @FXML private Label textMessage;
-    @FXML private Label qcId;
-    @FXML private Label qcTime;
-    @FXML private Label qcRequirement;
-    @FXML private Label employeeId;
-    @FXML private Label pondId;
+    @FXML private TextField qcTimeTextField;
+    @FXML private Label employeeIdLabel;
+    @FXML private Label pondIdLabel;
+    @FXML private Label measureWeightLabel;
+    @FXML private Label manageStatusLabel;
     @FXML private ListView<String> qcListView;
 
     private ObservableList<String> observableList;
-    private DataSource<QCList> datasource;
+    private DataSource<QCList> qcListDataSource;
+    private DataSource<ManagePrawnList> managePrawnListDataSource;
     private QCList qcList;
+    private ManagePrawnList managePrawnList;
+    private ArrayList<String> passItem;
+
     private boolean checkBox;
 
     @FXML
     public void initialize() {
-        String qcId = "QC001";
-        String qcTime = "12:00";
-        String qcRequirement = "Hi";
-        String employeeId = "EM001";
-        String pondId = "W0001";
-        QC qc = new QC(qcId,qcTime, qcRequirement, employeeId, pondId);
-        datasource = new QCDataSource();
-        qcList = datasource.readData();
-        System.out.println(qcList.getAllManagePrawn());
-        this.qcList.addQC(qc);
+        qcListDataSource = new QCDataSource();
+        qcList = qcListDataSource.readData();
+        managePrawnListDataSource = new ManagePrawnDataSource();
+        managePrawnList = managePrawnListDataSource.readData();
+        passItem = new ArrayList<>();
+
         this.showListView();
         this.clearData();
         this.handleSelectedListView();
     }
 
-    private void clearData() {
-        this.failedReason.setText("");
-        this.textMessage.setText("");
-        this.qcId.setText("");
-        this.qcTime.setText("");
-        this.qcRequirement.setText("");
-        this.employeeId.setText("");
-        this.pondId.setText("");
-    }
 
     @FXML
     private void clickOnFailedButton() {
@@ -66,6 +58,7 @@ public class StaffQcController {
         this.failedReason.setDisable(false);
         this.failedButton.setStyle("-fx-background-color: #FF8C00;");
         this.passedButton.setStyle("-fx-background-color: #FFD700;");
+        this.manageStatusLabel.setText("ไม่ผ่าน");
         System.out.println(checkBox);
     }
 
@@ -75,6 +68,7 @@ public class StaffQcController {
         this.failedReason.setDisable(true);
         this.passedButton.setStyle("-fx-background-color: #FF8C00;");
         this.failedButton.setStyle("-fx-background-color: #FFD700;");
+        this.manageStatusLabel.setText("ผ่าน");
         this.failedReason.clear();
         System.out.println(checkBox);
     }
@@ -83,7 +77,6 @@ public class StaffQcController {
     private void clickFinishedButton() {
         if (!checkBox && failedReason.getText().equals("")) {
             System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-            this.textMessage.setText("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
         } else {
             System.out.println("ไปหน้าต่อไป");
         }
@@ -96,7 +89,7 @@ public class StaffQcController {
 
     private void showListView() {
         observableList = FXCollections.observableArrayList();
-        ArrayList<QC> tempQcList = new ArrayList<>();
+        ArrayList<QC> tempQcList = new ArrayList<QC>();
         for (int i = qcList.count()-1; i>=0; i--){
             QC qualityControl = qcList.getQCNumber(i);
             tempQcList.add(qualityControl);
@@ -112,15 +105,29 @@ public class StaffQcController {
                 QC selectedQc = qcList.searchQcOrderById(newValue);
                 System.out.println(selectedQc + " is selected");
                 showSelectedQc(selectedQc);
+                selectedQcOrder();
             }
         });
     }
 
+    private QC selectedQcOrder() {
+        String selectedQcOrderString = qcListView.getSelectionModel().selectedItemProperty().get();
+        System.out.println(selectedQcOrderString);
+        QC qc = qcList.searchQcOrderById(selectedQcOrderString);
+        return qc;
+    }
+
     private void showSelectedQc(QC qualityControl) {
-        this.qcId.setText(qualityControl.getId());
-        this.qcTime.setText(qualityControl.getTime());
-        this.qcRequirement.setText(qualityControl.getRequirement());
-        this.employeeId.setText(qualityControl.getEmployeeID());
-        this.pondId.setText(qualityControl.getPondID());
+        this.employeeIdLabel.setText(qualityControl.getEmployeeID());
+        this.pondIdLabel.setText(qualityControl.getPondID());
+        this.measureWeightLabel.setText(qualityControl.getRequirement());
+    }
+
+    private void clearData() {
+        this.failedReason.setText("");
+        this.employeeIdLabel.setText("");
+        this.pondIdLabel.setText("");
+        this.measureWeightLabel.setText("");
+        this.manageStatusLabel.setText("");
     }
 }

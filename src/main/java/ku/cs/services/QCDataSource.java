@@ -35,6 +35,8 @@ public class QCDataSource implements DataSource<QCList> {
                 String id = queryOutput.getString("Q_ID");
                 String requirement = queryOutput.getString("Q_REQUIREMENT");
                 String time = queryOutput.getString("Q_TIME");
+                String manageStatus = queryOutput.getString("Q_STATUS");
+                String note = queryOutput.getString("Q_NOTE");
                 String employeeID = queryOutput.getString("E_ID");
                 String pondID = queryOutput.getString("W_NO");
 
@@ -43,6 +45,8 @@ public class QCDataSource implements DataSource<QCList> {
                                 id,
                                 requirement,
                                 time,
+                                manageStatus,
+                                note,
                                 employeeID,
                                 pondID
 

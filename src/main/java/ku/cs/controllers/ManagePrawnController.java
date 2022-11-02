@@ -17,14 +17,16 @@ public class ManagePrawnController {
     @FXML private Button notGiveFoodButton;
     @FXML private Button givePillsButton;
     @FXML private Button notGivePillsButton;
-    @FXML private Button deadButton;
-    @FXML private Button notDeadButton;
+    @FXML private Button codeOneButton;
+    @FXML private Button codeTwoButton;
+    @FXML private Button codeThreeButton;
     @FXML private TextArea textNote;
     @FXML private ListView<String> managePrawnListView;
 
     private boolean foodStatus;
     private boolean pillsStatus;
     private boolean isDead;
+    private int statusCode;
     private ManagePrawn managePrawn;
     private ManagePrawnList managePrawnList;
     private DataSource<ManagePrawnList> dataSource = new ManagePrawnDataSource();
@@ -76,17 +78,34 @@ public class ManagePrawnController {
     }
 
     @FXML
-    private void pressYesOnIsDead() {
-        this.isDead = true;
-        this.deadButton.setStyle("-fx-background-color: #FF8C00;");
-        this.notDeadButton.setStyle("-fx-background-color: #FFD700;");
+    private void pressOnCodeOneButton() {
+        this.statusCode = 1;
+        showStatusCode(statusCode);
+        this.codeOneButton.setStyle("-fx-background-color: #FF8C00;");
+        this.codeTwoButton.setStyle("-fx-background-color: #FFD700;");
+        this.codeThreeButton.setStyle("-fx-background-color: #FFD700;");
     }
 
     @FXML
-    private void presNoOnIsDead() {
-        this.isDead = false;
-        this.notDeadButton.setStyle("-fx-background-color: #FF8C00;");
-        this.deadButton.setStyle("-fx-background-color: #FFD700;");
+    private void pressOnCodeTwoButton() {
+        this.statusCode = 2;
+        showStatusCode(statusCode);
+        this.codeTwoButton.setStyle("-fx-background-color: #FF8C00;");
+        this.codeOneButton.setStyle("-fx-background-color: #FFD700;");
+        this.codeThreeButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    @FXML
+    private void pressOnCodeThreeButton() {
+        this.statusCode = 3;
+        showStatusCode(statusCode);
+        this.codeThreeButton.setStyle("-fx-background-color: #FF8C00;");
+        this.codeOneButton.setStyle("-fx-background-color: #FFD700;");
+        this.codeTwoButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    private void showStatusCode(int statusCode) {
+        System.out.println("Status Code is " + statusCode);
     }
 
     private void clearData() {
