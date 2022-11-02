@@ -16,6 +16,10 @@ import ku.cs.services.DataSource;
 import ku.cs.services.ManagePrawnDataSource;
 import ku.cs.services.QCDataSource;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StaffQcController {
@@ -75,12 +79,27 @@ public class StaffQcController {
 
     @FXML
     private void clickFinishedButton() {
-        if (!checkBox && failedReason.getText().equals("")) {
-            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-        } else {
-            System.out.println("ไปหน้าต่อไป");
-        }
+        QC qc = new QC("QC006", "20 ตัวโล", "20:00:00", "ผ่าน", "Yes", "EP0006", "W0006");
+        qc.insertToSql();
+//        if (!checkBox && failedReason.getText().equals("")) {
+//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
+//        } else {
+//            System.out.println("ไปหน้าต่อไป");
+//        }
     }
+
+    @FXML
+    private void clickUpdatedButton() {
+        QC qc = new QC("QC0012", "25 ตัวโล", "23:00:00", "ผ่าน", "Yes", "EP0022", "W0013");
+        qc.updateToSql();
+//        if (!checkBox && failedReason.getText().equals("")) {
+//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
+//        } else {
+//            System.out.println("ไปหน้าต่อไป");
+//        }
+    }
+
+
 
     @FXML
     private void clickBackButton() {
