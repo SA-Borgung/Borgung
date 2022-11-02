@@ -38,9 +38,9 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button layoutX="400.0" layoutY="489.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="334.0" text="เสร็จสิ้น" />
-      <TextField layoutX="562.0" layoutY="370.0" prefHeight="35.0" prefWidth="149.0" />
-      <TextField layoutX="562.0" layoutY="420.0" prefHeight="35.0" prefWidth="149.0" />
+        <Button layoutX="400.0" layoutY="489.0" mnemonicParsing="false" onAction="#enterButton" prefHeight="35.0" prefWidth="334.0" text="เสร็จสิ้น" />
+      <TextField fx:id="dateTextField" layoutX="562.0" layoutY="370.0" prefHeight="35.0" prefWidth="149.0" />
+      <TextField fx:id="roundTextField" layoutX="562.0" layoutY="420.0" prefHeight="35.0" prefWidth="149.0" />
       <Label layoutX="425.0" layoutY="370.0" text="วันที่ลงบ่อ">
          <font>
             <Font size="18.0" />
@@ -77,6 +77,11 @@
          </font>
       </Label>
       <Label fx:id="vendorOrderLabel" layoutX="562.0" layoutY="324.0" text="vendorOrderLabel">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="warningLabel" layoutX="527.0" layoutY="535.0" text="warningLabel">
          <font>
             <Font size="18.0" />
          </font>

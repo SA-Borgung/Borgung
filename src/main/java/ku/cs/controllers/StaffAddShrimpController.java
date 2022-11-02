@@ -28,6 +28,8 @@ public class StaffAddShrimpController {
     @FXML
     private Label vendorOrderLabel;
     @FXML
+    private Label warningLabel;
+    @FXML
     private TextField dateTextField;
     @FXML
     private TextField roundTextField;
@@ -62,7 +64,7 @@ public class StaffAddShrimpController {
 
         prawnListDataSource = new PrawnDataSource();
         prawnList = prawnListDataSource.readData();
-
+        Prawn prawn =prawnList.getPrawnById("1");
         showListView();
         clearSelectedProduct();
         handleSelectedListView();
@@ -71,25 +73,32 @@ public class StaffAddShrimpController {
     }
 
     private void handleAddFarming(String date, int round){
-
+        if (farming.addFarmingInputCheck(date, round)){
+            farmingList.addFarming(farming);
+        }
+        else {
+            warningLabel.setText("ข้อมูลผิดพลาด");
+        }
     }
 
     @FXML
     public void enterButton(ActionEvent actionEvent){
 
         try {
-
             vendorOrderList.updateVendorOrder(vendorOrder, "user01");
             String farmId = "";
             String roundString = roundTextField.getText();
             int round = Integer.parseInt(roundString);
             int amount = vendorOrder.getAmount();
+            System.out.println(roundString);
             String prawnId = vendorOrder.getOrderType();
             String dateString = dateTextField.getText();
             String vendorId = vendorOrder.getId();
-            //String pondStatus
 
-            //farming = new Farming(farmId, round, amount,prawnId, dateString,"NULL", "NULL", vendorId,);
+            farming = new Farming(farmId, round, amount, prawnId, dateString,"NULL", "NULL", vendorId);
+            System.out.println("ก่อนเพิ่ม");
+            handleAddFarming(dateString, round);
+            System.out.println("เพิ่มแล้ว");
 
         }catch (Exception e) {
             System.err.println("ใส่ข้อมูลผิดพลาด");

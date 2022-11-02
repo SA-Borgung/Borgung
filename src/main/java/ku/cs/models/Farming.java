@@ -10,9 +10,9 @@ public class Farming {
     private String sellDate;
     private String orderID;
     private String vendorOrderID;
-    private String pondStatus;
 
-    public Farming(String pondID, int round, int prawnAmount, String prawnID, String getDate, String sellDate, String orderID, String vendorOrderID, String pondStatus) {
+
+    public Farming(String pondID, int round, int prawnAmount, String prawnID, String getDate, String sellDate, String orderID, String vendorOrderID) {
         this.pondID = pondID;
         this.round = round;
         this.prawnAmount = prawnAmount;
@@ -21,7 +21,7 @@ public class Farming {
         this.sellDate = sellDate;
         this.orderID = orderID;
         this.vendorOrderID = vendorOrderID;
-        this.pondStatus = pondStatus;
+
     }
 
     public String getPondID() {
@@ -88,16 +88,8 @@ public class Farming {
         this.vendorOrderID = vendorOrderID;
     }
 
-    public String getPondStatus() {
-        return pondStatus;
-    }
-
-    public void setPondStatus(String pondStatus) {
-        this.pondStatus = pondStatus;
-    }
-
-    public boolean addFarmingInputCheck(){
-        if(getDate == null){
+    public boolean addFarmingInputCheck(String date, int round){
+        if(date == null){
             return false;
         }
         if(round < 0){

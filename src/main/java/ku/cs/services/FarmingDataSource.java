@@ -41,7 +41,6 @@ public class FarmingDataSource implements DataSource<FarmingList> {
                 String sellDate = queryOutput.getString("F_SELLDATE");
                 String orderID = queryOutput.getString("O_ID");
                 String vendorOrderID = queryOutput.getString("R_ID");
-                String pondStatus = queryOutput.getString("P_STATUS");
 
                 list.addFarming(
                         new Farming(
@@ -52,9 +51,7 @@ public class FarmingDataSource implements DataSource<FarmingList> {
                                 getDate,
                                 sellDate,
                                 orderID,
-                                vendorOrderID,
-                                pondStatus
-
+                                vendorOrderID
                         )
                 );
 
