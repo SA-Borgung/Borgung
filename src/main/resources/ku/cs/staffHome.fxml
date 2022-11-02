@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffHomeController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffHomeController">
    <children>
       <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="135.0" layoutY="216.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="เตรียมบ่อ" textFill="#111010">
          <graphic>
@@ -23,7 +23,7 @@
             <Image url="@../../image/Borgung.jpg" />
          </image>
       </ImageView>
-      <Button id="sideNavBtn1" layoutX="375.0" layoutY="523.0" mnemonicParsing="false" text="logout" />
+      <Button id="sideNavBtn1" layoutX="375.0" layoutY="523.0" mnemonicParsing="false" onAction="#logoutBtn" text="logout" />
       <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="444.0" layoutY="216.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="รับกุ้ง" textFill="#030303">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">

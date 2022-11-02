@@ -22,7 +22,7 @@ public class App extends Application {
         //stage.show();
         com.github.saacsos.FXRouter.bind(this, stage, "SA Project", 900, 700);
         configRoute();
-        com.github.saacsos.FXRouter.goTo("managerSellOrder");
+        com.github.saacsos.FXRouter.goTo("login");
 
     }
 

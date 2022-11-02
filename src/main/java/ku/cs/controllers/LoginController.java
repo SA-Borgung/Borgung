@@ -88,10 +88,16 @@ public class LoginController {
 
 
 
+                if (usernameField.getText().equals("EP001")){
+                    com.github.saacsos.FXRouter.goTo("managerHome");
+                    setPassItem("managerHome"); // will do later
+                }else{
+                    com.github.saacsos.FXRouter.goTo("staffHome");
 
-                com.github.saacsos.FXRouter.goTo("managerHome");
+                }
 
-                setPassItem("managerHome"); // will do later
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
