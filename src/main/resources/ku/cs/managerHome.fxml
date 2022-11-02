@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.Managerhome">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerHomeController">
    <children>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="152.0" layoutY="312.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="สั่งเตรียมบ่อ" textFill="#111010">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="152.0" layoutY="312.0" mnemonicParsing="false" onAction="#toPrepareBorgung" prefHeight="53.0" prefWidth="200.0" text="สั่งเตรียมบ่อ" textFill="#111010">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -18,7 +18,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="486.0" layoutY="313.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="สั่งกุ้ง" textFill="#030303">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="486.0" layoutY="313.0" mnemonicParsing="false" onAction="#toOrderShrimp" prefHeight="50.0" prefWidth="200.0" text="สั่งกุ้ง" textFill="#030303">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="sideNavBtn1" layoutX="378.0" layoutY="531.0" mnemonicParsing="false" text="logout" />
+      <Button id="sideNavBtn1" layoutX="378.0" layoutY="531.0" mnemonicParsing="false" onAction="#logoutBtn" text="logout" />
       <ImageView fitHeight="199.0" fitWidth="270.0" layoutX="113.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../image/Borgung.jpg" />
@@ -38,7 +38,7 @@
             <Image url="@../../image/Shrimp.jpg" />
          </image>
       </ImageView>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="330.0" layoutY="421.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="Check Stock" textFill="#111010">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="330.0" layoutY="421.0" mnemonicParsing="false" onAction="#toCheckStock" prefHeight="53.0" prefWidth="200.0" text="Check Stock" textFill="#111010">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>

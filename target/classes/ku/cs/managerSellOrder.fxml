@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.ManagerSellOrder">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerSellOrderController">
    <children>
       <Label layoutX="243.0" layoutY="39.0" text="sell order">
          <font>
@@ -25,10 +25,11 @@
             <Image url="@../../image/team.png" />
          </image>
       </ImageView>
-      <TextField layoutX="210.0" layoutY="159.0" promptText="ชื่อ-นามสกุล ลูกค้า" />
-      <TextField layoutX="388.0" layoutY="159.0" promptText="เบอร์โืทรศัพท์" />
-      <TextField layoutX="211.0" layoutY="212.0" promptText="ที่อยู่จัดส่ง" />
-      <Button layoutX="27.0" layoutY="345.0" mnemonicParsing="false" text="Back" />
+      <TextField fx:id="nameTextField" layoutX="210.0" layoutY="159.0" promptText="ชื่อ-นามสกุล ลูกค้า" />
+      <TextField fx:id="phoneTextField" layoutX="388.0" layoutY="159.0" promptText="เบอร์โทรศัพท์" />
+      <TextField fx:id="addressTextField" layoutX="211.0" layoutY="212.0" promptText="ที่อยู่จัดส่ง" />
+      <Button layoutX="27.0" layoutY="345.0" mnemonicParsing="false" onAction="#backBtn" text="Back" />
       <Button layoutX="214.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="เสร็จสิ้น" />
+      <TextField fx:id="idCardTextField" layoutX="388.0" layoutY="212.0" promptText="เลขบัตรประชาชน" />
    </children>
 </AnchorPane>

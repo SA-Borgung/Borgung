@@ -95,6 +95,11 @@ public class Employee {
         this.role = role;
     }
 
+    public boolean checkId(String id) {
+        return this.id.equals(id);
+    }
+
+
 
 
 

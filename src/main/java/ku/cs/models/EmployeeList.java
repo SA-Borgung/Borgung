@@ -31,6 +31,15 @@ public class EmployeeList {
 
     }
 
+    public Employee getEmployeeById(String id){
+        for (Employee employee : employees) {
+            if (employee.checkId(id)) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
 
 
 }

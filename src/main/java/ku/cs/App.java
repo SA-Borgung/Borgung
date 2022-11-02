@@ -22,7 +22,7 @@ public class App extends Application {
         //stage.show();
         com.github.saacsos.FXRouter.bind(this, stage, "SA Project", 900, 700);
         configRoute();
-        com.github.saacsos.FXRouter.goTo("staffHome");
+        com.github.saacsos.FXRouter.goTo("managerSellOrder");
 
     }
 
@@ -35,6 +35,13 @@ public class App extends Application {
         com.github.saacsos.FXRouter.when("staffPrepareBorgung", packageStr+"staffPrepareBorgung.fxml");
         com.github.saacsos.FXRouter.when("staffShrimpFarming", packageStr+"staffShrimpFarming.fxml");
         com.github.saacsos.FXRouter.when("staffQC", packageStr+"staffQC.fxml");
+
+        com.github.saacsos.FXRouter.when("managerOrderShrimp", packageStr+"managerOrderShrimp.fxml");
+        com.github.saacsos.FXRouter.when("managerPrepareBorgung", packageStr+"managerPrepareBorgung.fxml");
+        com.github.saacsos.FXRouter.when("managerCheckStock", packageStr+"managerCheckStock.fxml");
+        com.github.saacsos.FXRouter.when("managerSellOrder", packageStr+"managerSellOrder.fxml");
+        com.github.saacsos.FXRouter.when("login", packageStr+"login.fxml");
+        com.github.saacsos.FXRouter.when("managerHome", packageStr+"managerHome.fxml");
     }
 
 
