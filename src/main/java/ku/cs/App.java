@@ -29,6 +29,7 @@ public class App extends Application {
         String packageStr = "ku/cs/";
         com.github.saacsos.FXRouter.when("sample", packageStr+"sample.fxml");
         com.github.saacsos.FXRouter.when("staffGetShrimp", packageStr+"staffGetShirmp.fxml");
+        com.github.saacsos.FXRouter.when("staffAddShrimp", packageStr+"staffAddShrimp.fxml");
 
     }
 

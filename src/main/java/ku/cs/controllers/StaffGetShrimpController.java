@@ -16,6 +16,7 @@ import ku.cs.services.DataSource;
 import ku.cs.services.PrawnDataSource;
 import ku.cs.services.VendorOrderDataSource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StaffGetShrimpController {
@@ -39,6 +40,8 @@ public class StaffGetShrimpController {
     private DataSource<VendorOrderList> dataSource;
     private DataSource<PrawnList> prawnListDataSource;
 
+    private ArrayList<String> passItem;
+
     @FXML
     public void initialize() {
 
@@ -46,6 +49,7 @@ public class StaffGetShrimpController {
         vendorOrderList = dataSource.readData();
         prawnListDataSource = new PrawnDataSource();
         prawnList = prawnListDataSource.readData();
+        passItem = new ArrayList<>();
 
 
         showListView();
@@ -83,7 +87,7 @@ public class StaffGetShrimpController {
 
     private VendorOrder selectedVendorOrder(){
         String selectedVendorOrderString = addVendorListView.getSelectionModel().selectedItemProperty().get();
-        //System.out.println(selectedVendorOrderString);
+        System.out.println(selectedVendorOrderString);
         VendorOrder vendorOrder = vendorOrderList.getVendorOrderById(selectedVendorOrderString);
         return vendorOrder;
     }
@@ -123,6 +127,25 @@ public class StaffGetShrimpController {
         StatusLabel.setText(vendorOrder.getStatus());
         String prawnName = prawnList.getPrawnById(vendorOrder.getOrderType()).getSpecies();
         ShrimpNameLabel.setText(prawnName);
+    }
+
+    private void setPassItem(String location) throws IOException {
+
+        String R_ID = selectedVendorOrder().getId();
+        passItem.add(R_ID);
+
+        com.github.saacsos.FXRouter.goTo(location,passItem);
+    }
+
+    @FXML
+    public void addShrimpButton(ActionEvent actionEvent) throws IOException {
+        setPassItem("staffAddShrimp");
+        try {
+            com.github.saacsos.FXRouter.goTo("staffAddShrimp");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า staffAddShrimp ไม่ได้");
+        }
+
     }
 
     @FXML

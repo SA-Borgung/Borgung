@@ -3,16 +3,16 @@ package ku.cs.models;
 public class Farming {
 
     private String pondID;
-    private String round;
-    private String prawnAmount;
+    private int round;
+    private int prawnAmount;
     private String prawnID;
     private String getDate;
     private String sellDate;
     private String orderID;
-    private String getPrawnID;
+    private String vendorOrderID;
     private String pondStatus;
 
-    public Farming(String pondID, String round, String prawnAmount, String prawnID, String getDate, String sellDate, String orderID, String getPrawnID, String pondStatus) {
+    public Farming(String pondID, int round, int prawnAmount, String prawnID, String getDate, String sellDate, String orderID, String vendorOrderID, String pondStatus) {
         this.pondID = pondID;
         this.round = round;
         this.prawnAmount = prawnAmount;
@@ -20,7 +20,7 @@ public class Farming {
         this.getDate = getDate;
         this.sellDate = sellDate;
         this.orderID = orderID;
-        this.getPrawnID = getPrawnID;
+        this.vendorOrderID = vendorOrderID;
         this.pondStatus = pondStatus;
     }
 
@@ -32,19 +32,19 @@ public class Farming {
         this.pondID = pondID;
     }
 
-    public String getRound() {
+    public int getRound() {
         return round;
     }
 
-    public void setRound(String round) {
+    public void setRound(int round) {
         this.round = round;
     }
 
-    public String getPrawnAmount() {
+    public int getPrawnAmount() {
         return prawnAmount;
     }
 
-    public void setPrawnAmount(String prawnAmount) {
+    public void setPrawnAmount(int prawnAmount) {
         this.prawnAmount = prawnAmount;
     }
 
@@ -80,12 +80,12 @@ public class Farming {
         this.orderID = orderID;
     }
 
-    public String getGetPrawnID() {
-        return getPrawnID;
+    public String getVendorOrderID() {
+        return vendorOrderID;
     }
 
-    public void setGetPrawnID(String getPrawnID) {
-        this.getPrawnID = getPrawnID;
+    public void setVendorOrderID(String vendorOrderID) {
+        this.vendorOrderID = vendorOrderID;
     }
 
     public String getPondStatus() {
@@ -94,5 +94,15 @@ public class Farming {
 
     public void setPondStatus(String pondStatus) {
         this.pondStatus = pondStatus;
+    }
+
+    public boolean addFarmingInputCheck(){
+        if(getDate == null){
+            return false;
+        }
+        if(round < 0){
+            return false;
+        }
+        return true;
     }
 }

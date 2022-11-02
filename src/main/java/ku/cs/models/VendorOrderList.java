@@ -29,5 +29,10 @@ public class VendorOrderList {
         return null;
     }
 
+    public void updateVendorOrder(VendorOrder vendorOrder, String userId){
+        vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
+        vendorOrder.setEmployeeID(userId);
+    }
+
 
 }
