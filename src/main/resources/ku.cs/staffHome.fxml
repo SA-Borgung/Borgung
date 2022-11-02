@@ -13,7 +13,7 @@
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../image/Mycomplaint%20icon.png" />
+                  <Image url="@../../image/Mycomplaint icon.png" />
                </image>
             </ImageView>
          </graphic>
@@ -56,20 +56,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="135.0" layoutY="410.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="Update การเลี้ยงกุ้ง" textFill="#111010">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="135.0" layoutY="406.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="ส่งของ" textFill="#030303">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../image/Mycomplaint%20icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="446.0" layoutY="411.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="ส่งของ" textFill="#030303">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../image/img.png" />
                </image>
             </ImageView>
          </graphic>
