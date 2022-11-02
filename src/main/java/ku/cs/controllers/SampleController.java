@@ -20,47 +20,46 @@ public class SampleController {
     private Label nameLabel;
 
     private Sample sample;
-//    private DatabaseConnection databaseConnection;
+    private DatabaseConnection databaseConnection;
     private ManagePrawnList managePrawnList;
     private ManagePrawn managePrawn;
     private DataSource<ManagePrawnList> dataSource;
 
     @FXML
     public void initialize() {
-
-        dataSource = new ManagePrawnDataSource();
-        managePrawnList = dataSource.readData();
-        showArrayListView();
+//
+//        dataSource = new ManagePrawnDataSource();
+//        managePrawnList = dataSource.readData();
+//        showArrayListView();
 
 
 //        sample = new Sample("test1", 1);
-//        databaseConnection = new DatabaseConnection();
-//        Connection connectDB = databaseConnection.getConnection();
-//        String connectQuery = "SELECT * FROM manage_prawn";
-//
-//        try{
-//            Statement statement = connectDB.createStatement();
-//            ResultSet queryOutput = statement.executeQuery(connectQuery);
-//
-//            while (queryOutput != null && queryOutput.next()){
-//                String careID = queryOutput.getString("D_ID");
-//                String giveFoodStatus = queryOutput.getString("DF_STATUS");
-//                String givePillsStatus = queryOutput.getString("DP_STATUS");
-//                String measureWeight = queryOutput.getString("P_MEASUREWEIGHT");
-//                String prawnID = queryOutput.getString("P_ID");
-//                String pondID = queryOutput.getString("W_NO");
-//                // ทดสอบ print ลง cmdline
-//                System.out.println(careID + "\t\t" + giveFoodStatus
-//                        + "\t\t" + givePillsStatus
-//                        + "\t\t" + measureWeight
-//                        + "\t\t" + prawnID
-//                        + "\t\t" + pondID);
-//                // อันเก่า
-//                showSampleView(careID);
-//            }
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        databaseConnection = new DatabaseConnection();
+        Connection connectDB = databaseConnection.getConnection();
+        String connectQuery = "SELECT * FROM vender_order";
+
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQuery);
+
+            while (queryOutput != null && queryOutput.next()){
+                String id = queryOutput.getString("R_ID");
+                String amount = queryOutput.getString("R_AMOUNT");
+                String sellerName = queryOutput.getString("R_SELLER");
+                String status = queryOutput.getString("R_STATUS");
+                String employeeID = queryOutput.getString("E_ID");
+                // ทดสอบ print ลง cmdline
+                System.out.println(id + "\t\t" + amount
+                        + "\t\t" + sellerName
+                        + "\t\t" + status
+                        + "\t\t" + employeeID
+                        );
+                // อันเก่า
+                //showSampleView(careID);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void showSampleView(String string){

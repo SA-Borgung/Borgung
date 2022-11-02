@@ -26,7 +26,7 @@ public class ManagePrawnDataSource implements DataSource<ManagePrawnList> {
 
         databaseConnection = new DatabaseConnection();
         Connection connectDB = databaseConnection.getConnection();
-        String connectQuery = "SELECT * FROM care";
+        String connectQuery = "SELECT * FROM manage_prawn";
 
         try{
             Statement statement = connectDB.createStatement();

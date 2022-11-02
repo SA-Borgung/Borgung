@@ -19,4 +19,20 @@ public class VendorOrderList {
         VendorOrder vendorOrder = vendorOrders.get(num);
         return vendorOrder;
     }
+
+    public VendorOrder getVendorOrderById(String id){
+        for (VendorOrder vendorOrder : vendorOrders) {
+            if (vendorOrder.checkId(id)) {
+                return vendorOrder;
+            }
+        }
+        return null;
+    }
+
+    public void updateVendorOrder(VendorOrder vendorOrder, String userId){
+        vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
+        vendorOrder.setEmployeeID(userId);
+    }
+
+
 }

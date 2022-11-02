@@ -21,4 +21,13 @@ public class PreparePondList {
         return preparePond;
     }
 
+    public PreparePond getPreparePondById(String id){
+        for (PreparePond preparePond : preparePonds) {
+            if (preparePond.checkId(id)) {
+                return preparePond;
+            }
+        }
+        return null;
+    }
+
 }

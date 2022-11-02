@@ -32,4 +32,6 @@ public class Prawn {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
+    public boolean checkPrawnId(String id){return this.id.equals(id);}
 }

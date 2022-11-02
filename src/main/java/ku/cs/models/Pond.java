@@ -2,10 +2,10 @@ package ku.cs.models;
 
 public class Pond {
     private String id;
-    private int status;
-    private int detail;
+    private String status;
+    private String detail;
 
-    public Pond(String id, int status, int detail) {
+    public Pond(String id, String status, String detail) {
         this.id = id;
         this.status = status;
         this.detail = detail;
@@ -19,19 +19,23 @@ public class Pond {
         this.id = id;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public int getDetail() {
+    public String getDetail() {
         return detail;
     }
 
-    public void setDetail(int detail) {
+    public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public boolean checkId(String id) {
+        return this.id.equals(id);
     }
 }

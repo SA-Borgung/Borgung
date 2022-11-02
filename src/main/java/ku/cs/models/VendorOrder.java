@@ -2,15 +2,25 @@ package ku.cs.models;
 
 public class VendorOrder {
 
-    String id,sellerName,employeeID;
-    private int amount;
+    String id,sellerName,employeeID,status,orderType;
+    int amount;
 
-    public VendorOrder(String id, int amount, String sellerName, String employeeID) {
+    public VendorOrder(String id, int amount, String sellerName, String status,String orderType, String employeeID) {
         this.id = id;
         this.amount = amount;
         this.sellerName = sellerName;
         this.employeeID = employeeID;
+        this.orderType = orderType;
+        this.status = status;
 
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public String getId() {
@@ -19,14 +29,7 @@ public class VendorOrder {
 
     public void setId(String id) {
         this.id = id;
-    }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public String getSellerName() {
@@ -43,5 +46,25 @@ public class VendorOrder {
 
     public void setEmployeeID(String employeeID) {
         this.employeeID = employeeID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public boolean checkId(String id) {
+        return this.id.equals(id);
     }
 }

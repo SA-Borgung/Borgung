@@ -20,4 +20,13 @@ public class PondList {
         Pond pond = ponds.get(num);
         return pond;
     }
+
+    public Pond getPondById(String id){
+        for (Pond pond : ponds) {
+            if (pond.checkId(id)) {
+                return pond;
+            }
+        }
+        return null;
+    }
 }

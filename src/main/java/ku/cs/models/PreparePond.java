@@ -5,7 +5,7 @@ public class PreparePond {
 
     public PreparePond(String prepareID, String status, String employeeID, String pondID) {
         this.prepareID = prepareID;
-        this.status = status;
+        this.status = status; //คือหมายเหตุ
         this.employeeID = employeeID;
         this.pondID = pondID;
     }
@@ -40,5 +40,9 @@ public class PreparePond {
 
     public void setPondID(String pondID) {
         this.pondID = pondID;
+    }
+
+    public boolean checkId(String id) {
+        return this.prepareID.equals(id);
     }
 }
