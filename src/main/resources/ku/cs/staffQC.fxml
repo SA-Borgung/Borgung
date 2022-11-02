@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffQcController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffQcController">
    <children>
       <Label layoutX="104.0" layoutY="51.0" text="Q.C คุณภาพกุ้ง">
          <font>
@@ -22,7 +18,7 @@
             <Image url="@../../image/qc.png" />
          </image>
       </ImageView>
-      <Button layoutX="39.0" layoutY="529.0" mnemonicParsing="false" onAction="#clickBackButton" prefHeight="32.0" prefWidth="58.0" text="back" />
+      <Button layoutX="39.0" layoutY="529.0" mnemonicParsing="false" onAction="#BackButton" prefHeight="32.0" prefWidth="58.0" text="back" />
       <Button layoutX="482.0" layoutY="536.0" mnemonicParsing="false" onAction="#clickFinishedButton" prefHeight="32.0" prefWidth="261.0" text="เสร็จสิ้น" />
       <Button fx:id="passedButton" layoutX="621.0" layoutY="368.0" mnemonicParsing="false" onAction="#clickOnPassedButton" prefHeight="26.0" prefWidth="70.0" text="ผ่าน" />
       <Button fx:id="failedButton" layoutX="520.0" layoutY="367.0" mnemonicParsing="false" onAction="#clickOnFailedButton" prefHeight="28.0" prefWidth="70.0" text="ไม่ผ่าน" />

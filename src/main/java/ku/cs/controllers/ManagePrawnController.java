@@ -2,6 +2,7 @@ package ku.cs.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -10,6 +11,7 @@ import ku.cs.models.*;
 import ku.cs.services.DataSource;
 import ku.cs.services.ManagePrawnDataSource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManagePrawnController {
@@ -120,5 +122,16 @@ public class ManagePrawnController {
             this.observableList.add(managePrawn.getId());
         }
         this.managePrawnListView.setItems(observableList);
+    }
+
+    @FXML
+    public void BackButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("staffHome");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า home ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+
     }
 }

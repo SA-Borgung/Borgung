@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffPrepareBorgungController">
    <children>
-      <Button layoutX="37.0" layoutY="555.0" mnemonicParsing="false" text="back" />
+      <Button layoutX="37.0" layoutY="555.0" mnemonicParsing="false" onAction="#BackButton" text="back" />
       <Label layoutX="400.0" layoutY="203.0" text="สถานะ">
          <font>
             <Font size="18.0" />

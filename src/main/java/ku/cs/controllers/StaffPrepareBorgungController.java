@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import ku.cs.models.*;
 import ku.cs.services.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StaffPrepareBorgungController {
@@ -121,5 +122,15 @@ public class StaffPrepareBorgungController {
         preparePondStatusLabel.setText("");
     }
 
+    @FXML
+    public void BackButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("staffHome");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า home ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+
+    }
 
 }

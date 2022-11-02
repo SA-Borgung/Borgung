@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import ku.cs.models.*;
 import ku.cs.services.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StaffAddShrimpController {
@@ -157,5 +158,16 @@ public class StaffAddShrimpController {
         String prawnName = prawnList.getPrawnById(vendorOrder.getOrderType()).getSpecies();
         shrimpIdLabel.setText(prawnName);
         vendorOrderLabel.setText(vendorOrder.getId());
+    }
+
+    @FXML
+    public void BackButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("staffGetShrimp");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า home ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+
     }
 }

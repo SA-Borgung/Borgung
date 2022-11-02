@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ import ku.cs.services.DataSource;
 import ku.cs.services.ManagePrawnDataSource;
 import ku.cs.services.QCDataSource;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -148,5 +150,16 @@ public class StaffQcController {
         this.pondIdLabel.setText("");
         this.measureWeightLabel.setText("");
         this.manageStatusLabel.setText("");
+    }
+
+    @FXML
+    public void BackButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("staffHome");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า home ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+
     }
 }
