@@ -1,5 +1,9 @@
 package ku.cs.models;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 public class Employee {
     private String id;
     private String name;
@@ -10,6 +14,10 @@ public class Employee {
     private String startWorkingDate;
     private String password;
     private String role;
+
+    private Connection connection;
+    private PreparedStatement pst;
+    private String databaseName = "borgung";
 
     public Employee(String id, String name, String dateOfBirth, int sex, String address, String phoneNumber, String startWorkingDate, String password, String role) {
         this.id = id;
@@ -97,6 +105,58 @@ public class Employee {
 
     public boolean checkId(String id) {
         return this.id.equals(id);
+    }
+
+    public void insertToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("Insert into employee(E_ID,E_NAME,E_DOB,E_SEX,E_ADDRESS,E_TEL,E_STARTWORK,E_PASSWORD,E_ROLE)values(?,?,?,?,?,?,?,?,?)");
+            pst.setString(1, this.id);
+            pst.setString(2, this.name);
+            pst.setString(3, this.dateOfBirth);
+            pst.setString(4, this.sex+"");
+            pst.setString(5, this.address);
+            pst.setString(6, this.phoneNumber);
+            pst.setString(7, this.startWorkingDate);
+            pst.setString(8, this.password);
+            pst.setString(9, this.role);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
+
+    public void updateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("UPDATE employee SET E_NAME = ?,E_DOB = ?,E_SEX= ? ,E_ADDRESS= ? ,E_TEL= ? ,E_STARTWORK= ?,E_PASSWORD= ?,E_ROLE= ? WHERE E_ID=?");
+            pst.setString(1, this.id);
+            pst.setString(2, this.name);
+            pst.setString(3, this.dateOfBirth);
+            pst.setString(4, this.sex+"");
+            pst.setString(5, this.address);
+            pst.setString(6, this.phoneNumber);
+            pst.setString(7, this.startWorkingDate);
+            pst.setString(8, this.password);
+            pst.setString(9, this.role);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 

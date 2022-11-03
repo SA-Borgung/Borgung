@@ -1,10 +1,17 @@
 package ku.cs.models;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 public class Customer {
     private String id;
     private String name;
     private String phoneNumber;
     private String address;
+    private Connection connection;
+    private PreparedStatement pst;
+    private String databaseName = "borgung";
 
     public Customer(String id, String name, String phoneNumber, String address) {
         this.id = id;
@@ -44,4 +51,32 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public void insertToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("Insert into customer(C_ID,C_NAME,C_TEL,C_ADDRESS)values(?,?,?,?)");
+            pst.setString(1, this.id);
+            pst.setString(2, this.name);
+            pst.setString(3, this.phoneNumber);
+            pst.setString(4, this.address);
+
+
+            //String id, String name, String phoneNumber, String address
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
+
+
 }
