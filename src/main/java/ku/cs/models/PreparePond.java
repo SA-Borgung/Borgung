@@ -1,5 +1,10 @@
 package ku.cs.models;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
 public class PreparePond {
     private String prepareID,status,employeeID,pondID;
 
@@ -45,4 +50,6 @@ public class PreparePond {
     public boolean checkId(String id) {
         return this.prepareID.equals(id);
     }
+
+
 }

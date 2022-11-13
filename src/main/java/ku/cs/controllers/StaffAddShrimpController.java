@@ -97,6 +97,7 @@ public class StaffAddShrimpController {
             String vendorId = vendorOrder.getId();
 
             farming = new Farming(farmId, round, amount, prawnId, dateString,"NULL", "NULL", vendorId);
+
             System.out.println("ก่อนเพิ่ม");
             handleAddFarming(dateString, round);
             System.out.println("เพิ่มแล้ว");

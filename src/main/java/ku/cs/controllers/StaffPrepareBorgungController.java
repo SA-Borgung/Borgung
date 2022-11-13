@@ -49,6 +49,7 @@ public class StaffPrepareBorgungController {
 
         try {
             pond.setStatus("กำลังดำเนินการ");
+            pond.updateToSql();
             showPond();
             System.out.println(pond.getStatus());
         }catch (Exception e) {
@@ -61,6 +62,7 @@ public class StaffPrepareBorgungController {
 
         try {
             pond.setStatus("เตรียมบ่อเสร็จสิ้น");
+            pond.updateToSql();
             showPond();
             System.out.println(pond.getStatus());
         }catch (Exception e) {
@@ -74,8 +76,12 @@ public class StaffPrepareBorgungController {
         ArrayList<PreparePond> tempPreparePondList = new ArrayList<PreparePond>();
         for (int i = preparePondList.count()-1; i>=0; i--){
             PreparePond preparePond = preparePondList.getPreparePondNumber(i);
-            tempPreparePondList.add(preparePond);
-            ObservableList.add(preparePond.getPrepareID());
+            Pond pond = pondList.getPondById(preparePond.getPondID());
+            if (!pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
+                tempPreparePondList.add(preparePond);
+                ObservableList.add(preparePond.getPrepareID());
+            }
+
 
         }
         preparePondListView.setItems(ObservableList);
