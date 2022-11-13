@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
 import ku.cs.models.*;
 import ku.cs.services.*;
 import javafx.collections.ObservableList;
@@ -29,6 +30,9 @@ public class ManagerPrepareBorgungController {
     private Label pondIdLabel;
     @FXML
     private Label statusLabel;
+
+    @FXML
+    Label finishLB;
 
     @FXML
     private TextArea additionInfoTA;
@@ -59,6 +63,25 @@ public class ManagerPrepareBorgungController {
 
         showPondListView();
         handleSelectedPondListView();
+
+    }
+
+    @FXML
+    private void clickFinishedButton() {
+        //String id, String name, String phoneNumber, String address
+
+
+//        Customer customer = new Customer(idCardTextField.getText(),nameTextField.getText(),phoneTextField.getText(),idCardTextField.getText());
+//
+//        customer.insertToSql();
+
+        finishLB.setText("อัพเดทข้อมูลสำเร็จ");
+        finishLB.setTextFill(Color.web("#ff0000", 1));
+//        if (!checkBox && failedReason.getText().equals("")) {
+//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
+//        } else {
+//            System.out.println("ไปหน้าต่อไป");
+//        }
 
     }
 

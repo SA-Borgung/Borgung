@@ -29,7 +29,8 @@
       <TextField fx:id="phoneTextField" layoutX="388.0" layoutY="159.0" promptText="เบอร์โทรศัพท์" />
       <TextField fx:id="addressTextField" layoutX="211.0" layoutY="212.0" promptText="ที่อยู่จัดส่ง" />
       <Button layoutX="27.0" layoutY="345.0" mnemonicParsing="false" onAction="#backBtn" text="Back" />
-      <Button layoutX="214.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="เสร็จสิ้น" />
+      <Button layoutX="214.0" layoutY="260.0" mnemonicParsing="false" onAction="#clickFinishedButton" prefHeight="26.0" prefWidth="61.0" text="เสร็จสิ้น" />
       <TextField fx:id="idCardTextField" layoutX="388.0" layoutY="212.0" promptText="เลขบัตรประชาชน" />
+      <Label fx:id="finishLB" layoutX="321.0" layoutY="265.0" prefHeight="17.0" prefWidth="114.0" />
    </children>
 </AnchorPane>

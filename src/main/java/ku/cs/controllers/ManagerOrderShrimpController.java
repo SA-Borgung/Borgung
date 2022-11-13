@@ -3,12 +3,14 @@ package ku.cs.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import ku.cs.models.*;
 import ku.cs.services.DataSource;
 import ku.cs.services.EmployeeDataSource;
@@ -48,6 +50,11 @@ public class ManagerOrderShrimpController {
     @FXML
     private Label prawnTypeLabel;
 
+    @FXML
+    Label finishLB;
+
+    public static final String ANSI_RESET = "\u001B[0m";
+
 
 
     @FXML
@@ -74,6 +81,39 @@ public class ManagerOrderShrimpController {
 
 
 
+    }
+    @FXML
+    private void clickFinishedButton() {
+        String selectedEmployeeString = employeeListView.getSelectionModel().selectedItemProperty().get();
+        //System.out.println(selectedVendorOrderString);
+        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
+
+        String selectedPrawnString = prawnListView.getSelectionModel().selectedItemProperty().get();
+        //System.out.println(selectedVendorOrderString);
+        Prawn prawn = prawnList.getPrawnById(selectedPrawnString);
+
+        VendorOrder vendorOrder = new VendorOrder(" ",Integer.parseInt(prawnAmountField.getText()) ,shopNameField.getText(),"",prawn.getId(),employee.getId());
+        // String id, int amount, String sellerName, String status,String orderType, String employeeID
+        vendorOrder.insertToSql();
+
+        finishLB.setText("กรอกข้อมูลสำเร็จ ");
+        finishLB.setTextFill(Color.web("#ff0000", 1));
+//        if (!checkBox && failedReason.getText().equals("")) {
+//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
+//        } else {
+//            System.out.println("ไปหน้าต่อไป");
+//        }
+    }
+
+    @FXML
+    private void clickUpdatedButton() {
+        QC qc = new QC("QC0012", "25 ตัวโล", "23:00:00", "ผ่าน", "Yes", "EP0022", "W0013");
+        qc.updateToSql();
+//        if (!checkBox && failedReason.getText().equals("")) {
+//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
+//        } else {
+//            System.out.println("ไปหน้าต่อไป");
+//        }
     }
 
 

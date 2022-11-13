@@ -26,7 +26,7 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Button layoutX="207.0" layoutY="414.0" mnemonicParsing="false" text="บันทึก" />
+            <Button layoutX="207.0" layoutY="414.0" mnemonicParsing="false" onAction="#clickFinishedButton" text="บันทึก" />
             <Label layoutX="35.0" layoutY="281.0" text="พนักงาน:">
                <font>
                   <Font size="16.0" />
@@ -46,6 +46,7 @@
             <ListView fx:id="prawnListView" layoutX="229.0" layoutY="98.0" prefHeight="177.0" prefWidth="185.0" />
             <Label fx:id="employeeLabel" layoutX="104.0" layoutY="285.0" prefHeight="17.0" prefWidth="114.0" />
             <Label fx:id="prawnTypeLabel" layoutX="296.0" layoutY="285.0" prefHeight="17.0" prefWidth="120.0" />
+            <Label fx:id="finishLB" layoutX="280.0" layoutY="418.0" prefHeight="17.0" prefWidth="114.0" />
          </children>
       </Pane>
       <Button layoutX="37.0" layoutY="544.0" mnemonicParsing="false" onAction="#backBtn" text="back" />
