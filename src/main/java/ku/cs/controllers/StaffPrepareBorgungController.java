@@ -81,8 +81,6 @@ public class StaffPrepareBorgungController {
                 tempPreparePondList.add(preparePond);
                 ObservableList.add(preparePond.getPrepareID());
             }
-
-
         }
         preparePondListView.setItems(ObservableList);
     }

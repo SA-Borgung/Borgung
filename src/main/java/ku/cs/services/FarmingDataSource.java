@@ -33,23 +33,27 @@ public class FarmingDataSource implements DataSource<FarmingList> {
             ResultSet queryOutput = statement.executeQuery(connectQuery);
 
             while (queryOutput != null && queryOutput.next()){
-                String pondID = queryOutput.getString("W_NO");
+                String FarmingID = queryOutput.getString("F_ID");
+                String pondID = queryOutput.getString("W_ID");
+                String prawnID = queryOutput.getString("P_ID");
                 String round = queryOutput.getString("F_ROUND");
                 String prawnAmount = queryOutput.getString("F_AMOUNT");
-                String prawnID = queryOutput.getString("P_ID");
                 String getDate = queryOutput.getString("F_GETDATE");
                 String sellDate = queryOutput.getString("F_SELLDATE");
+                String FarmingStatus = queryOutput.getString("F_STATUS");
                 String orderID = queryOutput.getString("O_ID");
                 String vendorOrderID = queryOutput.getString("R_ID");
 
                 list.addFarming(
                         new Farming(
+                                FarmingID,
                                 pondID,
                                 Integer.parseInt(round),
                                 Integer.parseInt(prawnAmount),
                                 prawnID,
                                 getDate,
                                 sellDate,
+                                FarmingStatus,
                                 orderID,
                                 vendorOrderID
                         )

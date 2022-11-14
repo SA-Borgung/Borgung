@@ -32,7 +32,7 @@ public class PondDataSource implements DataSource<PondList> {
             ResultSet queryOutput = statement.executeQuery(connectQuery);
 
             while (queryOutput != null && queryOutput.next()){
-                String id = queryOutput.getString("W_NO");
+                String id = queryOutput.getString("W_ID");
                 String status = queryOutput.getString("W_STATUS");
                 String detail = queryOutput.getString("W_DETAILS");
 

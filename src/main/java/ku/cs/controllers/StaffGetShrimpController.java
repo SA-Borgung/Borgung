@@ -64,8 +64,11 @@ public class StaffGetShrimpController {
         ArrayList<VendorOrder> tempVendorList = new ArrayList<VendorOrder>();
         for (int i = vendorOrderList.count()-1; i>=0; i--){
             VendorOrder vendorOrder = vendorOrderList.getVendorOrderNumber(i);
-            tempVendorList.add(vendorOrder);
-            ObservableList.add(vendorOrder.getId());
+            if (!vendorOrder.getStatus().equals("ดำเนินการเสร็จสิ้น")){
+                tempVendorList.add(vendorOrder);
+                ObservableList.add(vendorOrder.getId());
+            }
+
 
         }
         addVendorListView.setItems(ObservableList);

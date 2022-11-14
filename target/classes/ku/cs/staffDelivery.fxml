@@ -10,23 +10,18 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.StaffDelivery">
    <children>
-      <Label layoutX="364.0" layoutY="59.0" prefHeight="35.0" prefWidth="127.0" text="ส่งของ">
-         <font>
-            <Font size="33.0" />
-         </font>
-      </Label>
-      <Label layoutX="391.0" layoutY="212.0" text="ใบ Sell order">
+      <ImageView fitHeight="611.0" fitWidth="810.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/ภาพถ่ายหน้าจอ%202565-11-12%20เวลา%2022.21.47.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="401.0" layoutY="198.0" text="ใบ Sell order">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Button layoutX="29.0" layoutY="553.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="406.0" layoutY="258.0" mnemonicParsing="false" text="เสร็จสิ้น" />
-      <ImageView fitHeight="71.0" fitWidth="91.0" layoutX="275.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../image/qc.png" />
-         </image>
-      </ImageView>
-      <ListView layoutX="74.0" layoutY="159.0" prefHeight="284.0" prefWidth="250.0" />
+      <Button layoutX="100.0" layoutY="546.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="405.0" layoutY="252.0" mnemonicParsing="false" text="เสร็จสิ้น" />
+      <ListView layoutX="106.0" layoutY="155.0" prefHeight="284.0" prefWidth="250.0" />
    </children>
 </AnchorPane>

@@ -10,12 +10,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerPrepareBorgungController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerPrepareBorgungController">
    <children>
+      <ImageView fitHeight="773.0" fitWidth="804.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/ภาพถ่ายหน้าจอ%202565-11-12%20เวลา%2012.11.29.png" />
+         </image>
+      </ImageView>
       <Pane id="frame1" layoutX="258.0" layoutY="66.0" prefHeight="469.0" prefWidth="480.0">
          <children>
-            <ListView fx:id="addPondListView" layoutX="-180.0" layoutY="41.0" prefHeight="249.0" prefWidth="325.0" />
-            <ListView fx:id="addEmployeeListView" layoutX="151.0" layoutY="41.0" prefHeight="249.0" prefWidth="325.0" />
+            <ListView fx:id="addPondListView" layoutX="-175.0" layoutY="41.0" prefHeight="249.0" prefWidth="325.0" />
+            <ListView fx:id="addEmployeeListView" layoutX="156.0" layoutY="41.0" prefHeight="249.0" prefWidth="325.0" />
             <Label layoutX="187.0" layoutY="300.0" text="พนักงาน:">
                <font>
                   <Font size="17.0" />
@@ -23,22 +28,11 @@
             </Label>
             <Label fx:id="employeeLabel" layoutX="261.0" layoutY="306.0" prefHeight="17.0" prefWidth="211.0" />
             <Label fx:id="statusLabel" layoutX="-69.0" layoutY="301.0" prefHeight="26.0" prefWidth="131.0" />
-            <Button layoutX="328.0" layoutY="412.0" mnemonicParsing="false" onAction="#clickFinishedButton" text="เตรียมบ่อ" />
+            <Button layoutX="328.0" layoutY="412.0" mnemonicParsing="false" text="เตรียมบ่อ" />
             <TextArea layoutX="2.0" layoutY="387.0" prefHeight="111.0" prefWidth="264.0" />
-            <Label fx:id="finishLB" layoutX="306.0" layoutY="449.0" prefHeight="17.0" prefWidth="117.0" />
          </children>
       </Pane>
-      <Button layoutX="57.0" layoutY="524.0" mnemonicParsing="false" onAction="#backBtn" text="back" />
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="328.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../image/complain.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="388.0" layoutY="17.0" prefHeight="44.0" prefWidth="131.0" text="เตรียมบ่อ">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
+      <Button layoutX="96.0" layoutY="539.0" mnemonicParsing="false" onAction="#backBtn" text="back" />
       <Label fx:id="pondIdLabel" layoutX="183.0" layoutY="398.0" prefHeight="17.0" prefWidth="138.0" />
       <Label layoutX="125.0" layoutY="363.0" prefHeight="26.0" prefWidth="88.0" text="สถานะ :">
          <font>
@@ -50,6 +44,6 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="167.0" layoutY="467.0" text="รายละเอียดเพิ่มเติม" />
+      <Label layoutX="145.0" layoutY="462.0" text="รายละเอียดเพิ่มเติม" />
    </children>
 </AnchorPane>

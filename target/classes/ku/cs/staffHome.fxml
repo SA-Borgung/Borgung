@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffHomeController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffHomeController">
    <children>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="135.0" layoutY="216.0" mnemonicParsing="false" onAction="#staffPrepareButton" prefHeight="53.0" prefWidth="200.0" text="เตรียมบ่อ" textFill="#111010">
+      <ImageView fitHeight="639.0" fitWidth="817.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/ภาพถ่ายหน้าจอ%202565-11-12%20เวลา%2011.59.16.png" />
+         </image>
+      </ImageView>
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="178.0" layoutY="186.0" mnemonicParsing="false" onAction="#staffPrepareButton" prefHeight="53.0" prefWidth="200.0" text="เตรียมบ่อ" textFill="#111010">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -16,13 +21,8 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="117.0" fitWidth="214.0" layoutX="157.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../image/Borgung.jpg" />
-         </image>
-      </ImageView>
-      <Button id="sideNavBtn1" layoutX="375.0" layoutY="523.0" mnemonicParsing="false" onAction="#logoutBtn" text="logout" />
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="444.0" layoutY="216.0" mnemonicParsing="false" onAction="#staffGetShrimpButton" prefHeight="50.0" prefWidth="200.0" text="รับกุ้ง" textFill="#030303">
+      <Button id="sideNavBtn1" layoutX="397.0" layoutY="494.0" mnemonicParsing="false" onAction="#logoutBtn" text="logout" />
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="457.0" layoutY="186.0" mnemonicParsing="false" onAction="#staffGetShrimpButton" prefHeight="50.0" prefWidth="200.0" text="รับกุ้ง" textFill="#030303">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,12 +31,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="128.0" fitWidth="229.0" layoutX="471.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../image/Shrimp.jpg" />
-         </image>
-      </ImageView>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="135.0" layoutY="311.0" mnemonicParsing="false" onAction="#staffShrimpFarmingButton" prefHeight="50.0" prefWidth="200.0" text="การเลี้ยงดูกุ้ง" textFill="#030303">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="179.0" layoutY="289.0" mnemonicParsing="false" onAction="#staffShrimpFarmingButton" prefHeight="50.0" prefWidth="200.0" text="การเลี้ยงดูกุ้ง" textFill="#030303">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -45,7 +40,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="448.0" layoutY="311.0" mnemonicParsing="false" onAction="#staffQCButton" prefHeight="53.0" prefWidth="200.0" text="Q.C." textFill="#111010">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="455.0" layoutY="290.0" mnemonicParsing="false" onAction="#staffQCButton" prefHeight="53.0" prefWidth="200.0" text="Q.C." textFill="#111010">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -54,7 +49,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="135.0" layoutY="406.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="ส่งของ" textFill="#030303">
+      <Button id="sideNavBtn" alignment="TOP_LEFT" layoutX="182.0" layoutY="396.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="ส่งของ" textFill="#030303">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -63,10 +58,5 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="337.0" layoutY="17.0" prefHeight="45.0" prefWidth="130.0" text="Menu">
-         <font>
-            <Font name="AppleGothic Regular" size="41.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

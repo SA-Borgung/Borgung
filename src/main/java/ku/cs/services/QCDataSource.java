@@ -33,22 +33,20 @@ public class QCDataSource implements DataSource<QCList> {
 
             while (queryOutput != null && queryOutput.next()){
                 String id = queryOutput.getString("Q_ID");
-                String requirement = queryOutput.getString("Q_REQUIREMENT");
                 String time = queryOutput.getString("Q_TIME");
                 String manageStatus = queryOutput.getString("Q_STATUS");
                 String note = queryOutput.getString("Q_NOTE");
                 String employeeID = queryOutput.getString("E_ID");
-                String pondID = queryOutput.getString("W_NO");
+                String farmingID = queryOutput.getString("F_ID");
 
                 list.addQC(
                         new QC(
                                 id,
-                                requirement,
                                 time,
                                 manageStatus,
                                 note,
                                 employeeID,
-                                pondID
+                                farmingID
 
                         )
                 );

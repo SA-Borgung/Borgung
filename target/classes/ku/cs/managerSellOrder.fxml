@@ -8,29 +8,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerSellOrderController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerSellOrderController">
    <children>
-      <Label layoutX="243.0" layoutY="39.0" text="sell order">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <Label layoutX="256.0" layoutY="109.0" text="กรอกข้อมูล">
+      <ImageView fitHeight="482.0" fitWidth="607.0" layoutX="-3.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/ภาพถ่ายหน้าจอ%202565-11-12%20เวลา%2021.47.13.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="281.0" layoutY="107.0" text="กรอกข้อมูล">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="81.0" fitWidth="79.0" layoutX="144.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../image/team.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="nameTextField" layoutX="210.0" layoutY="159.0" promptText="ชื่อ-นามสกุล ลูกค้า" />
       <TextField fx:id="phoneTextField" layoutX="388.0" layoutY="159.0" promptText="เบอร์โทรศัพท์" />
       <TextField fx:id="addressTextField" layoutX="211.0" layoutY="212.0" promptText="ที่อยู่จัดส่ง" />
-      <Button layoutX="27.0" layoutY="345.0" mnemonicParsing="false" onAction="#backBtn" text="Back" />
-      <Button layoutX="214.0" layoutY="260.0" mnemonicParsing="false" onAction="#clickFinishedButton" prefHeight="26.0" prefWidth="61.0" text="เสร็จสิ้น" />
+      <Button layoutX="74.0" layoutY="396.0" mnemonicParsing="false" onAction="#backBtn" text="Back" />
+      <Button layoutX="214.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="เสร็จสิ้น" />
       <TextField fx:id="idCardTextField" layoutX="388.0" layoutY="212.0" promptText="เลขบัตรประชาชน" />
-      <Label fx:id="finishLB" layoutX="321.0" layoutY="265.0" prefHeight="17.0" prefWidth="114.0" />
+      <ImageView fitHeight="87.0" fitWidth="87.0" layoutX="94.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../image/complain.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

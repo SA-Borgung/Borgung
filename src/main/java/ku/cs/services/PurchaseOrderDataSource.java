@@ -37,13 +37,17 @@ public class PurchaseOrderDataSource implements DataSource<PurchaseOrderList> {
                 String weight = queryOutput.getString("P_WEIGHT");
                 String species = queryOutput.getString("P_SPECIES");
                 String age = queryOutput.getString("P_AGE");
+                String customerID = queryOutput.getString("C_ID");
+
+
 
                 list.addPurchaseOrder(
                         new PurchaseOrder(
                                 id,
                                 weight,
                                 species,
-                                Integer.parseInt(age)
+                                Integer.parseInt(age),
+                                customerID
 
                         )
                 );

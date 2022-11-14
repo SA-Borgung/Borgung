@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import ku.cs.models.FarmingList;
 import ku.cs.models.ManagePrawnList;
 import ku.cs.models.QC;
 import ku.cs.models.QCList;
@@ -37,9 +38,9 @@ public class StaffQcController {
 
     private ObservableList<String> observableList;
     private DataSource<QCList> qcListDataSource;
-    private DataSource<ManagePrawnList> managePrawnListDataSource;
+    private DataSource<FarmingList> farmingListDataSource;
     private QCList qcList;
-    private ManagePrawnList managePrawnList;
+    private FarmingList farmingList;
     private ArrayList<String> passItem;
 
     private boolean checkBox;
@@ -48,8 +49,6 @@ public class StaffQcController {
     public void initialize() {
         qcListDataSource = new QCDataSource();
         qcList = qcListDataSource.readData();
-        managePrawnListDataSource = new ManagePrawnDataSource();
-        managePrawnList = managePrawnListDataSource.readData();
         passItem = new ArrayList<>();
 
         this.showListView();
@@ -81,7 +80,7 @@ public class StaffQcController {
 
     @FXML
     private void clickFinishedButton() {
-        QC qc = new QC("QC006", "20 ตัวโล", "20:00:00", "ผ่าน", "Yes", "EP0006", "W0006");
+        QC qc = new QC("QC006", "2020-11-01", "ผ่าน", "Yes", "EP0006", "W0006");
         qc.insertToSql();
 //        if (!checkBox && failedReason.getText().equals("")) {
 //            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
@@ -92,7 +91,7 @@ public class StaffQcController {
 
     @FXML
     private void clickUpdatedButton() {
-        QC qc = new QC("QC0012", "25 ตัวโล", "23:00:00", "ผ่าน", "Yes", "EP0022", "W0013");
+        QC qc = new QC("QC006", "2020-11-01", "ผ่าน", "Yes", "EP0006", "W0006");
 //        qc.updateToSql();
 //        if (!checkBox && failedReason.getText().equals("")) {
 //            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
@@ -140,8 +139,8 @@ public class StaffQcController {
 
     private void showSelectedQc(QC qualityControl) {
         this.employeeIdLabel.setText(qualityControl.getEmployeeID());
-        this.pondIdLabel.setText(qualityControl.getPondID());
-        this.measureWeightLabel.setText(qualityControl.getRequirement());
+//        this.pondIdLabel.setText(qualityControl.getPondID());
+//        this.measureWeightLabel.setText(qualityControl.getRequirement());
     }
 
     private void clearData() {

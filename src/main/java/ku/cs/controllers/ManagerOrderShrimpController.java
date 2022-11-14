@@ -105,16 +105,16 @@ public class ManagerOrderShrimpController {
 //        }
     }
 
-    @FXML
-    private void clickUpdatedButton() {
-        QC qc = new QC("QC0012", "25 ตัวโล", "23:00:00", "ผ่าน", "Yes", "EP0022", "W0013");
-        qc.updateToSql();
+//    @FXML
+//    private void clickUpdatedButton() {
+//        QC qc = new QC("QC0012", "2020-11-01", "ผ่าน", "Yes", "EP0022", "W0013");
+//        qc.updateToSql();
 //        if (!checkBox && failedReason.getText().equals("")) {
 //            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
 //        } else {
 //            System.out.println("ไปหน้าต่อไป");
 //        }
-    }
+//    }
 
 
     private void showEmployeeListView() {

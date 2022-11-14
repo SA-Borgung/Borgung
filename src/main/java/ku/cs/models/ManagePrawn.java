@@ -6,17 +6,17 @@ public class ManagePrawn {
     private boolean givePillsStatus;
     private String manageStatus;
     private String measureWeight;
-    private String prawnID;
-    private String pondID;
+    private String date;
+    private String farmingID;
 
-    public ManagePrawn(String id, boolean giveFoodStatus, boolean givePillsStatus, String measureWeight, String manageStatus, String prawnID, String pondID) {
+    public ManagePrawn(String id, boolean giveFoodStatus, boolean givePillsStatus, String measureWeight, String manageStatus, String date, String farmingID) {
         this.id = id;
         this.giveFoodStatus = giveFoodStatus;
         this.givePillsStatus = givePillsStatus;
         this.measureWeight = measureWeight;
         this.manageStatus = manageStatus;
-        this.prawnID = prawnID;
-        this.pondID = pondID;
+        this.date = date;
+        this.farmingID = farmingID;
     }
 
     public String getId() {
@@ -56,20 +56,28 @@ public class ManagePrawn {
         this.measureWeight = measureWeight;
     }
 
-    public String getPrawnID() {
-        return prawnID;
+    public boolean isGiveFoodStatus() {
+        return giveFoodStatus;
     }
 
-    public void setPrawnID(String prawnID) {
-        this.prawnID = prawnID;
+    public boolean isGivePillsStatus() {
+        return givePillsStatus;
     }
 
-    public String getPondID() {
-        return pondID;
+    public String getDate() {
+        return date;
     }
 
-    public void setPondID(String pondID) {
-        this.pondID = pondID;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getFarmingID() {
+        return farmingID;
+    }
+
+    public void setFarmingID(String farmingID) {
+        this.farmingID = farmingID;
     }
 
     public void setManageStatus(String manageStatus) {

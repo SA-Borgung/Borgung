@@ -87,7 +87,8 @@ public class StaffAddShrimpController {
 
         try {
             vendorOrderList.updateVendorOrder(vendorOrder, "user01");
-            String farmId = "";
+            String farmingID = "F0004";
+            String pondID = "LB0001";
             String roundString = roundTextField.getText();
             int round = Integer.parseInt(roundString);
             int amount = vendorOrder.getAmount();
@@ -96,11 +97,12 @@ public class StaffAddShrimpController {
             String dateString = dateTextField.getText();
             String vendorId = vendorOrder.getId();
 
-            farming = new Farming(farmId, round, amount, prawnId, dateString,"NULL", "NULL", vendorId);
+            farming = new Farming("F5", "LB0001", round, amount, prawnId, dateString,null, "ปกติ","", vendorId);
 
             System.out.println("ก่อนเพิ่ม");
             handleAddFarming(dateString, round);
             System.out.println("เพิ่มแล้ว");
+            farming.insertToSql();
 
         }catch (Exception e) {
             System.err.println("ใส่ข้อมูลผิดพลาด");

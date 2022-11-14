@@ -20,9 +20,9 @@ public class App extends Application {
         //scene = new Scene(loadFXML("member_card_detail"), 640, 480);
         //stage.setScene(scene);
         //stage.show();
-        com.github.saacsos.FXRouter.bind(this, stage, "SA Project", 900, 700);
+        com.github.saacsos.FXRouter.bind(this, stage, "SA Project", 800, 600);
         configRoute();
-        com.github.saacsos.FXRouter.goTo("login");
+        com.github.saacsos.FXRouter.goTo("staffHome");
 
     }
 
