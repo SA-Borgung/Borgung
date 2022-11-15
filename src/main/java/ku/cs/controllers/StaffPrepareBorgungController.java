@@ -32,8 +32,12 @@ public class StaffPrepareBorgungController {
     private PreparePondList preparePondList;
     private DataSource<PreparePondList> preparePondListDataSource;
 
+    private ArrayList<String> getItem;
+
     @FXML
     public void initialize() {
+        getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
+        String userID  = getItem.get(0);
         pondListDataSource = new PondDataSource();
         pondList = pondListDataSource.readData();
         preparePondListDataSource = new PreparePondDataSource();
@@ -71,19 +75,22 @@ public class StaffPrepareBorgungController {
     }
 
     private void showListView() {
+        String userID  = getItem.get(0);
         ListView<String> listView = new ListView<>();
         ObservableList = FXCollections.observableArrayList();
         ArrayList<PreparePond> tempPreparePondList = new ArrayList<PreparePond>();
         for (int i = preparePondList.count()-1; i>=0; i--){
             PreparePond preparePond = preparePondList.getPreparePondNumber(i);
-            Pond pond = pondList.getPondById(preparePond.getPondID());
-            if (!pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
-                if (!pond.getStatus().equals("เลี้ยงกุ้ง")){
-                    tempPreparePondList.add(preparePond);
-                    ObservableList.add(preparePond.getPrepareID());
+            if (preparePond.getEmployeeID().equals(userID)){
+                Pond pond = pondList.getPondById(preparePond.getPondID());
+                if (!pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
+                    if (!pond.getStatus().equals("เลี้ยงกุ้ง")){
+                        tempPreparePondList.add(preparePond);
+                        ObservableList.add(preparePond.getPrepareID());
+                    }
                 }
-
             }
+
         }
         preparePondListView.setItems(ObservableList);
     }

@@ -40,10 +40,13 @@ public class StaffGetShrimpController {
     private DataSource<VendorOrderList> dataSource;
     private DataSource<PrawnList> prawnListDataSource;
 
+    private ArrayList<String> getItem;
     private ArrayList<String> passItem;
 
     @FXML
     public void initialize() {
+        getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
+        String userID  = getItem.get(0);
 
         dataSource = new VendorOrderDataSource();
         vendorOrderList = dataSource.readData();
@@ -135,7 +138,9 @@ public class StaffGetShrimpController {
     private void setPassItem(String location) throws IOException {
 
         String R_ID = selectedVendorOrder().getId();
+        String userID  = getItem.get(0);
         passItem.add(R_ID);
+        passItem.add(userID);
 
         com.github.saacsos.FXRouter.goTo(location,passItem);
     }

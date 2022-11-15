@@ -60,23 +60,25 @@ public class ManagePrawnList {
         }
     }
 
-    public ManagePrawn latestDate(String farmingID){
-        ArrayList<String> date = new ArrayList<>();
-        ArrayList<ManagePrawn> getManagePrawnByDate = new ArrayList<>();
+    public ManagePrawn latestManagePrawn(String farmingID){
+        ArrayList<Integer> id = new ArrayList<>();
+        int max = 0 ;
         for (ManagePrawn managePrawn : managePrawns) {
             if (managePrawn.getFarmingID().equals(farmingID)){
-                date.add(managePrawn.getDate());
+                if (managePrawn.getType().equals("วัดน้ำหนัก")){}
+                String idString = managePrawn.getId();
+                System.out.println("idString is: " + idString);
+                Integer idInt = Integer.parseInt(idString.substring(2));
+                id.add(idInt);
             }
         }
-        String maxDate = Collections.max(date);
-        for (ManagePrawn managePrawn : managePrawns){
-            if (managePrawn.getFarmingID().equals(farmingID)){
-                if (managePrawn.getDate().equals(maxDate)){
-                    getManagePrawnByDate.add(managePrawn);
-                }
+        for (int i = 0; i < id.size(); i++){
+            if (id.get(i) > max){
+                max = id.get(i);
             }
         }
-        ManagePrawn getManagePrawn = getManagePrawnByDate.get(getManagePrawnByDate.size());
-        return getManagePrawn;
+        System.out.println("max is: " + max);
+        String managePrawnGetID = "TK"+ max;
+        return  getManagePrawnById(managePrawnGetID);
     }
 }

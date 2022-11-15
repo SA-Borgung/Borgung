@@ -29,8 +29,6 @@ public class LoginController {
 //    private DatabaseConnection databaseConnection;
 
     private DataSource<EmployeeList> dataSource;
-
-
     private ArrayList<String> passItem;
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -39,43 +37,11 @@ public class LoginController {
     @FXML private Label warningUsernameLabel;
     @FXML private Label warningLabel;
 
-
-
     @FXML
     public void initialize() {
-
+        passItem = new ArrayList<>();
         dataSource = new EmployeeDataSource();
         employeeList = dataSource.readData();
-
-
-//        sample = new Sample("test1", 1);
-//        databaseConnection = new DatabaseConnection();
-//        Connection connectDB = databaseConnection.getConnection();
-//        String connectQuery = "SELECT * FROM manage_prawn";
-//
-//        try{
-//            Statement statement = connectDB.createStatement();
-//            ResultSet queryOutput = statement.executeQuery(connectQuery);
-//
-//            while (queryOutput != null && queryOutput.next()){
-//                String careID = queryOutput.getString("D_ID");
-//                String giveFoodStatus = queryOutput.getString("DF_STATUS");
-//                String givePillsStatus = queryOutput.getString("DP_STATUS");
-//                String measureWeight = queryOutput.getString("P_MEASUREWEIGHT");
-//                String prawnID = queryOutput.getString("P_ID");
-//                String pondID = queryOutput.getString("W_NO");
-//                // ทดสอบ print ลง cmdline
-//                System.out.println(careID + "\t\t" + giveFoodStatus
-//                        + "\t\t" + givePillsStatus
-//                        + "\t\t" + measureWeight
-//                        + "\t\t" + prawnID
-//                        + "\t\t" + pondID);
-//                // อันเก่า
-//                showSampleView(careID);
-//            }
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @FXML
@@ -86,17 +52,11 @@ public class LoginController {
             try {
                 System.out.println(ANSI_GREEN +  "Log in finished !" + ANSI_RESET);
 
-
-
                 if (usernameField.getText().equals("EP001")){
-                    com.github.saacsos.FXRouter.goTo("managerHome");
                     setPassItem("managerHome"); // will do later
                 }else{
-                    com.github.saacsos.FXRouter.goTo("staffHome");
-
+                    setPassItem("staffHome");
                 }
-
-
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -135,7 +95,8 @@ public class LoginController {
     }
 
     private void setPassItem(String location) throws IOException {
-        passItem.add(usernameField.getText());
+        String userID = usernameField.getText();
+        passItem.add(userID);
         com.github.saacsos.FXRouter.goTo(location,passItem);
     }
 
