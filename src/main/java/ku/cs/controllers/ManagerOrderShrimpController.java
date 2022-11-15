@@ -3,19 +3,12 @@ package ku.cs.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
-import ku.cs.services.DataSource;
-import ku.cs.services.EmployeeDataSource;
-import ku.cs.services.PrawnDataSource;
-import ku.cs.services.VendorOrderDataSource;
+import ku.cs.services.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +27,9 @@ public class ManagerOrderShrimpController {
     @FXML
     Label finishLB;
     public static final String ANSI_RESET = "\u001B[0m";
+
+    @FXML private TableView<Employee> employeeTableView;
+    @FXML private TableView<Prawn> prawnTableView;
 
     private javafx.collections.ObservableList<String> ObservableList;
     private DataSource<VendorOrderList> vendorDataSource;
@@ -62,12 +58,61 @@ public class ManagerOrderShrimpController {
         handleSelectedPrawnListView();
 
 
+        showEmployeeData();
+        showPrawnData();
 
 //        handleSelectedListView();
 
+        employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedEmployee(newValue);
+            }
+        });
+        prawnTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedPrawnType(newValue);
+            }
+        });
 
 
     }
+    private void showEmployeeData() {
+        employeeTableView.getItems().clear();
+        employeeTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(employeeList.getEmployees());
+        employeeTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:id"));
+//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            employeeTableView.getColumns().add(col);
+        }
+    }
+    private void showPrawnData() {
+        prawnTableView.getItems().clear();
+        prawnTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(prawnList.getPrawns());
+        prawnTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:id"));
+//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            prawnTableView.getColumns().add(col);
+        }
+    }
+
+
+
     @FXML
     private void clickFinishedButton() {
         int vendorOrderID = vendorOrderList.count()+1;

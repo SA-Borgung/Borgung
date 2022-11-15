@@ -6,16 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.Farming;
 import ku.cs.models.FarmingList;
-import ku.cs.models.ManagePrawn;
 import ku.cs.models.ManagePrawnList;
 import ku.cs.services.DataSource;
 import ku.cs.services.FarmingDataSource;
 import ku.cs.services.ManagePrawnDataSource;
+import ku.cs.services.StringConfiguration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +38,8 @@ public class ManagerCheckStockController {
     @FXML
     private TextField priceTextField;
 
+    @FXML private TableView<Farming> farmingTableView1;
+
     private ObservableList<String> ObservableList;
     private FarmingList farmingList;
     private DataSource<FarmingList> farmingListDataSource;
@@ -55,7 +56,31 @@ public class ManagerCheckStockController {
 
         showListView();
         clearSelectedProduct();
-        handleSelectedListView();
+        showProductData();
+//        handleSelectedListView();
+        farmingTableView1.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedFarming(newValue);
+            }
+        });
+    }
+
+    private void showProductData() {
+        farmingTableView1.getItems().clear();
+        farmingTableView1.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
+        farmingTableView1.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:farmingID"));
+//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            farmingTableView1.getColumns().add(col);
+        }
     }
 
     private void showListView() {

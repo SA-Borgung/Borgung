@@ -2,14 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerPrepareBorgungController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerPrepareBorgungController">
    <children>
       <ImageView fitHeight="773.0" fitWidth="804.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,8 +31,6 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <ListView fx:id="addPondListView" layoutX="84.0" layoutY="107.0" prefHeight="249.0" prefWidth="325.0" />
-      <ListView fx:id="addEmployeeListView" layoutX="415.0" layoutY="107.0" prefHeight="249.0" prefWidth="325.0" />
       <Label layoutX="119.0" layoutY="454.0" text="พนักงาน:">
          <font>
             <Font size="20.0" />
@@ -48,5 +47,17 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <TableView fx:id="pondTableView" layoutX="96.0" layoutY="107.0" prefHeight="249.0" prefWidth="307.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <TableView fx:id="employeeTableView" layoutX="428.0" layoutY="107.0" prefHeight="249.0" prefWidth="307.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

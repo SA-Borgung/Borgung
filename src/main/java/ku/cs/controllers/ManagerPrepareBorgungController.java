@@ -5,10 +5,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
 import ku.cs.services.*;
 import javafx.collections.ObservableList;
@@ -42,6 +40,9 @@ public class ManagerPrepareBorgungController {
     private PreparePondList preparePondList;
     private DataSource<PreparePondList> preparePondListDataSource;
 
+    @FXML private TableView<Employee> employeeTableView;
+    @FXML private TableView<Pond> pondTableView;
+
     @FXML
     public void initialize() {
 
@@ -61,6 +62,55 @@ public class ManagerPrepareBorgungController {
         showPondListView();
         handleSelectedPondListView();
 
+        showEmployeeData();
+        showPondData();
+
+        employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedEmployee(newValue);
+            }
+        });
+        pondTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedPond(newValue);
+            }
+        });
+
+    }
+
+    private void showEmployeeData() {
+        employeeTableView.getItems().clear();
+        employeeTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(employeeList.getEmployees());
+        employeeTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:id"));
+//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            employeeTableView.getColumns().add(col);
+        }
+    }
+    private void showPondData() {
+        pondTableView.getItems().clear();
+        pondTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(pondList.getPonds());
+        pondTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:id"));
+//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            pondTableView.getColumns().add(col);
+        }
     }
 
     @FXML
