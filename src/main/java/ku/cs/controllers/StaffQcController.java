@@ -59,7 +59,6 @@ public class StaffQcController {
     }
 
     private void showProductData() {
-
         farmingTableView.getItems().clear();
         farmingTableView.getColumns().clear();
         ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
@@ -67,7 +66,7 @@ public class StaffQcController {
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
         configs.add(new StringConfiguration("title:ID", "field:farmingID"));
-        configs.add(new StringConfiguration("title:round", "field:round"));
+        configs.add(new StringConfiguration("title:รอบ", "field:round"));
 
 
         for (StringConfiguration conf: configs) {
@@ -75,7 +74,6 @@ public class StaffQcController {
             col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
             farmingTableView.getColumns().add(col);
         }
-
     }
 
 
@@ -95,6 +93,9 @@ public class StaffQcController {
     }
 
     private void clearSelectedProduct() {
+        pondIdLabel.setText("");
+        manageStatusLabel.setText("");
+        measureWeightLabel.setText("");
     }
 
 

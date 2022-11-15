@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
 import ku.cs.services.*;
 
@@ -24,10 +25,11 @@ public class ManagePrawnController {
     @FXML private Label farmingLabel;
     @FXML private TextField dateTextField;
     @FXML private ListView<String> farmingListView;
+    @FXML private TableView<Farming> farmingTableView;
 
     private String noteType;
     private String statusType;
-    private ObservableList<String> ObservableList;
+    private ObservableList<Farming> ObservableList;
     private FarmingList farmingList;
     private DataSource<FarmingList> farmingListDataSource;
     private ManagePrawnList managePrawnList;
@@ -41,44 +43,32 @@ public class ManagePrawnController {
         managePrawnListDataSource = new ManagePrawnDataSource();
         managePrawnList = managePrawnListDataSource.readData();
 
-        showListView();
+        showProductData();
         clearSelectedProduct();
-        handleSelectedListView();
-    }
-
-
-    private void showListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
-        for (int i = farmingList.count()-1; i>=0; i--){
-            Farming farming = farmingList.getFarmingNumber(i);
-            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
-                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
-                    tempFarmingList.add(farming);
-                    String showList = farming.getFarmingID();
-                    ObservableList.add(showList);
-                }
-
+        farmingTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedFarming(newValue);
             }
+        });
+    }
+
+    private void showProductData() {
+        farmingTableView.getItems().clear();
+        farmingTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
+        farmingTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:farmingID"));
+        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            farmingTableView.getColumns().add(col);
         }
-        farmingListView.setItems(ObservableList);
     }
-
-    private void handleSelectedListView() {
-        farmingListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        Farming selectedFarming = farmingList.getFarmingById(newValue);
-                        System.out.println(selectedFarming + " is selected");
-                        showSelectedFarming(selectedFarming);
-                        selectedFarming();
-                    }
-                });
-    }
-
     public void  showSelectedFarming(Farming farming){
         farmingLabel.setText(farming.getPondID());
         if (farming.getFarmingStatus().equals("ปกติ")){

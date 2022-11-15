@@ -8,6 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
 import ku.cs.services.*;
 
@@ -16,16 +19,13 @@ import java.util.ArrayList;
 
 public class StaffPrepareBorgungController {
 
-    @FXML
-    private ListView<String> preparePondListView;
-    @FXML
-    private Label pondIdLabel;
-    @FXML
-    private Label pondStatusLabel;
-    @FXML
-    private Label preparePondStatusLabel;
+    @FXML private TableView<PreparePond> preparePondTableView;
+    @FXML private ListView<String> preparePondListView;
+    @FXML private Label pondIdLabel;
+    @FXML private Label pondStatusLabel;
+    @FXML private Label preparePondStatusLabel;
 
-    private ObservableList<String> ObservableList;
+    private ObservableList<PreparePond> ObservableList;
     private PondList pondList;
     private Pond pond;
     private DataSource<PondList> pondListDataSource;
@@ -39,14 +39,17 @@ public class StaffPrepareBorgungController {
         preparePondListDataSource = new PreparePondDataSource();
         preparePondList = preparePondListDataSource.readData();
 
-        showListView();
+        showProductData();
         clearSelectedProduct();
-        handleSelectedListView();
+        preparePondTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedPond(newValue);
+            }
+        });
     }
 
     @FXML
     public void enterInProgressButton(ActionEvent actionEvent){
-
         try {
             pond.setStatus("กำลังดำเนินการ");
             pond.updateToSql();
@@ -59,7 +62,6 @@ public class StaffPrepareBorgungController {
 
     @FXML
     public void enterFinishProgressButton(ActionEvent actionEvent){
-
         try {
             pond.setStatus("เตรียมบ่อเสร็จสิ้น");
             pond.updateToSql();
@@ -70,37 +72,22 @@ public class StaffPrepareBorgungController {
         }
     }
 
-    private void showListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<PreparePond> tempPreparePondList = new ArrayList<PreparePond>();
-        for (int i = preparePondList.count()-1; i>=0; i--){
-            PreparePond preparePond = preparePondList.getPreparePondNumber(i);
-            Pond pond = pondList.getPondById(preparePond.getPondID());
-            if (!pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
-                if (!pond.getStatus().equals("เลี้ยงกุ้ง")){
-                    tempPreparePondList.add(preparePond);
-                    ObservableList.add(preparePond.getPrepareID());
-                }
+    private void showProductData() {
+        preparePondTableView.getItems().clear();
+        preparePondTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(preparePondList.getPreparePonds());
+        preparePondTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:prepareID"));
+        configs.add(new StringConfiguration("title:รหัสพนักงาน", "field:employeeID"));
 
-            }
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            preparePondTableView.getColumns().add(col);
         }
-        preparePondListView.setItems(ObservableList);
-    }
-
-    private void handleSelectedListView() {
-        preparePondListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        PreparePond selectedPreparePond = preparePondList.getPreparePondById(newValue);
-                        System.out.println(selectedPreparePond + " is selected");
-
-                        selectedPreparePond();
-                        showSelectedPond(selectedPreparePond);
-                    }
-                });
     }
 
     private PreparePond selectedPreparePond(){
@@ -113,9 +100,8 @@ public class StaffPrepareBorgungController {
 
     private void showSelectedPond(PreparePond preparePond) {
         pondIdLabel.setText(preparePond.getPrepareID());
-//        String pondString = preparePond.getPrepareID();
-//        pond = pondList.getPondById(pondString);
-        pondStatusLabel.setText(pond.getStatus());
+        String pondStatus = pondList.getPondById(preparePond.getPondID()).getStatus();
+        pondStatusLabel.setText(pondStatus);
         preparePondStatusLabel.setText(preparePond.getStatus());
     }
 

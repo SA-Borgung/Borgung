@@ -8,12 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.Prawn;
 import ku.cs.models.PrawnList;
 import ku.cs.models.VendorOrder;
 import ku.cs.models.VendorOrderList;
 import ku.cs.services.DataSource;
 import ku.cs.services.PrawnDataSource;
+import ku.cs.services.StringConfiguration;
 import ku.cs.services.VendorOrderDataSource;
 
 import java.io.IOException;
@@ -21,20 +25,15 @@ import java.util.ArrayList;
 
 public class StaffGetShrimpController {
 
-    @FXML
-    private ListView<String> addVendorListView;
-    @FXML
-    private Label idLabel;
-    @FXML
-    private Label amountLabel;
-    @FXML
-    private Label SellerIdLabel;
-    @FXML
-    private Label StatusLabel;
-    @FXML
-    private Label ShrimpNameLabel;
+    @FXML private ListView<String> addVendorListView;
+    @FXML private TableView<VendorOrder> addVendorTableView;
+    @FXML private Label idLabel;
+    @FXML private Label amountLabel;
+    @FXML private Label SellerIdLabel;
+    @FXML private Label StatusLabel;
+    @FXML private Label ShrimpNameLabel;
 
-    private ObservableList<String> ObservableList;
+    private ObservableList<VendorOrder> ObservableList;
     private VendorOrderList vendorOrderList;
     private PrawnList prawnList;
     private DataSource<VendorOrderList> dataSource;
@@ -44,7 +43,6 @@ public class StaffGetShrimpController {
 
     @FXML
     public void initialize() {
-
         dataSource = new VendorOrderDataSource();
         vendorOrderList = dataSource.readData();
         prawnListDataSource = new PrawnDataSource();
@@ -52,27 +50,33 @@ public class StaffGetShrimpController {
         passItem = new ArrayList<>();
 
 
-        showListView();
+        showProductData();
         clearSelectedProduct();
-        handleSelectedListView();
-
-    }
-
-    private void showListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<VendorOrder> tempVendorList = new ArrayList<VendorOrder>();
-        for (int i = vendorOrderList.count()-1; i>=0; i--){
-            VendorOrder vendorOrder = vendorOrderList.getVendorOrderNumber(i);
-            if (!vendorOrder.getStatus().equals("ดำเนินการเสร็จสิ้น")){
-                tempVendorList.add(vendorOrder);
-                ObservableList.add(vendorOrder.getId());
+        addVendorTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedVendor(newValue);
             }
-
-
-        }
-        addVendorListView.setItems(ObservableList);
+        });
     }
+
+    private void showProductData() {
+        addVendorTableView.getItems().clear();
+        addVendorTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(vendorOrderList.getAllVendorOrder());
+        addVendorTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:id"));
+        configs.add(new StringConfiguration("title:ผู้ขาย", "field:sellerName"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            addVendorTableView.getColumns().add(col);
+        }
+    }
+
 
     private void handleSelectedListView() {
         addVendorListView.getSelectionModel().selectedItemProperty().addListener(
