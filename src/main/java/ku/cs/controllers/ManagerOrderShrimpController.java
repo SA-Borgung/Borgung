@@ -15,58 +15,44 @@ import ku.cs.models.*;
 import ku.cs.services.DataSource;
 import ku.cs.services.EmployeeDataSource;
 import ku.cs.services.PrawnDataSource;
+import ku.cs.services.VendorOrderDataSource;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManagerOrderShrimpController {
-
-    private VendorOrderList vendorOrderList;
-    private EmployeeList employeeList;
-    private VendorOrder vendorOrder;
-
-    private javafx.collections.ObservableList<String> ObservableList;
-    private DataSource<VendorOrderList> vendorDataSource;
-    private DataSource<EmployeeList> employeeDataSource;
-
-    private PrawnList prawnList;
-    private DataSource<PrawnList> prawnDataSource;
-
-    @FXML
-    ChoiceBox<String> employeeCB = new ChoiceBox<>();
-    ChoiceBox<String> prawnTypeCB = new ChoiceBox<>();
-
-
     @FXML
     TextField prawnAmountField,shopNameField;
-
     @FXML
     private ListView<String> employeeListView;
     @FXML
     private ListView<String> prawnListView;
-
     @FXML
     private Label employeeLabel;
     @FXML
     private Label prawnTypeLabel;
-
     @FXML
     Label finishLB;
-
     public static final String ANSI_RESET = "\u001B[0m";
 
-
+    private javafx.collections.ObservableList<String> ObservableList;
+    private DataSource<VendorOrderList> vendorDataSource;
+    private VendorOrderList vendorOrderList;
+    private DataSource<EmployeeList> employeeDataSource;
+    private EmployeeList employeeList;
+    private DataSource<PrawnList> prawnDataSource;
+    private PrawnList prawnList;
 
     @FXML
     public void initialize() {
-
-
-
         employeeDataSource = new EmployeeDataSource();
         employeeList = employeeDataSource.readData();
 
         prawnDataSource = new PrawnDataSource();
         prawnList = prawnDataSource.readData();
+
+        vendorDataSource = new VendorOrderDataSource();
+        vendorOrderList = vendorDataSource.readData();
 
         showEmployeeListView();
         clearSelectedRow();
@@ -84,37 +70,22 @@ public class ManagerOrderShrimpController {
     }
     @FXML
     private void clickFinishedButton() {
-        String selectedEmployeeString = employeeListView.getSelectionModel().selectedItemProperty().get();
-        //System.out.println(selectedVendorOrderString);
-        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
+        int vendorOrderID = vendorOrderList.count()+1;
+        String vendorOrderIDString = "GET"+vendorOrderID;
+        int amount = Integer.parseInt(prawnAmountField.getText());
+        String sellerName = shopNameField.getText();
+        String prawnID = selectedPrawn().getId();
+        String employeeID = selectedEmployee().getId();
 
-        String selectedPrawnString = prawnListView.getSelectionModel().selectedItemProperty().get();
-        //System.out.println(selectedVendorOrderString);
-        Prawn prawn = prawnList.getPrawnById(selectedPrawnString);
-
-        VendorOrder vendorOrder = new VendorOrder(" ",Integer.parseInt(prawnAmountField.getText()) ,shopNameField.getText(),"",prawn.getId(),employee.getId());
-        // String id, int amount, String sellerName, String status,String orderType, String employeeID
+        VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,employeeID);
         vendorOrder.insertToSql();
 
-        finishLB.setText("กรอกข้อมูลสำเร็จ ");
-        finishLB.setTextFill(Color.web("#ff0000", 1));
-//        if (!checkBox && failedReason.getText().equals("")) {
-//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-//        } else {
-//            System.out.println("ไปหน้าต่อไป");
-//        }
+//        finishLB.setText("กรอกข้อมูลสำเร็จ ");
+//        finishLB.setTextFill(Color.web("#ff0000", 1));
+
     }
 
-//    @FXML
-//    private void clickUpdatedButton() {
-//        QC qc = new QC("QC0012", "2020-11-01", "ผ่าน", "Yes", "EP0022", "W0013");
-//        qc.updateToSql();
-//        if (!checkBox && failedReason.getText().equals("")) {
-//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-//        } else {
-//            System.out.println("ไปหน้าต่อไป");
-//        }
-//    }
+
 
 
     private void showEmployeeListView() {
@@ -188,31 +159,19 @@ public class ManagerOrderShrimpController {
         return prawn;
     }
 
-
-
-
-
-
-
     private void clearSelectedRow() {
         employeeLabel.setText("");
         prawnTypeLabel.setText("");
-
-
     }
 
     private void showSelectedEmployee(Employee employee) {
         employeeLabel.setText(employee.getName());
 
-
-//        StatusLabel.setText(vendorOrder.getStatus());
     }
 
     private void showSelectedPrawnType(Prawn prawn) {
 
         prawnTypeLabel.setText(prawn.getSpecies());
-
-//        StatusLabel.setText(vendorOrder.getStatus());
     }
 
 

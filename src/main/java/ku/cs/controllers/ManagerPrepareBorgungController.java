@@ -22,30 +22,25 @@ public class ManagerPrepareBorgungController {
     private ListView<String> addEmployeeListView;
     @FXML
     private ListView<String> addPondListView;
-
     @FXML
     private Label employeeLabel;
-
     @FXML
     private Label pondIdLabel;
     @FXML
     private Label statusLabel;
-
     @FXML
-    Label finishLB;
-
+    private Label finishLB;
     @FXML
-    private TextArea additionInfoTA;
+    private TextArea infoTextArea;
 
 
     private ObservableList<String> ObservableList;
-
     private PondList pondList;
-
     private EmployeeList employeeList;
-
     private DataSource<PondList> dataSource;
     private DataSource<EmployeeList> employeeDataSource;
+    private PreparePondList preparePondList;
+    private DataSource<PreparePondList> preparePondListDataSource;
 
     @FXML
     public void initialize() {
@@ -56,6 +51,8 @@ public class ManagerPrepareBorgungController {
         employeeDataSource = new EmployeeDataSource();
         employeeList = employeeDataSource.readData();
 
+        preparePondListDataSource = new PreparePondDataSource();
+        preparePondList = preparePondListDataSource.readData();
 
         showEmployeeListView();
         clearSelectedRow();
@@ -68,20 +65,18 @@ public class ManagerPrepareBorgungController {
 
     @FXML
     private void clickFinishedButton() {
-        //String id, String name, String phoneNumber, String address
+        int preparePondID = preparePondList.count()+1;
+        String preparePondIDString = "TB"+preparePondID;
+        String status = infoTextArea.getText();
+        String employeeID = selectedEmployee().getId();
+        String pondID = selectedPond().getId();
 
-
-//        Customer customer = new Customer(idCardTextField.getText(),nameTextField.getText(),phoneTextField.getText(),idCardTextField.getText());
-//
-//        customer.insertToSql();
+        PreparePond preparePond = new PreparePond(preparePondIDString,status,employeeID,pondID );
+        preparePond.insertToSql();
+        preparePondList.addPreparePond(preparePond);
 
         finishLB.setText("อัพเดทข้อมูลสำเร็จ");
-        finishLB.setTextFill(Color.web("#ff0000", 1));
-//        if (!checkBox && failedReason.getText().equals("")) {
-//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-//        } else {
-//            System.out.println("ไปหน้าต่อไป");
-//        }
+//        finishLB.setTextFill(Color.web("#ff0000", 1));
 
     }
 
@@ -106,9 +101,14 @@ public class ManagerPrepareBorgungController {
         ArrayList<Pond> tempVendorList = new ArrayList<Pond>();
         for (int i = pondList.count()-1; i>=0; i--){
             Pond pond = pondList.getPondNumber(i);
-            tempVendorList.add(pond);
-            ObservableList.add(pond.getId());
-
+            if (pond.getStatus().equals("ขายแล้ว")){
+                tempVendorList.add(pond);
+                ObservableList.add(pond.getId());
+            }
+            else if (pond.getStatus().equals("เกิดปัญหา")){
+                tempVendorList.add(pond);
+                ObservableList.add(pond.getId());
+            }
         }
         addPondListView.setItems(ObservableList);
     }
@@ -157,27 +157,10 @@ public class ManagerPrepareBorgungController {
         return pond;
     }
 
-//    @FXML
-//    private void handleSetWaitStatus(ActionEvent actionEvent){
-//        String addStatusString = "รอดำเนินการ";
-//        selectedVendorOrder().setStatus(addStatusString);
-//        showSelectedVendor(selectedVendorOrder());
-//        System.out.println(addStatusString);
-//
-//    }
-//
-//    @FXML
-//    private void handleSetFinishStatus(ActionEvent actionEvent){
-//        String addStatusString = "เสร็จสิ้น";
-//        selectedVendorOrder().setStatus(addStatusString);
-//        showSelectedVendor(selectedVendorOrder());
-//        System.out.println(addStatusString);
-//
-//    }
-
     private void clearSelectedRow() {
         employeeLabel.setText("");
         pondIdLabel.setText("");
+        finishLB.setText("");
 
 
 
@@ -190,7 +173,7 @@ public class ManagerPrepareBorgungController {
 
     private void showSelectedPond(Pond pond) {
         pondIdLabel.setText(pond.getId());
-        statusLabel.setText(pond.getStatus()+""); //String.valueOf(pond.getStatus())
+//        statusLabel.setText(pond.getStatus()+"");
 
     }
 

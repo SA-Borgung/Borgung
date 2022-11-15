@@ -3,13 +3,18 @@ package ku.cs.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import ku.cs.models.Farming;
+import ku.cs.models.FarmingList;
 import ku.cs.models.ManagePrawn;
 import ku.cs.models.ManagePrawnList;
 import ku.cs.services.DataSource;
+import ku.cs.services.FarmingDataSource;
 import ku.cs.services.ManagePrawnDataSource;
 
 import java.io.IOException;
@@ -20,80 +25,92 @@ public class ManagerCheckStockController {
     //still dont know
 
     @FXML
-    private ListView<String> managePrawnListView;
+    private ListView<String> farmingListView;
     @FXML
-    private Label prawnDetailLabel;
+    private Label pondLabel;
     @FXML
-    private Label pondIDLabel;
+    private Label prawnLabel;
+    @FXML
+    private Label weightLabel;
+    @FXML
+    private Label amountLabel;
+    @FXML
+    private Label dateLabel;
+    @FXML
+    private TextField priceTextField;
 
-
-    private javafx.collections.ObservableList<String> ObservableList;
-
+    private ObservableList<String> ObservableList;
+    private FarmingList farmingList;
+    private DataSource<FarmingList> farmingListDataSource;
     private ManagePrawnList managePrawnList;
-    private ManagePrawn managePrawn;
-    private DataSource<ManagePrawnList> dataSource;
+    private DataSource<ManagePrawnList> managePrawnListDataSource;
 
     @FXML
     public void initialize() {
 
-        dataSource = new ManagePrawnDataSource();
-        managePrawnList = dataSource.readData();
+        farmingListDataSource = new FarmingDataSource();
+        farmingList = farmingListDataSource.readData();
+        managePrawnListDataSource = new ManagePrawnDataSource();
+        managePrawnList = managePrawnListDataSource.readData();
 
         showListView();
-        clearSelectedRow();
-        handleSelectedManagePrawnListView();
-//        handleSelectedListView();
-
+        clearSelectedProduct();
+        handleSelectedListView();
     }
 
     private void showListView() {
         ListView<String> listView = new ListView<>();
         ObservableList = FXCollections.observableArrayList();
-        ArrayList<ManagePrawn> tempVendorList = new ArrayList<ManagePrawn>();
-        for (int i = managePrawnList.count()-1; i>=0; i--){
-            ManagePrawn managePrawn = managePrawnList.getManagePrawnNumber(i);
-            tempVendorList.add(managePrawn);
-            ObservableList.add(managePrawn.getId());
+        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
+        for (int i = farmingList.count()-1; i>=0; i--){
+            Farming farming = farmingList.getFarmingNumber(i);
+            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
+                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
+                    tempFarmingList.add(farming);
+                    String showList = farming.getFarmingID();
+                    ObservableList.add(showList);
+                }
 
+            }
         }
-        managePrawnListView.setItems(ObservableList);
+        farmingListView.setItems(ObservableList);
     }
 
-    private void handleSelectedManagePrawnListView() {
-        managePrawnListView.getSelectionModel().selectedItemProperty().addListener(
+    private void handleSelectedListView() {
+        farmingListView.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> observableValue,
                                         String oldValue, String newValue) {
-                        ManagePrawn selectedManagePrawn = managePrawnList.getManagePrawnById(newValue);
-                        System.out.println(selectedManagePrawn + " is selected");
-                        showSelectedManagePrawn(selectedManagePrawn);
-                        selectedManagePrawn();
+                        Farming selectedFarming = farmingList.getFarmingById(newValue);
+                        System.out.println(selectedFarming + " is selected");
+                        showSelectedFarming(selectedFarming);
+                        selectedFarming();
                     }
                 });
     }
 
-
-
-    private void clearSelectedRow() {
-        prawnDetailLabel.setText("");
-        pondIDLabel.setText("");
-
-
+    public Farming selectedFarming(){
+        String selectedFarmingString = farmingListView.getSelectionModel().selectedItemProperty().get();
+        System.out.println(selectedFarmingString);
+        Farming farming = farmingList.getFarmingById(selectedFarmingString);
+        return farming;
     }
 
-
-    private void showSelectedManagePrawn(ManagePrawn managePrawn) {
-//        prawnDetailLabel.setText(managePrawn.getMeasureWeight());
-//        pondIDLabel.setText(managePrawn.getPondID());
-
+    public void  showSelectedFarming(Farming farming){
+        pondLabel.setText(farming.getPondID());
+        prawnLabel.setText("ไปเรียกข้อมูลซะ");
+        weightLabel.setText("ไปเรียกข้อมูลซะ");
+        amountLabel.setText(Integer.toString(farming.getPrawnAmount()));
+        dateLabel.setText(farming.getGetDate());
     }
 
-    private ManagePrawn selectedManagePrawn(){
-        String selectedManagePrawnString = managePrawnListView.getSelectionModel().selectedItemProperty().get();
-        //System.out.println(selectedVendorOrderString);
-        ManagePrawn managePrawn = managePrawnList.getManagePrawnById(selectedManagePrawnString);
-        return managePrawn;
+    private void clearSelectedProduct() {
+        pondLabel.setText("");
+        prawnLabel.setText("");
+        weightLabel.setText("");
+        amountLabel.setText("");
+        dateLabel.setText("");
     }
 
     @FXML
