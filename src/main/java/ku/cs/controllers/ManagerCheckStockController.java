@@ -40,7 +40,8 @@ public class ManagerCheckStockController {
 
     @FXML private TableView<Farming> farmingTableView1;
 
-    private ObservableList<String> ObservableList;
+    private ObservableList<Farming> ObservableList;
+
     private FarmingList farmingList;
     private DataSource<FarmingList> farmingListDataSource;
     private ManagePrawnList managePrawnList;
@@ -54,7 +55,7 @@ public class ManagerCheckStockController {
         managePrawnListDataSource = new ManagePrawnDataSource();
         managePrawnList = managePrawnListDataSource.readData();
 
-        showListView();
+//        showListView();
         clearSelectedProduct();
         showProductData();
 //        handleSelectedListView();
@@ -83,23 +84,23 @@ public class ManagerCheckStockController {
         }
     }
 
-    private void showListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
-        for (int i = farmingList.count()-1; i>=0; i--){
-            Farming farming = farmingList.getFarmingNumber(i);
-            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
-                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
-                    tempFarmingList.add(farming);
-                    String showList = farming.getFarmingID();
-                    ObservableList.add(showList);
-                }
-
-            }
-        }
-        farmingListView.setItems(ObservableList);
-    }
+//    private void showListView() {
+//        ListView<String> listView = new ListView<>();
+//        ObservableList = FXCollections.observableArrayList();
+//        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
+//        for (int i = farmingList.count()-1; i>=0; i--){
+//            Farming farming = farmingList.getFarmingNumber(i);
+//            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
+//                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
+//                    tempFarmingList.add(farming);
+//                    String showList = farming.getFarmingID();
+//                    ObservableList.add(showList);
+//                }
+//
+//            }
+//        }
+//        farmingListView.setItems(ObservableList);
+//    }
 
     private void handleSelectedListView() {
         farmingListView.getSelectionModel().selectedItemProperty().addListener(

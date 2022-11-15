@@ -3,6 +3,7 @@ package ku.cs.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -31,7 +32,8 @@ public class ManagerOrderShrimpController {
     @FXML private TableView<Employee> employeeTableView;
     @FXML private TableView<Prawn> prawnTableView;
 
-    private javafx.collections.ObservableList<String> ObservableList;
+    private ObservableList<Employee> ObservableList;
+    private ObservableList<Prawn> ObservableList2;
     private DataSource<VendorOrderList> vendorDataSource;
     private VendorOrderList vendorOrderList;
     private DataSource<EmployeeList> employeeDataSource;
@@ -50,11 +52,11 @@ public class ManagerOrderShrimpController {
         vendorDataSource = new VendorOrderDataSource();
         vendorOrderList = vendorDataSource.readData();
 
-        showEmployeeListView();
+//        showEmployeeListView();
         clearSelectedRow();
         handleSelectedEmployeeListView();
 
-        showPrawnListView();
+//        showPrawnListView();
         handleSelectedPrawnListView();
 
 
@@ -96,8 +98,8 @@ public class ManagerOrderShrimpController {
     private void showPrawnData() {
         prawnTableView.getItems().clear();
         prawnTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(prawnList.getPrawns());
-        prawnTableView.setItems(ObservableList);
+        ObservableList2 = FXCollections.observableArrayList(prawnList.getPrawns());
+        prawnTableView.setItems(ObservableList2);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
         configs.add(new StringConfiguration("title:ID", "field:id"));
@@ -133,19 +135,19 @@ public class ManagerOrderShrimpController {
 
 
 
-    private void showEmployeeListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Employee> tempEmployeeList = new ArrayList<Employee>();
-        for (int i = employeeList.count()-1; i>=0; i--){
-
-            Employee employee = employeeList.getEmployeeNumber(i);
-            tempEmployeeList.add(employee);
-            ObservableList.add(employee.getId());
-
-        }
-        employeeListView.setItems(ObservableList);
-    }
+//    private void showEmployeeListView() {
+//        ListView<String> listView = new ListView<>();
+//        ObservableList = FXCollections.observableArrayList();
+//        ArrayList<Employee> tempEmployeeList = new ArrayList<Employee>();
+//        for (int i = employeeList.count()-1; i>=0; i--){
+//
+//            Employee employee = employeeList.getEmployeeNumber(i);
+//            tempEmployeeList.add(employee);
+//            ObservableList.add(employee.getId());
+//
+//        }
+//        employeeListView.setItems(ObservableList);
+//    }
 
     private void handleSelectedEmployeeListView() {
         employeeListView.getSelectionModel().selectedItemProperty().addListener(
@@ -163,19 +165,19 @@ public class ManagerOrderShrimpController {
 
 
 
-    private void showPrawnListView() {
-        ListView<String> listView = new ListView<>();
-
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Prawn> tempPrawnList = new ArrayList<Prawn>();
-        for (int i = prawnList.count()-1; i>=0; i--){
-            Prawn prawn = prawnList.getPrawnNumber(i);
-            tempPrawnList.add(prawn);
-            ObservableList.add(prawn.getId());
-
-        }
-        prawnListView.setItems(ObservableList);
-    }
+//    private void showPrawnListView() {
+//        ListView<String> listView = new ListView<>();
+//
+//        ObservableList = FXCollections.observableArrayList();
+//        ArrayList<Prawn> tempPrawnList = new ArrayList<Prawn>();
+//        for (int i = prawnList.count()-1; i>=0; i--){
+//            Prawn prawn = prawnList.getPrawnNumber(i);
+//            tempPrawnList.add(prawn);
+//            ObservableList2.add(prawn.getId());
+//
+//        }
+//        prawnListView.setItems(ObservableList2);
+//    }
 
     private void handleSelectedPrawnListView() {
         prawnListView.getSelectionModel().selectedItemProperty().addListener(

@@ -32,7 +32,8 @@ public class ManagerPrepareBorgungController {
     private TextArea infoTextArea;
 
 
-    private ObservableList<String> ObservableList;
+    private ObservableList<Employee> ObservableList;
+    private ObservableList<Pond> ObservableList2;
     private PondList pondList;
     private EmployeeList employeeList;
     private DataSource<PondList> dataSource;
@@ -55,11 +56,11 @@ public class ManagerPrepareBorgungController {
         preparePondListDataSource = new PreparePondDataSource();
         preparePondList = preparePondListDataSource.readData();
 
-        showEmployeeListView();
+//        showEmployeeListView();
         clearSelectedRow();
         handleSelectedEmployeeListView();
 
-        showPondListView();
+//        showPondListView();
         handleSelectedPondListView();
 
         showEmployeeData();
@@ -98,8 +99,8 @@ public class ManagerPrepareBorgungController {
     private void showPondData() {
         pondTableView.getItems().clear();
         pondTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(pondList.getPonds());
-        pondTableView.setItems(ObservableList);
+        ObservableList2 = FXCollections.observableArrayList(pondList.getPonds());
+        pondTableView.setItems(ObservableList2);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
         configs.add(new StringConfiguration("title:ID", "field:id"));
@@ -130,38 +131,38 @@ public class ManagerPrepareBorgungController {
 
     }
 
-    private void showEmployeeListView() {
-        ListView<String> listView = new ListView<>();
+//    private void showEmployeeListView() {
+//        ListView<String> listView = new ListView<>();
+//
+//        ObservableList = FXCollections.observableArrayList();
+//        ArrayList<Employee> tempVendorList = new ArrayList<Employee>();
+//        for (int i = employeeList.count()-1; i>=0; i--){
+//            Employee employee = employeeList.getEmployeeNumber(i);
+//            tempVendorList.add(employee);
+//            ObservableList.add(employee.getId());
+//
+//        }
+//        addEmployeeListView.setItems(ObservableList);
+//    }
 
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Employee> tempVendorList = new ArrayList<Employee>();
-        for (int i = employeeList.count()-1; i>=0; i--){
-            Employee employee = employeeList.getEmployeeNumber(i);
-            tempVendorList.add(employee);
-            ObservableList.add(employee.getId());
-
-        }
-        addEmployeeListView.setItems(ObservableList);
-    }
-
-    private void showPondListView() {
-        ListView<String> listView = new ListView<>();
-
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Pond> tempVendorList = new ArrayList<Pond>();
-        for (int i = pondList.count()-1; i>=0; i--){
-            Pond pond = pondList.getPondNumber(i);
-            if (pond.getStatus().equals("ขายแล้ว")){
-                tempVendorList.add(pond);
-                ObservableList.add(pond.getId());
-            }
-            else if (pond.getStatus().equals("เกิดปัญหา")){
-                tempVendorList.add(pond);
-                ObservableList.add(pond.getId());
-            }
-        }
-        addPondListView.setItems(ObservableList);
-    }
+//    private void showPondListView() {
+//        ListView<String> listView = new ListView<>();
+//
+//        ObservableList = FXCollections.observableArrayList();
+//        ArrayList<Pond> tempVendorList = new ArrayList<Pond>();
+//        for (int i = pondList.count()-1; i>=0; i--){
+//            Pond pond = pondList.getPondNumber(i);
+//            if (pond.getStatus().equals("ขายแล้ว")){
+//                tempVendorList.add(pond);
+//                ObservableList.add(pond.getId());
+//            }
+//            else if (pond.getStatus().equals("เกิดปัญหา")){
+//                tempVendorList.add(pond);
+//                ObservableList.add(pond.getId());
+//            }
+//        }
+//        addPondListView.setItems(ObservableList);
+//    }
 
 
 
