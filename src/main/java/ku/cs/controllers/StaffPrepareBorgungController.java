@@ -78,8 +78,11 @@ public class StaffPrepareBorgungController {
             PreparePond preparePond = preparePondList.getPreparePondNumber(i);
             Pond pond = pondList.getPondById(preparePond.getPondID());
             if (!pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
-                tempPreparePondList.add(preparePond);
-                ObservableList.add(preparePond.getPrepareID());
+                if (!pond.getStatus().equals("เลี้ยงกุ้ง")){
+                    tempPreparePondList.add(preparePond);
+                    ObservableList.add(preparePond.getPrepareID());
+                }
+
             }
         }
         preparePondListView.setItems(ObservableList);

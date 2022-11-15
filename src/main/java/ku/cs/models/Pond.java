@@ -81,7 +81,7 @@ public class Pond {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("UPDATE pond SET W_STATUS = ?,W_DETAILS = ? WHERE W_NO=?");
+            pst = connection.prepareStatement("UPDATE pond SET W_STATUS = ?,W_DETAILS = ? WHERE W_ID=?");
             pst.setString(1, this.status);
             pst.setString(2, this.detail);
             pst.setString(3, this.id);

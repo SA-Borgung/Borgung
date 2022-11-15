@@ -20,4 +20,13 @@ public class CustomerList {
         return customer;
     }
 
+    public Customer getCustomerById(String id){
+        for (Customer customer : customers) {
+            if (customer.checkId(id)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
 }

@@ -3,6 +3,10 @@ package ku.cs.models;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Farming {
 
@@ -109,6 +113,10 @@ public class Farming {
         this.vendorOrderID = vendorOrderID;
     }
 
+    public boolean checkId(String id) {
+        return this.farmingID.equals(id);
+    }
+
     public String getFarmingStatus() {
         return farmingStatus;
     }
@@ -117,15 +125,7 @@ public class Farming {
         this.farmingStatus = farmingStatus;
     }
 
-    public boolean addFarmingInputCheck(String date, int round){
-        if(date == null){
-            return false;
-        }
-        if(round < 0){
-            return false;
-        }
-        return true;
-    }
+    final static String DATE_FORMAT = "dd-MM-yyyy";
 
     public void insertToSql() {
         try {
@@ -147,6 +147,25 @@ public class Farming {
             pst.setString(8, this.farmingStatus);
             pst.setString(9, this.orderID);
             pst.setString(10, this.vendorOrderID);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("UPDATE farming SET F_SELLDATE = ?,F_STATUS = ? WHERE F_ID=?");
+            pst.setString(1, this.sellDate);
+            pst.setString(2, this.farmingStatus);
+            pst.setString(3, this.farmingID);
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

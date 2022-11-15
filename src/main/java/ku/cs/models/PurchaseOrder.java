@@ -6,18 +6,18 @@ import java.sql.PreparedStatement;
 
 public class PurchaseOrder {
 
-    private String id,weight,species, customerID;
-    private int age;
+    private String id,purchaseType,status, customerID;
+    private int price;
     private Connection connection;
     private PreparedStatement pst;
     private String databaseName = "borgung";
 
-    public PurchaseOrder(String id, String weight, String species, int age, String customerID) {
+    public PurchaseOrder(String id, String purchaseType, int price , String status, String customerID) {
         this.id = id;
-        this.weight = weight;
-        this.species = species;
-        this.age = age;
+        this.purchaseType = purchaseType;
+        this.status = status;
         this.customerID = customerID;
+        this.price = price;
     }
 
     public String getId() {
@@ -28,28 +28,40 @@ public class PurchaseOrder {
         this.id = id;
     }
 
-    public String getWeight() {
-        return weight;
+    public String getPurchaseType() {
+        return purchaseType;
     }
 
-    public void setWeight(String weight) {
-        this.weight = weight;
+    public void setPurchaseType(String purchaseType) {
+        this.purchaseType = purchaseType;
     }
 
-    public String getSpecies() {
-        return species;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getAge() {
-        return age;
+    public String getCustomerID() {
+        return customerID;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public boolean checkId(String id) {
+        return this.id.equals(id);
     }
 
     public void insertToSql() {
@@ -61,21 +73,18 @@ public class PurchaseOrder {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("Insert into purchase_order(O_ID,P_WEIGHT,P_SPECIES,P_AGE )values(?,?,?,?)");
+            pst = connection.prepareStatement("Insert into purchase_order(O_ID,O_PURCHASE_TYPE,O_PRICE,O_STATUS,C_ID )values(?,?,?,?,?)");
             pst.setString(1, this.id);
-            pst.setString(2, this.weight);
-            pst.setString(3, this.species);
-            pst.setString(4, this.age+"");
+            pst.setString(2, this.purchaseType);
+            pst.setString(3, Integer.toString(this.price));
+            pst.setString(4, this.status);
+            pst.setString(5, this.customerID);
 
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-
-    //String id, String weight, String species, int age
-
-
 
     public void updateToSql() {
         try {
@@ -86,11 +95,10 @@ public class PurchaseOrder {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("UPDATE purchase_order SET P_WEIGHT = ?,P_SPECIES = ?,P_AGE= ?  WHERE O_ID=?");
-            pst.setString(1, this.id);
-            pst.setString(2, this.weight);
-            pst.setString(3, this.species);
-            pst.setString(4, this.age+"");
+            pst = connection.prepareStatement("UPDATE purchase_order SET O_STATUS = ? WHERE O_ID=?");
+            pst.setString(1, this.status);
+            pst.setString(2, this.id);
+
 
             pst.executeUpdate();
         } catch (Exception e) {

@@ -52,6 +52,10 @@ public class Customer {
         this.address = address;
     }
 
+    public boolean checkId(String id) {
+        return this.id.equals(id);
+    }
+
     public void insertToSql() {
         try {
             try{

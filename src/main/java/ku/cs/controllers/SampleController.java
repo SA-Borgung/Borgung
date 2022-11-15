@@ -66,11 +66,11 @@ public class SampleController {
         nameLabel.setText(string);
     }
 
-    private void showArrayListView(){
-        for (int i = managePrawnList.count()-1; i>=0; i--){
-            ManagePrawn managePrawn = managePrawnList.getManagePrawnNumber(i);
-            System.out.println(managePrawn.getId() + managePrawn.getGiveFoodStatus() + managePrawn.getMeasureWeight());
-        }
-
-    }
+//    private void showArrayListView(){
+//        for (int i = managePrawnList.count()-1; i>=0; i--){
+//            ManagePrawn managePrawn = managePrawnList.getManagePrawnNumber(i);
+//            System.out.println(managePrawn.getId() + managePrawn.getGiveFoodStatus() + managePrawn.getMeasureWeight());
+//        }
+//
+//    }
 }

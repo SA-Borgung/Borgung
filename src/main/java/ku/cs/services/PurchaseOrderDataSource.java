@@ -34,9 +34,9 @@ public class PurchaseOrderDataSource implements DataSource<PurchaseOrderList> {
 
             while (queryOutput != null && queryOutput.next()){
                 String id = queryOutput.getString("O_ID");
-                String weight = queryOutput.getString("P_WEIGHT");
-                String species = queryOutput.getString("P_SPECIES");
-                String age = queryOutput.getString("P_AGE");
+                String purchaseType = queryOutput.getString("O_PURCHASE_TYPE");
+                String price = queryOutput.getString("O_PRICE");
+                String status = queryOutput.getString("O_STATUS");
                 String customerID = queryOutput.getString("C_ID");
 
 
@@ -44,9 +44,9 @@ public class PurchaseOrderDataSource implements DataSource<PurchaseOrderList> {
                 list.addPurchaseOrder(
                         new PurchaseOrder(
                                 id,
-                                weight,
-                                species,
-                                Integer.parseInt(age),
+                                purchaseType,
+                                Integer.parseInt(price),
+                                status,
                                 customerID
 
                         )

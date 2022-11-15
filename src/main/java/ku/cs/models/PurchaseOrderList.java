@@ -19,4 +19,13 @@ public class PurchaseOrderList {
         PurchaseOrder purchaseOrder = purchaseOrders.get(num);
         return purchaseOrder;
     }
+
+    public PurchaseOrder getPurchaseOrderById(String id){
+        for (PurchaseOrder purchaseOrder : purchaseOrders) {
+            if (purchaseOrder.checkId(id)) {
+                return purchaseOrder;
+            }
+        }
+        return null;
+    }
 }

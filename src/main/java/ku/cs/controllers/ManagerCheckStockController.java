@@ -84,7 +84,7 @@ public class ManagerCheckStockController {
 
 
     private void showSelectedManagePrawn(ManagePrawn managePrawn) {
-        prawnDetailLabel.setText(managePrawn.getMeasureWeight());
+//        prawnDetailLabel.setText(managePrawn.getMeasureWeight());
 //        pondIDLabel.setText(managePrawn.getPondID());
 
     }

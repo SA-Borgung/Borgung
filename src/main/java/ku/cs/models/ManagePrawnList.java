@@ -1,6 +1,10 @@
 package ku.cs.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 public class ManagePrawnList {
 
@@ -28,5 +32,51 @@ public class ManagePrawnList {
             }
         }
         return null;
+    }
+
+    public static boolean validateJavaDate(String strDate)
+    {
+        if (strDate.trim().equals(""))
+        {
+            return false;
+        }
+        else
+        {
+
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+            sdfrmt.setLenient(false);
+
+            try
+            {
+                Date javaDate = sdfrmt.parse(strDate);
+                System.out.println(strDate+" is valid date format");
+            }
+            catch (ParseException e)
+            {
+                System.out.println(strDate+" is Invalid Date format");
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public ManagePrawn latestDate(String farmingID){
+        ArrayList<String> date = new ArrayList<>();
+        ArrayList<ManagePrawn> getManagePrawnByDate = new ArrayList<>();
+        for (ManagePrawn managePrawn : managePrawns) {
+            if (managePrawn.getFarmingID().equals(farmingID)){
+                date.add(managePrawn.getDate());
+            }
+        }
+        String maxDate = Collections.max(date);
+        for (ManagePrawn managePrawn : managePrawns){
+            if (managePrawn.getFarmingID().equals(farmingID)){
+                if (managePrawn.getDate().equals(maxDate)){
+                    getManagePrawnByDate.add(managePrawn);
+                }
+            }
+        }
+        ManagePrawn getManagePrawn = getManagePrawnByDate.get(getManagePrawnByDate.size());
+        return getManagePrawn;
     }
 }

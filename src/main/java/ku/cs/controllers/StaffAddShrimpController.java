@@ -73,12 +73,19 @@ public class StaffAddShrimpController {
 
     }
 
-    private void handleAddFarming(String date, int round){
-        if (farming.addFarmingInputCheck(date, round)){
-            farmingList.addFarming(farming);
+    private boolean handleAddFarming(String roundString, String date){
+        if (farmingList.addFarmingInputCheck(roundString)){
+            if (farmingList.validateJavaDate(date)){
+                return true;
+            }
+            else {
+                System.out.println("วันที่ผิด");
+                return false;
+            }
         }
         else {
-            warningLabel.setText("ข้อมูลผิดพลาด");
+            System.out.println("รอบผิด");
+            return false;
         }
     }
 
@@ -86,9 +93,10 @@ public class StaffAddShrimpController {
     public void enterButton(ActionEvent actionEvent){
 
         try {
-            vendorOrderList.updateVendorOrder(vendorOrder, "user01");
-            String farmingID = "F0004";
-            String pondID = "LB0001";
+//            vendorOrderList.updateVendorOrder(vendorOrder, "user01");
+            int farmingID = farmingList.count()+1;
+            String farmingIDString = "F"+ farmingID;
+            String pondID = selectedPond().getId();
             String roundString = roundTextField.getText();
             int round = Integer.parseInt(roundString);
             int amount = vendorOrder.getAmount();
@@ -97,19 +105,34 @@ public class StaffAddShrimpController {
             String dateString = dateTextField.getText();
             String vendorId = vendorOrder.getId();
 
-            farming = new Farming("F5", "LB0001", round, amount, prawnId, dateString,null, "ปกติ","", vendorId);
+            if (handleAddFarming(roundString,dateString)){
+                farming = new Farming(farmingIDString, pondID, round, amount, prawnId, dateString,null, "ปกติ",null, vendorId);
+                handleAddFarming(roundString,dateString);
+                farming.insertToSql();
+                vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
+                System.out.println("vendor status change");
+                vendorOrder.updateToSql();
 
-            System.out.println("ก่อนเพิ่ม");
-            handleAddFarming(dateString, round);
-            System.out.println("เพิ่มแล้ว");
-            farming.insertToSql();
+                Pond pond = pondList.getPondById(pondIdLabel.getText());
+                pond.setStatus("เลี้ยงกุ้ง");
+                pond.updateToSql();
+                staffHome();
+            }
+
 
         }catch (Exception e) {
             System.err.println("ใส่ข้อมูลผิดพลาด");
+            warningLabel.setText("ใส่ข้อมูลผิดพลาด");
         }
-
-
     }
+
+//    @FXML
+//    public void vendorUpdateTest(ActionEvent actionEvent){
+//        System.out.println("vendor test");
+//        vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
+//        System.out.println(vendorOrder.getId() + vendorOrder.getStatus());
+//        vendorOrder.updateToSql();
+//    }
 
     private void showListView() {
         ListView<String> listView = new ListView<>();
@@ -117,8 +140,11 @@ public class StaffAddShrimpController {
         ArrayList<Pond> tempPondList = new ArrayList<Pond>();
         for (int i = pondList.count()-1; i>=0; i--){
             Pond pond = pondList.getPondNumber(i);
-            tempPondList.add(pond);
-            ObservableList.add(pond.getId());
+            if (pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
+                tempPondList.add(pond);
+                ObservableList.add(pond.getId());
+            }
+
 
         }
         addPondListView.setItems(ObservableList);
@@ -152,8 +178,6 @@ public class StaffAddShrimpController {
     private void showSelectedPond(Pond pond) {
         pondIdLabel.setText(pond.getId());
         pondStatusLabel.setText(pond.getStatus());
-
-
     }
 
     private void showVendorOrder(){
@@ -173,4 +197,14 @@ public class StaffAddShrimpController {
         }
 
     }
+
+    public void staffHome(){
+        try {
+            com.github.saacsos.FXRouter.goTo("staffHome");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า home ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+    }
+
 }

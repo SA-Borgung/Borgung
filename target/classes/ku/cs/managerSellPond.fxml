@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.ManagerSellPond">
+   <children>
+      <ListView layoutX="42.0" layoutY="74.0" prefHeight="287.0" prefWidth="240.0" />
+      <Label layoutX="115.0" layoutY="28.0" text="รายการบ่อกุ้ง">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="93.0" text="รหัสบ่อกุ้ง">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="128.0" text="สายพันธุ์กุ้ง">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="314.0" layoutY="164.0" text="น้ำหนักกุ้ง">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="315.0" layoutY="334.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" text="สรุปบิล" />
+      <Label layoutX="314.0" layoutY="204.0" text="จำนวนกุ้ง">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="240.0" text="วันที่ลงบ่อ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

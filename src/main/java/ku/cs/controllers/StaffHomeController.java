@@ -63,4 +63,14 @@ public class StaffHomeController {
             System.err.println("ให้ตรวจสอบการกำหนด main");
         }
     }
+
+    @FXML
+    public void staffDeliveryButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("staffDelivery");
+        } catch (IOException e) {
+            System.err.println("ไปที่หน้า main ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด main");
+        }
+    }
 }

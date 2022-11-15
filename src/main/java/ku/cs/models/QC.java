@@ -101,26 +101,4 @@ public class QC {
         }
     }
 
-//    public void updateToSql() {
-//        try {
-//            try{
-//                Class.forName("com.mysql.cj.jdbc.Driver");
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//            String url = "jdbc:mysql://localhost:3306/" + databaseName;
-//            connection = DriverManager.getConnection(url , "root","");
-//            pst = connection.prepareStatement("UPDATE qc SET Q_REQUIREMENT = ?,Q_TIME = ?,Q_STATUS= ? ,Q_NOTE= ? ,E_ID= ? ,W_NO= ? WHERE Q_ID=?");
-//            pst.setString(1, this.requirement);
-//            pst.setString(2, this.time);
-//            pst.setString(3, this.manageStatus);
-//            pst.setString(4, this.note);
-//            pst.setString(5, this.employeeID);
-//            pst.setString(6, this.pondID);
-//            pst.setString(7, this.id);
-//            pst.executeUpdate();
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//    }
 }

@@ -134,13 +134,9 @@ public class VendorOrder {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("UPDATE vender_order SET R_AMOUNT = ?,R_SELLER = ?,R_STATUS= ? ,R_ORDER= ? ,E_ID= ? WHERE R_ID=?");
-            pst.setString(1, this.id);
-            pst.setString(2, this.amount+"");
-            pst.setString(3, this.sellerName);
-            pst.setString(4, this.status);
-            pst.setString(5, this.orderType);
-            pst.setString(6, this.employeeID);
+            pst = connection.prepareStatement("UPDATE vender_order SET R_STATUS= ? WHERE R_ID=?");
+            pst.setString(1, this.status);
+            pst.setString(2, this.id);
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

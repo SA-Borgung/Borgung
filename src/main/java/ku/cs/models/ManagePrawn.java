@@ -1,20 +1,25 @@
 package ku.cs.models;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 public class ManagePrawn {
     private String id;
-    private boolean giveFoodStatus;
-    private boolean givePillsStatus;
-    private String manageStatus;
-    private String measureWeight;
+    private String type;
+    private String note;
     private String date;
     private String farmingID;
 
-    public ManagePrawn(String id, boolean giveFoodStatus, boolean givePillsStatus, String measureWeight, String manageStatus, String date, String farmingID) {
+    private Connection connection;
+    private PreparedStatement pst;
+    private String databaseName = "borgung";
+
+
+    public ManagePrawn(String id, String type, String note, String date, String farmingID) {
         this.id = id;
-        this.giveFoodStatus = giveFoodStatus;
-        this.givePillsStatus = givePillsStatus;
-        this.measureWeight = measureWeight;
-        this.manageStatus = manageStatus;
+        this.type = type;
+        this.note = note;
         this.date = date;
         this.farmingID = farmingID;
     }
@@ -27,41 +32,20 @@ public class ManagePrawn {
         this.id = id;
     }
 
-    public boolean getGiveFoodStatus() {
-        return giveFoodStatus;
+    public String getType() {
+        return type;
     }
 
-
-    public void setGiveFoodStatus(boolean giveFoodStatus) {
-        this.giveFoodStatus = giveFoodStatus;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public boolean getGivePillsStatus() {
-        return givePillsStatus;
+    public String getNote() {
+        return note;
     }
 
-    public void setGivePillsStatus(boolean givePillsStatus) {
-        this.givePillsStatus = givePillsStatus;
-    }
-
-    public String getManageStatus() {
-        return manageStatus;
-    }
-
-    public String getMeasureWeight() {
-        return measureWeight;
-    }
-
-    public void setMeasureWeight(String measureWeight) {
-        this.measureWeight = measureWeight;
-    }
-
-    public boolean isGiveFoodStatus() {
-        return giveFoodStatus;
-    }
-
-    public boolean isGivePillsStatus() {
-        return givePillsStatus;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getDate() {
@@ -80,11 +64,29 @@ public class ManagePrawn {
         this.farmingID = farmingID;
     }
 
-    public void setManageStatus(String manageStatus) {
-        this.manageStatus = manageStatus;
-    }
-
     public boolean checkPrawnId(String id){
         return this.id.equals(id);
+    }
+
+    public void insertToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("Insert into manage_prawn(D_ID,D_TYPE,D_NOTE,D_DATE,F_ID)values(?,?,?,?,?)");
+            pst.setString(1, this.id);
+            pst.setString(2, this.type);
+            pst.setString(3, this.note);
+            pst.setString(4, this.date);
+            pst.setString(5, this.farmingID);
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

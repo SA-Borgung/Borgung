@@ -10,11 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import ku.cs.models.FarmingList;
-import ku.cs.models.ManagePrawnList;
-import ku.cs.models.QC;
-import ku.cs.models.QCList;
+import ku.cs.models.*;
 import ku.cs.services.DataSource;
+import ku.cs.services.FarmingDataSource;
 import ku.cs.services.ManagePrawnDataSource;
 import ku.cs.services.QCDataSource;
 
@@ -34,121 +32,119 @@ public class StaffQcController {
     @FXML private Label pondIdLabel;
     @FXML private Label measureWeightLabel;
     @FXML private Label manageStatusLabel;
-    @FXML private ListView<String> qcListView;
+    @FXML private ListView<String> farmingListView;
 
-    private ObservableList<String> observableList;
-    private DataSource<QCList> qcListDataSource;
-    private DataSource<FarmingList> farmingListDataSource;
-    private QCList qcList;
+    private ObservableList<String> ObservableList;
     private FarmingList farmingList;
-    private ArrayList<String> passItem;
+    private DataSource<FarmingList> farmingListDataSource;
+    private ManagePrawnList managePrawnList;
+    private DataSource<ManagePrawnList> managePrawnListDataSource;
+    private QCList qcList;
+    private DataSource<QCList> qcListDataSource;
 
-    private boolean checkBox;
+    private String qcStatus;
 
     @FXML
     public void initialize() {
+        farmingListDataSource = new FarmingDataSource();
+        farmingList = farmingListDataSource.readData();
+        managePrawnListDataSource = new ManagePrawnDataSource();
+        managePrawnList = managePrawnListDataSource.readData();
         qcListDataSource = new QCDataSource();
         qcList = qcListDataSource.readData();
-        passItem = new ArrayList<>();
 
-        this.showListView();
-        this.clearData();
-        this.handleSelectedListView();
+        showListView();
+        clearSelectedProduct();
+        handleSelectedListView();
+    }
+
+    private void showListView() {
+        ListView<String> listView = new ListView<>();
+        ObservableList = FXCollections.observableArrayList();
+        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
+        for (int i = farmingList.count()-1; i>=0; i--){
+            Farming farming = farmingList.getFarmingNumber(i);
+            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
+                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
+                    tempFarmingList.add(farming);
+                    String showList = farming.getFarmingID();
+                    ObservableList.add(showList);
+                }
+
+            }
+        }
+        farmingListView.setItems(ObservableList);
+    }
+
+    private void handleSelectedListView() {
+        farmingListView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observableValue,
+                                        String oldValue, String newValue) {
+                        Farming selectedFarming = farmingList.getFarmingById(newValue);
+                        System.out.println(selectedFarming + " is selected");
+                        showSelectedFarming(selectedFarming);
+                        selectedFarming();
+                    }
+                });
+    }
+
+    public Farming selectedFarming(){
+        String selectedFarmingString = farmingListView.getSelectionModel().selectedItemProperty().get();
+        System.out.println(selectedFarmingString);
+        Farming farming = farmingList.getFarmingById(selectedFarmingString);
+        return farming;
+    }
+
+    public void  showSelectedFarming(Farming farming){
+        pondIdLabel.setText(farming.getPondID());
+        manageStatusLabel.setText(farming.getFarmingStatus());
+
+//        ManagePrawn managePrawn = managePrawnList.latestDate(farming.getFarmingID());
+//        measureWeightLabel.setText(managePrawn.getNote());
+    }
+
+    private void clearSelectedProduct() {
     }
 
 
     @FXML
     private void clickOnFailedButton() {
-        this.checkBox = false;
+        qcStatus = "ไม่ผ่าน";
         this.failedReason.setDisable(false);
         this.failedButton.setStyle("-fx-background-color: #FF8C00;");
         this.passedButton.setStyle("-fx-background-color: #FFD700;");
-        this.manageStatusLabel.setText("ไม่ผ่าน");
-        System.out.println(checkBox);
+
     }
 
     @FXML
     private void clickOnPassedButton() {
-        this.checkBox = true;
+        qcStatus = "ผ่าน";
         this.failedReason.setDisable(true);
         this.passedButton.setStyle("-fx-background-color: #FF8C00;");
         this.failedButton.setStyle("-fx-background-color: #FFD700;");
-        this.manageStatusLabel.setText("ผ่าน");
         this.failedReason.clear();
-        System.out.println(checkBox);
     }
 
     @FXML
     private void clickFinishedButton() {
-        QC qc = new QC("QC006", "2020-11-01", "ผ่าน", "Yes", "EP0006", "W0006");
+        int qcID = qcList.count()+1;
+        String qcIDString =  "QC"+ qcID;
+        String date = qcTimeTextField.getText();
+        String note = failedReason.getText();
+        String farmingId = selectedFarming().getFarmingID();
+
+
+        QC qc = new QC(qcIDString, date, qcStatus, note, "EP001", farmingId);
         qc.insertToSql();
-//        if (!checkBox && failedReason.getText().equals("")) {
-//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-//        } else {
-//            System.out.println("ไปหน้าต่อไป");
-//        }
+        qcList.addQC(qc);
     }
-
-    @FXML
-    private void clickUpdatedButton() {
-        QC qc = new QC("QC006", "2020-11-01", "ผ่าน", "Yes", "EP0006", "W0006");
-//        qc.updateToSql();
-//        if (!checkBox && failedReason.getText().equals("")) {
-//            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน Q.C");
-//        } else {
-//            System.out.println("ไปหน้าต่อไป");
-//        }
-    }
-
 
 
     @FXML
     private void clickBackButton() {
         System.out.println("กลับไปหน้าก่อนหน้า");
-    }
-
-    private void showListView() {
-        observableList = FXCollections.observableArrayList();
-        ArrayList<QC> tempQcList = new ArrayList<QC>();
-        for (int i = qcList.count()-1; i>=0; i--){
-            QC qualityControl = qcList.getQCNumber(i);
-            tempQcList.add(qualityControl);
-            this.observableList.add(qualityControl.getId());
-        }
-        this.qcListView.setItems(observableList);
-    }
-
-    private void handleSelectedListView() {
-        qcListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                QC selectedQc = qcList.searchQcOrderById(newValue);
-                System.out.println(selectedQc + " is selected");
-                showSelectedQc(selectedQc);
-                selectedQcOrder();
-            }
-        });
-    }
-
-    private QC selectedQcOrder() {
-        String selectedQcOrderString = qcListView.getSelectionModel().selectedItemProperty().get();
-        System.out.println(selectedQcOrderString);
-        QC qc = qcList.searchQcOrderById(selectedQcOrderString);
-        return qc;
-    }
-
-    private void showSelectedQc(QC qualityControl) {
-        this.employeeIdLabel.setText(qualityControl.getEmployeeID());
-//        this.pondIdLabel.setText(qualityControl.getPondID());
-//        this.measureWeightLabel.setText(qualityControl.getRequirement());
-    }
-
-    private void clearData() {
-        this.failedReason.setText("");
-        this.employeeIdLabel.setText("");
-        this.pondIdLabel.setText("");
-        this.measureWeightLabel.setText("");
-        this.manageStatusLabel.setText("");
     }
 
     @FXML

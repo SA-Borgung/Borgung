@@ -34,20 +34,16 @@ public class ManagePrawnDataSource implements DataSource<ManagePrawnList> {
 
             while (queryOutput != null && queryOutput.next()){
                 String careID = queryOutput.getString("D_ID");
-                String giveFoodStatus = queryOutput.getString("DF_STATUS");
-                String givePillsStatus = queryOutput.getString("DP_STATUS");
-                String manageStatus = queryOutput.getString("D_MANANGESTATUS");
-                String measureWeight = queryOutput.getString("P_MEASUREWEIGHT");
+                String manageType = queryOutput.getString("D_TYPE");
+                String manageNote = queryOutput.getString("D_NOTE");
                 String date = queryOutput.getString("D_DATE");
                 String farmingID = queryOutput.getString("F_ID");
 
                 list.addManagePrawn(
                         new ManagePrawn(
                                 careID,
-                                Boolean.parseBoolean(giveFoodStatus),
-                                Boolean.parseBoolean(givePillsStatus),
-                                manageStatus,
-                                measureWeight, ///ต้องเป็น double
+                                manageType,
+                                manageNote,
                                 date,
                                 farmingID
                         )
