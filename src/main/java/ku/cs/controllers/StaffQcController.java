@@ -6,16 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
-import ku.cs.services.DataSource;
-import ku.cs.services.FarmingDataSource;
-import ku.cs.services.ManagePrawnDataSource;
-import ku.cs.services.QCDataSource;
-
+import ku.cs.services.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,8 +27,10 @@ public class StaffQcController {
     @FXML private Label measureWeightLabel;
     @FXML private Label manageStatusLabel;
     @FXML private ListView<String> farmingListView;
+    @FXML
+    private TableView<Farming> farmingTableView;
 
-    private ObservableList<String> ObservableList;
+    private ObservableList<Farming> ObservableList;
     private FarmingList farmingList;
     private DataSource<FarmingList> farmingListDataSource;
     private ManagePrawnList managePrawnList;
@@ -53,42 +49,35 @@ public class StaffQcController {
         qcListDataSource = new QCDataSource();
         qcList = qcListDataSource.readData();
 
-        showListView();
+        showProductData();
         clearSelectedProduct();
-        handleSelectedListView();
-    }
-
-    private void showListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
-        for (int i = farmingList.count()-1; i>=0; i--){
-            Farming farming = farmingList.getFarmingNumber(i);
-            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
-                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
-                    tempFarmingList.add(farming);
-                    String showList = farming.getFarmingID();
-                    ObservableList.add(showList);
-                }
-
+        farmingTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedFarming(newValue);
             }
-        }
-        farmingListView.setItems(ObservableList);
+        });
     }
 
-    private void handleSelectedListView() {
-        farmingListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        Farming selectedFarming = farmingList.getFarmingById(newValue);
-                        System.out.println(selectedFarming + " is selected");
-                        showSelectedFarming(selectedFarming);
-                        selectedFarming();
-                    }
-                });
+    private void showProductData() {
+
+        farmingTableView.getItems().clear();
+        farmingTableView.getColumns().clear();
+        ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
+        farmingTableView.setItems(ObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:farmingID"));
+        configs.add(new StringConfiguration("title:round", "field:round"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            farmingTableView.getColumns().add(col);
+        }
+
     }
+
 
     public Farming selectedFarming(){
         String selectedFarmingString = farmingListView.getSelectionModel().selectedItemProperty().get();
