@@ -48,6 +48,7 @@ public class StaffPrepareBorgungController {
         preparePondTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 showSelectedPond(newValue);
+                selectedPreparePond();
             }
         });
     }
@@ -94,12 +95,10 @@ public class StaffPrepareBorgungController {
         }
     }
 
-    private PreparePond selectedPreparePond(){
-        String selectedPreparePondString = preparePondListView.getSelectionModel().selectedItemProperty().get();
-        PreparePond preparePond = preparePondList.getPreparePondById(selectedPreparePondString);
-        String pondString = preparePond.getPrepareID();
+    private void selectedPreparePond(){
+        PreparePond selectedPreparePondString = preparePondTableView.getSelectionModel().selectedItemProperty().get();
+        String pondString = selectedPreparePondString.getPrepareID();
         pond = pondList.getPondById(pondString);
-        return preparePond;
     }
 
     private void showSelectedPond(PreparePond preparePond) {

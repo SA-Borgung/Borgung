@@ -98,10 +98,10 @@ public class StaffGetShrimpController {
     }
 
     private VendorOrder selectedVendorOrder(){
-        String selectedVendorOrderString = addVendorListView.getSelectionModel().selectedItemProperty().get();
-        System.out.println(selectedVendorOrderString);
-        VendorOrder vendorOrder = vendorOrderList.getVendorOrderById(selectedVendorOrderString);
-        return vendorOrder;
+        VendorOrder selectedVendorOrderString = addVendorTableView.getSelectionModel().selectedItemProperty().get();
+//        System.out.println(selectedVendorOrderString);
+//        VendorOrder vendorOrder = vendorOrderList.getVendorOrderById(selectedVendorOrderString);
+        return selectedVendorOrderString;
     }
 
     @FXML

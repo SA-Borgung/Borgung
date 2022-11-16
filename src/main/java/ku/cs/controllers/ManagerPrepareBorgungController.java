@@ -195,17 +195,17 @@ public class ManagerPrepareBorgungController {
     }
 
     private Employee selectedEmployee(){
-        String selectedEmployeeString = addEmployeeListView.getSelectionModel().selectedItemProperty().get();
+        Employee selectedEmployeeString = employeeTableView.getSelectionModel().selectedItemProperty().get();
         //System.out.println(selectedVendorOrderString);
-        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
-        return employee;
+//        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
+        return selectedEmployeeString;
     }
 
     private Pond selectedPond(){
-        String selectedPondString = addPondListView.getSelectionModel().selectedItemProperty().get();
+        Pond selectedPondString = pondTableView.getSelectionModel().selectedItemProperty().get();
         //System.out.println(selectedVendorOrderString);
-        Pond pond = pondList.getPondById(selectedPondString);
-        return pond;
+//        Pond pond = pondList.getPondById(selectedPondString);
+        return selectedPondString;
     }
 
     private void clearSelectedRow() {

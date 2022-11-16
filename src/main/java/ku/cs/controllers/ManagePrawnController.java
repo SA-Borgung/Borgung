@@ -79,14 +79,18 @@ public class ManagePrawnController {
             this.sickStatusButton.setStyle("-fx-background-color: #FF8C00;");
             this.normalStatusButton.setStyle("-fx-background-color: #FFD700;");
             this.problemStatusButton.setStyle("-fx-background-color: #FFD700;");
-        }else{}
+        }else{
+            this.problemStatusButton.setStyle("-fx-background-color: #FF8C00;");
+            this.normalStatusButton.setStyle("-fx-background-color: #FFD700;");
+            this.sickStatusButton.setStyle("-fx-background-color: #FFD700;");
+        }
     }
 
     public Farming selectedFarming(){
-        String selectedFarmingString = farmingListView.getSelectionModel().selectedItemProperty().get();
-        System.out.println(selectedFarmingString);
-        Farming farming = farmingList.getFarmingById(selectedFarmingString);
-        return farming;
+        Farming selectedFarmingString = farmingTableView.getSelectionModel().selectedItemProperty().get();
+//        System.out.println(selectedFarmingString);
+//        Farming farming = farmingList.getFarmingById(selectedFarmingString);
+        return selectedFarmingString;
     }
 
     private void clearSelectedProduct() {

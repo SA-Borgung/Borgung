@@ -24,11 +24,8 @@ public class LoginController {
     PasswordField passwordField;
 
     private EmployeeList employeeList;
-    private Employee employee;
+    private DataSource<EmployeeList> employeeListDataSource;
 
-//    private DatabaseConnection databaseConnection;
-
-    private DataSource<EmployeeList> dataSource;
     private ArrayList<String> passItem;
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -40,8 +37,8 @@ public class LoginController {
     @FXML
     public void initialize() {
         passItem = new ArrayList<>();
-        dataSource = new EmployeeDataSource();
-        employeeList = dataSource.readData();
+        employeeListDataSource = new EmployeeDataSource();
+        employeeList = employeeListDataSource.readData();
     }
 
     @FXML
@@ -52,7 +49,7 @@ public class LoginController {
             try {
                 System.out.println(ANSI_GREEN +  "Log in finished !" + ANSI_RESET);
 
-                if (usernameField.getText().equals("EP001")){
+                if (employeeList.getEmployeeById(usernameField.getText()).getRole().equals("ผู้จัดการ")){
                     setPassItem("managerHome"); // will do later
                 }else{
                     setPassItem("staffHome");
