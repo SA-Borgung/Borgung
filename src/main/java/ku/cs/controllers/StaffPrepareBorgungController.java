@@ -32,8 +32,12 @@ public class StaffPrepareBorgungController {
     private PreparePondList preparePondList;
     private DataSource<PreparePondList> preparePondListDataSource;
 
+    private ArrayList<String> getItem;
+
     @FXML
     public void initialize() {
+        getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
+        String userID  = getItem.get(0);
         pondListDataSource = new PondDataSource();
         pondList = pondListDataSource.readData();
         preparePondListDataSource = new PreparePondDataSource();

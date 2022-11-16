@@ -54,6 +54,7 @@ public class StaffAddShrimpController {
 
         getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
         String R_ID  = getItem.get(0);
+        String userID = getItem.get(1);
 
         dataSource = new PondDataSource();
         pondList = dataSource.readData();
@@ -110,6 +111,8 @@ public class StaffAddShrimpController {
                 handleAddFarming(roundString,dateString);
                 farming.insertToSql();
                 vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
+                String userID = getItem.get(1);
+                vendorOrder.setEmployeeID(userID);
                 System.out.println("vendor status change");
                 vendorOrder.updateToSql();
 

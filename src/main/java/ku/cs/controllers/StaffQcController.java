@@ -39,9 +39,13 @@ public class StaffQcController {
     private DataSource<QCList> qcListDataSource;
 
     private String qcStatus;
+    private ArrayList<String> getItem;
 
     @FXML
     public void initialize() {
+        getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
+        String userID  = getItem.get(0);
+
         farmingListDataSource = new FarmingDataSource();
         farmingList = farmingListDataSource.readData();
         managePrawnListDataSource = new ManagePrawnDataSource();
@@ -88,8 +92,9 @@ public class StaffQcController {
         pondIdLabel.setText(farming.getPondID());
         manageStatusLabel.setText(farming.getFarmingStatus());
 
-//        ManagePrawn managePrawn = managePrawnList.latestDate(farming.getFarmingID());
-//        measureWeightLabel.setText(managePrawn.getNote());
+        ManagePrawn managePrawn = managePrawnList.latestManagePrawn(farming.getFarmingID());
+//        System.out.println("this is: " + managePrawn);
+        measureWeightLabel.setText(managePrawn.getNote());
     }
 
     private void clearSelectedProduct() {
@@ -124,9 +129,9 @@ public class StaffQcController {
         String date = qcTimeTextField.getText();
         String note = failedReason.getText();
         String farmingId = selectedFarming().getFarmingID();
+        String userID  = getItem.get(0);
 
-
-        QC qc = new QC(qcIDString, date, qcStatus, note, "EP001", farmingId);
+        QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
         qc.insertToSql();
         qcList.addQC(qc);
     }
