@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffAddShrimpController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffAddShrimpController">
     <children>
       <ImageView fitHeight="619.0" fitWidth="811.0" layoutX="-9.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,7 +23,6 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <ListView fx:id="addPondListView" layoutX="126.0" layoutY="154.0" prefHeight="372.0" prefWidth="240.0" />
         <Label layoutX="421.0" layoutY="140.0" text="IDบ่อกุ้ง">
             <font>
                 <Font size="18.0" />
@@ -39,8 +43,8 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button layoutX="400.0" layoutY="489.0" mnemonicParsing="false" onAction="#enterButton" prefHeight="35.0" prefWidth="334.0" text="เสร็จสิ้น" />
-      <TextField fx:id="dateTextField" layoutX="562.0" layoutY="370.0" prefHeight="35.0" prefWidth="149.0" />
+        <Button layoutX="400.0" layoutY="481.0" mnemonicParsing="false" onAction="#enterButton" prefHeight="35.0" prefWidth="334.0" text="เสร็จสิ้น" />
+      <TextField fx:id="dateTextField" layoutX="562.0" layoutY="370.0" prefHeight="35.0" prefWidth="149.0" promptText="dd-mm-yyyy" />
       <TextField fx:id="roundTextField" layoutX="562.0" layoutY="420.0" prefHeight="35.0" prefWidth="149.0" />
       <Label layoutX="422.0" layoutY="370.0" text="วันที่ลงบ่อ">
          <font>
@@ -52,7 +56,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="176.0" layoutY="113.0" text="รายการบ่อกุ้ง">
+      <Label layoutX="188.0" layoutY="111.0" text="รายการบ่อกุ้ง">
          <font>
             <Font size="18.0" />
          </font>
@@ -82,10 +86,16 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="warningLabel" layoutX="527.0" layoutY="535.0" text="warningLabel">
+      <Label fx:id="warningLabel" layoutX="520.0" layoutY="528.0" text="warningLabel" textFill="RED">
          <font>
-            <Font size="18.0" />
+            <Font size="15.0" />
          </font>
       </Label>
+      <TableView fx:id="pondTableView" layoutX="106.0" layoutY="144.0" prefHeight="374.0" prefWidth="266.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

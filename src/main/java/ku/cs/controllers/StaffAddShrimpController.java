@@ -3,11 +3,11 @@ package ku.cs.controllers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
 import ku.cs.services.*;
 
@@ -16,26 +16,18 @@ import java.util.ArrayList;
 
 public class StaffAddShrimpController {
 
-    @FXML
-    private ListView<String> addPondListView;
-    @FXML
-    private Label pondIdLabel;
-    @FXML
-    private Label pondStatusLabel;
-    @FXML
-    private Label shrimpQuantityLabel;
-    @FXML
-    private Label shrimpIdLabel;
-    @FXML
-    private Label vendorOrderLabel;
-    @FXML
-    private Label warningLabel;
-    @FXML
-    private TextField dateTextField;
-    @FXML
-    private TextField roundTextField;
+    @FXML private ListView<String> addPondListView;
+    @FXML private TableView<Pond> pondTableView;
+    @FXML private Label pondIdLabel;
+    @FXML private Label pondStatusLabel;
+    @FXML private Label shrimpQuantityLabel;
+    @FXML private Label shrimpIdLabel;
+    @FXML private Label vendorOrderLabel;
+    @FXML private Label warningLabel;
+    @FXML private TextField dateTextField;
+    @FXML private TextField roundTextField;
 
-    private javafx.collections.ObservableList<String> ObservableList;
+    private ObservableList<Pond> pondObservableList;
     private PondList pondList;
     private VendorOrder vendorOrder;
     private VendorOrderList vendorOrderList;
@@ -67,11 +59,14 @@ public class StaffAddShrimpController {
         prawnListDataSource = new PrawnDataSource();
         prawnList = prawnListDataSource.readData();
         Prawn prawn =prawnList.getPrawnById("1");
-        showListView();
         clearSelectedProduct();
-        handleSelectedListView();
+        showProductData();
         showVendorOrder();
-
+        pondTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showSelectedPond(newValue);
+            }
+        });
     }
 
     private boolean handleAddFarming(String roundString, String date){
@@ -80,21 +75,40 @@ public class StaffAddShrimpController {
                 return true;
             }
             else {
+                warningLabel.setText("กรุณากรอกวันที่ให้อยู่ในรูปแบบ dd-mm-yyyy");
                 System.out.println("วันที่ผิด");
                 return false;
             }
         }
         else {
+            warningLabel.setText("กรุณากรอกรอบให้ถูกต้อง");
             System.out.println("รอบผิด");
             return false;
         }
     }
 
+    private void showProductData() {
+        pondTableView.getItems().clear();
+        pondTableView.getColumns().clear();
+        pondObservableList = FXCollections.observableArrayList(pondList.getPonds());
+        pondTableView.setItems(pondObservableList);
+        ///แสดงแถวแนวตรง
+        ArrayList<StringConfiguration> configs = new ArrayList<>();
+        configs.add(new StringConfiguration("title:ID", "field:id"));
+        configs.add(new StringConfiguration("title:สถานะบ่อ", "field:status"));
+
+
+        for (StringConfiguration conf: configs) {
+            TableColumn col = new TableColumn(conf.get("title"));
+            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
+            pondTableView.getColumns().add(col);
+        }
+    }
+
     @FXML
     public void enterButton(ActionEvent actionEvent){
-
         try {
-//            vendorOrderList.updateVendorOrder(vendorOrder, "user01");
+//          vendorOrderList.updateVendorOrder(vendorOrder, "user01");
             int farmingID = farmingList.count()+1;
             String farmingIDString = "F"+ farmingID;
             String pondID = selectedPond().getId();
@@ -114,6 +128,7 @@ public class StaffAddShrimpController {
                 String userID = getItem.get(1);
                 vendorOrder.setEmployeeID(userID);
                 System.out.println("vendor status change");
+                warningLabel.setText("ดำเนินการเสร็จสิ้น");
                 vendorOrder.updateToSql();
 
                 Pond pond = pondList.getPondById(pondIdLabel.getText());
@@ -121,8 +136,6 @@ public class StaffAddShrimpController {
                 pond.updateToSql();
                 staffHome();
             }
-
-
         }catch (Exception e) {
             System.err.println("ใส่ข้อมูลผิดพลาด");
             warningLabel.setText("ใส่ข้อมูลผิดพลาด");
@@ -137,36 +150,6 @@ public class StaffAddShrimpController {
 //        vendorOrder.updateToSql();
 //    }
 
-    private void showListView() {
-        ListView<String> listView = new ListView<>();
-        ObservableList = FXCollections.observableArrayList();
-        ArrayList<Pond> tempPondList = new ArrayList<Pond>();
-        for (int i = pondList.count()-1; i>=0; i--){
-            Pond pond = pondList.getPondNumber(i);
-            if (pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
-                tempPondList.add(pond);
-                ObservableList.add(pond.getId());
-            }
-
-
-        }
-        addPondListView.setItems(ObservableList);
-    }
-
-    private void handleSelectedListView() {
-        addPondListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        Pond selectedPond = pondList.getPondById(newValue);
-                        System.out.println(selectedPond + " is selected");
-                        showSelectedPond(selectedPond);
-                        selectedPond();
-                    }
-                });
-    }
-
     private Pond selectedPond(){
         String selectedPondString = addPondListView.getSelectionModel().selectedItemProperty().get();
         Pond pond = pondList.getPondById(selectedPondString);
@@ -176,6 +159,10 @@ public class StaffAddShrimpController {
     private void clearSelectedProduct() {
         pondIdLabel.setText("");
         pondStatusLabel.setText("");
+//        shrimpQuantityLabel.setText("");
+//        shrimpIdLabel.setText("");
+//        vendorOrderLabel.setText("");
+        warningLabel.setText("");
     }
 
     private void showSelectedPond(Pond pond) {
