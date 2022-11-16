@@ -55,6 +55,7 @@ public class ManagerOrderShrimpController {
 
         prawnTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                clearSelectedRow();
                 showSelectedPrawnType(newValue);
             }
         });

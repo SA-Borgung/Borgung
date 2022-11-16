@@ -89,7 +89,7 @@ public class ManagerCreatePurchaseOrderController {
         String farmingID  = getItem.get(5);
 
         Customer customer = new Customer(customerIDString, name, phone, address);
-        if (customerList.getCustomerByName(customer.getName()) == null){
+        if (!customerList.checkCustomerByName(customer.getName())){
             customer.insertToSql();
         }
 

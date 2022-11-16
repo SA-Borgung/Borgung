@@ -27,6 +27,7 @@ public class StaffDeliveryController {
     @FXML private Label customerLabel;
     @FXML private Label phoneLabel;
     @FXML private Label locationLabel;
+    @FXML private Label warningLabel;
 
     private ObservableList<PurchaseOrder> ObservableList;
     private PurchaseOrderList purchaseOrderList;
@@ -106,23 +107,18 @@ public class StaffDeliveryController {
         customerLabel.setText("");
         phoneLabel.setText("");
         locationLabel.setText("");
+        warningLabel.setText("");
     }
 
     @FXML
     private void enterButton(ActionEvent actionEvent){
         try{
-//            int purchaseOrderId = purchaseOrderList.count()+1;
-//            String purchaseOrderIdString = "O"+ purchaseOrderId;
-//            String purchaseType = selectedPurchaseOrder().getPurchaseType();
-//            int price = selectedPurchaseOrder().getPrice();
-//            String status = selectedPurchaseOrder().getStatus();
-//            String customerID = selectedPurchaseOrder().getCustomerID();
-//            PurchaseOrder purchaseOrder = new PurchaseOrder(purchaseOrderIdString,purchaseType,price, status, customerID);
-
             selectedPurchaseOrder().setStatus("ส่งของเสร็จสิิ้น");
             selectedPurchaseOrder().updateToSql();
+            warningLabel.setText("ส่งของเสร็จสิิ้น");
             System.out.println("กดติดแล้ว");
         }catch (Exception e) {
+            warningLabel.setText("เลือกรายการใบสั่งซื้อ");
             System.err.println("ใส่ข้อมูลผิดพลาด");
         }
 

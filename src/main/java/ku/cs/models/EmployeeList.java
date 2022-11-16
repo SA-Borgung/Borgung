@@ -40,6 +40,15 @@ public class EmployeeList {
         return null;
     }
 
+    public ArrayList<Employee> getManagerEmployee(){
+        ArrayList<Employee> managerEmployee = new ArrayList<>();
+        for (Employee employee : employees){
+            if (employee.getRole().equals("พนักงาน")){
+                managerEmployee.add(employee);
+            }
+        }
 
+        return managerEmployee;
+    }
 
 }

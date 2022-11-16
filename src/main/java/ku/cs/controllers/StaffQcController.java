@@ -129,18 +129,19 @@ public class StaffQcController {
 
     @FXML
     private void clickFinishedButton() {
-        int qcID = qcList.count()+1;
-        String qcIDString =  "QC"+ qcID;
-        String date = qcTimeTextField.getText();
-        String note = failedReason.getText();
-        String farmingId = selectedFarming().getFarmingID();
-        String userID  = getItem.get(0);
+//        int qcID = qcList.count()+1;
+//        String qcIDString =  "QC"+ qcID;
+//        String date = qcTimeTextField.getText();
+//        String note = failedReason.getText();
+//        String farmingId = selectedFarming().getFarmingID();
+//        String userID  = getItem.get(0);
+//
+//        QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+//        qc.insertToSql();
+//        qcList.addQC(qc);
+//        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
 
-        QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-        qc.insertToSql();
-        qcList.addQC(qc);
-        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
-        /*if (qcStatus == ""){
+        if (qcStatus == ""){
             warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
             System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน1");
         }
@@ -148,26 +149,37 @@ public class StaffQcController {
             if(qcTimeTextField.getText().isEmpty() || failedReason.getText().isEmpty()){
                 warningLabel.setText("กรุณากรอกสาเหตุที่ไม่ผ่าน");
                 System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน2");
+            }else {
+                int qcID = qcList.count()+1;
+                String qcIDString =  "QC"+ qcID;
+                String date = qcTimeTextField.getText();
+                String note = failedReason.getText();
+                String farmingId = selectedFarming().getFarmingID();
+                String userID  = getItem.get(0);
+
+                QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+                qc.insertToSql();
+                qcList.addQC(qc);
+                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
             }
         } else if (qcStatus == "ผ่าน"){
             if (qcTimeTextField.getText().isEmpty()){
                 warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
                 System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน3");
+            }else {
+                int qcID = qcList.count()+1;
+                String qcIDString =  "QC"+ qcID;
+                String date = qcTimeTextField.getText();
+                String note = failedReason.getText();
+                String farmingId = selectedFarming().getFarmingID();
+                String userID  = getItem.get(0);
+
+                QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+                qc.insertToSql();
+                qcList.addQC(qc);
+                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
             }
         }
-        else {
-            int qcID = qcList.count()+1;
-            String qcIDString =  "QC"+ qcID;
-            String date = qcTimeTextField.getText();
-            String note = failedReason.getText();
-            String farmingId = selectedFarming().getFarmingID();
-            String userID  = getItem.get(0);
-
-            QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-            qc.insertToSql();
-            qcList.addQC(qc);
-            warningLabel.setText("ดำเนินการเสร็จสิ้น !");
-        }*/
     }
 
 

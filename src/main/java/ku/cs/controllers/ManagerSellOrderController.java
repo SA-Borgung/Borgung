@@ -44,6 +44,7 @@ public class ManagerSellOrderController {
         clearSelectedProduct();
         customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                warningLabel.setText("");
                 showSelectedCustomer(newValue);
             }
         });
@@ -131,8 +132,14 @@ public class ManagerSellOrderController {
             System.out.println("กรอกข้อมูลให้ครบ");
             warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
         } else {
-            enterCustomerDetail();
-            setPassItem("managerCheckStock");
+            if (purchaseType == null){
+                warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+            }
+            else {
+                enterCustomerDetail();
+                setPassItem("managerCheckStock");
+            }
+
             try {
                 com.github.saacsos.FXRouter.goTo("managerCheckStock");
             } catch (IOException e) {

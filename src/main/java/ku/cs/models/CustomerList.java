@@ -38,4 +38,13 @@ public class CustomerList {
         return null;
     }
 
+    public boolean checkCustomerByName(String name){
+        for (Customer customer : customers) {
+            if (customer.checkName(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

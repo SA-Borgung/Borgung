@@ -152,7 +152,18 @@ public class ManagerCheckStockController {
         if (priceTextField.getText().isEmpty()) {
             warningLabel.setText("กรุณากรอกราคา");
             System.out.println("กรุณากรอกราคา");
-        } else {
+        }
+        else if(selectedFarming() == null){
+            warningLabel.setText("กรุณาเลือกบ่อ");
+        }
+        else if (sellDateTextField.getText().isEmpty()) {
+            warningLabel.setText("กรุณาใส่วันที่");
+            System.out.println("กรุณากรอกราคา");
+        }
+        else if (!farmingList.validateJavaDate(sellDateTextField.getText())){
+            warningLabel.setText("ใส่วันที่ไม่ถูกต้อง");
+        }
+        else {
             try {
                 setPassItem("managerCreatePurchaseOrder");
             } catch (IOException e) {

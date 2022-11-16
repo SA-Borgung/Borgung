@@ -69,11 +69,13 @@ public class ManagerPrepareBorgungController {
 
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                finishLB.setText("");
                 showSelectedEmployee(newValue);
             }
         });
         pondTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                finishLB.setText("");
                 showSelectedPond(newValue);
             }
         });
@@ -83,7 +85,7 @@ public class ManagerPrepareBorgungController {
     private void showEmployeeData() {
         employeeTableView.getItems().clear();
         employeeTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(employeeList.getEmployees());
+        ObservableList = FXCollections.observableArrayList(employeeList.getManagerEmployee());
         employeeTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
