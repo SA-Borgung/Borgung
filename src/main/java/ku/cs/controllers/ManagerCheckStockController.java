@@ -35,6 +35,8 @@ public class ManagerCheckStockController {
     @FXML
     private TextField sellDateTextField;
 
+    @FXML private Label warningLabel;
+
 
     @FXML private TableView<Farming> farmingTableView1;
 
@@ -142,15 +144,21 @@ public class ManagerCheckStockController {
         weightLabel.setText("");
         amountLabel.setText("");
         dateLabel.setText("");
+        warningLabel.setText("");
     }
 
     @FXML
     private void enterButton(ActionEvent actionEvent){
-        try {
-            setPassItem("managerCreatePurchaseOrder");
-        } catch (IOException e) {
-            System.err.println(e.toString());
-            System.err.println("ไม่สามารถเข้าหน้า managerCreatePurchaseOrder");
+        if (priceTextField.getText().isEmpty()) {
+            warningLabel.setText("กรุณากรอกราคา");
+            System.out.println("กรุณากรอกราคา");
+        } else {
+            try {
+                setPassItem("managerCreatePurchaseOrder");
+            } catch (IOException e) {
+                System.err.println(e.toString());
+                System.err.println("ไม่สามารถเข้าหน้า managerCreatePurchaseOrder");
+            }
         }
     }
 

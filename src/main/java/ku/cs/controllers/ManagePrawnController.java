@@ -23,6 +23,7 @@ public class ManagePrawnController {
     @FXML private Button problemStatusButton;
     @FXML private TextArea textNote;
     @FXML private Label farmingLabel;
+    @FXML private Label warningLabel;
     @FXML private TextField dateTextField;
     @FXML private ListView<String> farmingListView;
     @FXML private TableView<Farming> farmingTableView;
@@ -98,6 +99,7 @@ public class ManagePrawnController {
 
     private void clearSelectedProduct() {
         farmingLabel.setText("");
+        warningLabel.setText("");
     }
 
     @FXML
@@ -116,11 +118,14 @@ public class ManagePrawnController {
                 Farming farming = farmingList.getFarmingById(farmingId);
                 farming.setFarmingStatus(statusType);
                 farming.updateToSql();
+                warningLabel.setText("บันทึกเสร็จสิ้น");
                 System.out.println("บันทึกแล้ว");
             }else {
+                warningLabel.setText("กรุณาใส่วันที่ในรูปแบบ dd-mm-yyyy");
                 System.out.println("ใส่วันที่ผิดพลาด");
             }
         }catch (Exception e) {
+            warningLabel.setText("กรุณากรอกข้อมูลให้ครบถ้วน");
             System.err.println("ใส่ข้อมูลผิดพลาด");
         }
     }

@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerCheckStockController">
+
    <children>
       <ImageView fitHeight="616.0" fitWidth="809.0" layoutX="-1.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -95,5 +96,7 @@
             <Font size="18.0" />
          </font>
       </Label>
+
+      <Label fx:id="warningLabel" layoutX="212.0" layoutY="505.0" text="Label" />
    </children>
 </AnchorPane>

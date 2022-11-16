@@ -65,6 +65,7 @@ public class ManagerPrepareBorgungController {
 
         showEmployeeData();
         showPondData();
+        clearSelectedRow();
 
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -121,22 +122,26 @@ public class ManagerPrepareBorgungController {
 
     @FXML
     private void clickFinishedButton() {
-        int preparePondID = preparePondList.count()+1;
-        String preparePondIDString = "TB"+preparePondID;
-        String status = "รอดำเนินการ";
-        String note = infoTextArea.getText();
-        String employeeID = selectedEmployee().getId();
-        String pondID = selectedPond().getId();
+        try {
+            int preparePondID = preparePondList.count()+1;
+            String preparePondIDString = "TB"+preparePondID;
+            String status = "รอดำเนินการ";
+            String note = infoTextArea.getText();
+            String employeeID = selectedEmployee().getId();
+            String pondID = selectedPond().getId();
 
-        PreparePond preparePond = new PreparePond(preparePondIDString,status,note,employeeID,pondID );
-        preparePond.insertToSql();
-        preparePondList.addPreparePond(preparePond);
+            PreparePond preparePond = new PreparePond(preparePondIDString,status,note,employeeID,pondID );
+            preparePond.insertToSql();
+            preparePondList.addPreparePond(preparePond);
 
-        selectedPond().setStatus("รอดำเนินการ");
-        selectedPond().updateToSql();
+            selectedPond().setStatus("รอดำเนินการ");
+            selectedPond().updateToSql();
 
-        finishLB.setText("อัพเดทข้อมูลสำเร็จ");
-//        finishLB.setTextFill(Color.web("#ff0000", 1));
+            finishLB.setText("อัพเดทข้อมูลสำเร็จ");
+        }catch (Exception e){
+            finishLB.setText("ใส่ข้อมูลผิดพลาด");
+        }
+
 
     }
 
@@ -221,9 +226,6 @@ public class ManagerPrepareBorgungController {
         employeeLabel.setText("");
         pondIdLabel.setText("");
         finishLB.setText("");
-
-
-
     }
 
     private void showSelectedEmployee(Employee employee) {

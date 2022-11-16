@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class StaffDeliveryController {
     @FXML private ListView<String> purchaseOrderListView;
     @FXML TableView<PurchaseOrder> staffDeliveryTableView;
-    @FXML private Label orderLabel;
+    @FXML private Label prawnLabel;
+    @FXML private Label amountLabel;
     @FXML private Label purchaseTypeLabel;
     @FXML private Label priceLabel;
     @FXML private Label customerLabel;
@@ -32,6 +33,10 @@ public class StaffDeliveryController {
     private DataSource<PurchaseOrderList> purchaseOrderListDataSource;
     private CustomerList customerList;
     private DataSource<CustomerList> customerListDataSource;
+    private FarmingList farmingList;
+    private DataSource<FarmingList> farmingListDataSource;
+    private DataSource<PrawnList> prawnDataSource;
+    private PrawnList prawnList;
 
     @FXML
     public void initialize() {
@@ -39,6 +44,10 @@ public class StaffDeliveryController {
         purchaseOrderList = purchaseOrderListDataSource.readData();
         customerListDataSource = new CustomerDataSource();
         customerList = customerListDataSource.readData();
+        farmingListDataSource = new FarmingDataSource();
+        farmingList = farmingListDataSource.readData();
+        prawnDataSource = new PrawnDataSource();
+        prawnList = prawnDataSource.readData();
 
         showProductData();
         clearSelectedProduct();
@@ -76,7 +85,11 @@ public class StaffDeliveryController {
     }
 
     private void showSelectedPurchaseOrder(PurchaseOrder purchaseOrder) {
-        orderLabel.setText(purchaseOrder.getId());
+        Farming farming =farmingList.getFarmingById(purchaseOrder.getFarmingID());
+        Prawn prawn = prawnList.getPrawnById(farming.getPrawnID());
+
+        prawnLabel.setText(prawn.getSpecies());
+        amountLabel.setText(Integer.toString(farming.getPrawnAmount()));
         purchaseTypeLabel.setText(purchaseOrder.getPurchaseType());
         priceLabel.setText(Integer.toString(purchaseOrder.getPrice()));
         Customer customer = customerList.getCustomerById(purchaseOrder.getCustomerID());
@@ -86,7 +99,8 @@ public class StaffDeliveryController {
     }
 
     private void clearSelectedProduct() {
-        orderLabel.setText("");
+        prawnLabel.setText("");
+        amountLabel.setText("");
         purchaseTypeLabel.setText("");
         priceLabel.setText("");
         customerLabel.setText("");

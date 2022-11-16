@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffQcController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.StaffQcController">
    <children>
       <ImageView fitHeight="634.0" fitWidth="806.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -74,5 +74,6 @@
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
+      <Label fx:id="warningLabel" layoutX="115.0" layoutY="496.0" prefHeight="17.0" prefWidth="224.0" text="warningLabel" />
    </children>
 </AnchorPane>
