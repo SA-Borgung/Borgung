@@ -42,6 +42,7 @@ public class ManagerCreatePurchaseOrderController {
         String purchaseType = getItem.get(4);
         String farmingID  = getItem.get(5);
         String price  = getItem.get(6);
+        String sellDate  = getItem.get(7);
 
         purchaseOrderListDataSource = new PurchaseOrderDataSource();
         purchaseOrderList = purchaseOrderListDataSource.readData();
@@ -93,7 +94,8 @@ public class ManagerCreatePurchaseOrderController {
         }
 
         Farming farming = farmingList.getFarmingById(farmingID);
-        farming.setSellDate("1212-12-12");
+        String sellDate  = getItem.get(7);
+        farming.setSellDate(sellDate);
         farming.setFarmingStatus("ขายแล้ว");
         farming.updateToSql();
 
@@ -128,7 +130,7 @@ public class ManagerCreatePurchaseOrderController {
     @FXML
     public void backBtn(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("managerHome");
+            com.github.saacsos.FXRouter.goTo("managerCheckStock");
         } catch (IOException ex) {
             System.err.println(ex.toString());
             System.err.println("ไม่สามารถเข้าหน้า managerHome");

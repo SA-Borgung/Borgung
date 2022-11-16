@@ -22,7 +22,6 @@ public class ManagerOrderShrimpController {
     @FXML
     private Label prawnTypeLabel;
 
-    @FXML private TableView<Employee> employeeTableView;
     @FXML private TableView<Prawn> prawnTableView;
 
     private ObservableList<Employee> ObservableList;
@@ -33,6 +32,7 @@ public class ManagerOrderShrimpController {
     private EmployeeList employeeList;
     private DataSource<PrawnList> prawnDataSource;
     private PrawnList prawnList;
+
 
     @FXML
     public void initialize() {
@@ -47,14 +47,9 @@ public class ManagerOrderShrimpController {
 
 
 
-        showEmployeeData();
+        prawnTypeLabel.setText("");
         showPrawnData();
 
-        employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                showSelectedEmployee(newValue);
-            }
-        });
         prawnTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 showSelectedPrawnType(newValue);
@@ -63,23 +58,7 @@ public class ManagerOrderShrimpController {
 
 
     }
-    private void showEmployeeData() {
-        employeeTableView.getItems().clear();
-        employeeTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(employeeList.getEmployees());
-        employeeTableView.setItems(ObservableList);
-        ///แสดงแถวแนวตรง
-        ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:id"));
-//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
 
-
-        for (StringConfiguration conf: configs) {
-            TableColumn col = new TableColumn(conf.get("title"));
-            col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
-            employeeTableView.getColumns().add(col);
-        }
-    }
     private void showPrawnData() {
         prawnTableView.getItems().clear();
         prawnTableView.getColumns().clear();
@@ -107,10 +86,10 @@ public class ManagerOrderShrimpController {
         int amount = Integer.parseInt(prawnAmountField.getText());
         String sellerName = shopNameField.getText();
         String prawnID = selectedPrawn().getId();
-        String employeeID = selectedEmployee().getId();
 
-        VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,employeeID);
+        VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,null);
         vendorOrder.insertToSql();
+        vendorOrderList.addVendorOrder(vendorOrder);
 
 //        finishLB.setText("กรอกข้อมูลสำเร็จ ");
 //        finishLB.setTextFill(Color.web("#ff0000", 1));
@@ -178,12 +157,6 @@ public class ManagerOrderShrimpController {
 //                });
 //    }
 
-    private Employee selectedEmployee(){
-        Employee selectedEmployeeString = employeeTableView.getSelectionModel().selectedItemProperty().get();
-        //System.out.println(selectedVendorOrderString);
-//        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
-        return selectedEmployeeString;
-    }
     private Prawn selectedPrawn(){
         Prawn selectedPrawnString = prawnTableView.getSelectionModel().selectedItemProperty().get();
         //System.out.println(selectedVendorOrderString);

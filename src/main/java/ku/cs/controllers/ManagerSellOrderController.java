@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import ku.cs.models.*;
 import ku.cs.services.CustomerDataSource;
@@ -22,6 +19,9 @@ import java.util.ArrayList;
 
 public class ManagerSellOrderController {
 
+    @FXML private Button codeOneButton;
+    @FXML private Button codeTwoButton;
+    @FXML private Button codeThreeButton;
     @FXML
     private TextField nameTextField,phoneTextField,idCardTextField;
     @FXML
@@ -34,6 +34,7 @@ public class ManagerSellOrderController {
     private DataSource<CustomerList> customerListDataSource;
 
     private ArrayList<String> passItem;
+    private String purchaseType;
 
     @FXML
     public void initialize() {
@@ -48,7 +49,7 @@ public class ManagerSellOrderController {
         String phone = phoneTextField.getText();
         String id = idCardTextField.getText();
         String address = addressTextArea.getText();
-        String purchaseType = "test";
+        String purchaseType = this.purchaseType;
         passItem.add(name);
         passItem.add(phone);
         passItem.add(id);
@@ -75,6 +76,30 @@ public class ManagerSellOrderController {
     private void setPassItem(String location) throws IOException {
 
         com.github.saacsos.FXRouter.goTo(location,passItem);
+    }
+
+    @FXML
+    private void pressOnCodeOneButton() {
+        this.purchaseType = "บัตรเครดิต";
+        this.codeOneButton.setStyle("-fx-background-color: #FF8C00;");
+        this.codeTwoButton.setStyle("-fx-background-color: #FFD700;");
+        this.codeThreeButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    @FXML
+    private void pressOnCodeTwoButton() {
+        this.purchaseType = "โอนจ่าย";
+        this.codeTwoButton.setStyle("-fx-background-color: #FF8C00;");
+        this.codeOneButton.setStyle("-fx-background-color: #FFD700;");
+        this.codeThreeButton.setStyle("-fx-background-color: #FFD700;");
+    }
+
+    @FXML
+    private void pressOnCodeThreeButton() {
+        this.purchaseType = "เงินสด";
+        this.codeThreeButton.setStyle("-fx-background-color: #FF8C00;");
+        this.codeOneButton.setStyle("-fx-background-color: #FFD700;");
+        this.codeTwoButton.setStyle("-fx-background-color: #FFD700;");
     }
 
     @FXML

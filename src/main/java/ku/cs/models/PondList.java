@@ -30,6 +30,17 @@ public class PondList {
         return null;
     }
 
+    public ArrayList<Pond> getStaffPond(){
+        ArrayList<Pond> staffPond = new ArrayList<>();
+        for (Pond pond : ponds){
+            if (pond.getStatus().equals("เตรียมบ่อเสร็จสิ้น")){
+                staffPond.add(pond);
+            }
+        }
+
+        return staffPond;
+    }
+
     public ArrayList<Pond> getManagerPond(){
         ArrayList<Pond> managerPond = new ArrayList<>();
         for (Pond pond : ponds){

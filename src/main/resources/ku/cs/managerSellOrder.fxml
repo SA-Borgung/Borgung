@@ -29,9 +29,9 @@
       <TextField fx:id="idCardTextField" layoutX="402.0" layoutY="252.0" prefHeight="42.0" prefWidth="310.0" promptText="เลขบัตรประชาชน" />
       <ListView fx:id="farmingListView" layoutX="102.0" layoutY="129.0" prefHeight="369.0" prefWidth="234.0" />
       <TextArea fx:id="addressTextArea" layoutX="402.0" layoutY="314.0" prefHeight="110.0" prefWidth="310.0" promptText="ที่อยู่จัดส่ง" />
-      <Button layoutX="415.0" layoutY="481.0" mnemonicParsing="false" onAction="#checkStockButton" prefHeight="34.0" prefWidth="99.0" text="บัตรเครดิต" />
-      <Button layoutX="514.0" layoutY="481.0" mnemonicParsing="false" onAction="#checkStockButton" prefHeight="34.0" prefWidth="99.0" text="โอนจ่าย" />
-      <Button layoutX="613.0" layoutY="481.0" mnemonicParsing="false" onAction="#checkStockButton" prefHeight="34.0" prefWidth="99.0" text="เงินสด" />
+      <Button fx:id="codeOneButton" layoutX="415.0" layoutY="481.0" mnemonicParsing="false" onAction="#pressOnCodeOneButton" prefHeight="34.0" prefWidth="99.0" text="บัตรเครดิต" />
+      <Button fx:id="codeTwoButton" layoutX="514.0" layoutY="481.0" mnemonicParsing="false" onAction="#pressOnCodeTwoButton" prefHeight="34.0" prefWidth="99.0" text="โอนจ่าย" />
+      <Button fx:id="codeThreeButton" layoutX="613.0" layoutY="481.0" mnemonicParsing="false" onAction="#pressOnCodeThreeButton" prefHeight="34.0" prefWidth="99.0" text="เงินสด" />
       <Label layoutX="415.0" layoutY="445.0" text="ประเภทการจ่ายเงิน">
          <font>
             <Font size="16.0" />

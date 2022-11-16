@@ -72,14 +72,17 @@ public class ManagePrawnController {
     public void  showSelectedFarming(Farming farming){
         farmingLabel.setText(farming.getPondID());
         if (farming.getFarmingStatus().equals("ปกติ")){
+            statusType = "ปกติ";
             this.normalStatusButton.setStyle("-fx-background-color: #FF8C00;");
             this.sickStatusButton.setStyle("-fx-background-color: #FFD700;");
             this.problemStatusButton.setStyle("-fx-background-color: #FFD700;");
         }else if(farming.getFarmingStatus().equals("ป่วย")){
+            statusType = "ป่วย";
             this.sickStatusButton.setStyle("-fx-background-color: #FF8C00;");
             this.normalStatusButton.setStyle("-fx-background-color: #FFD700;");
             this.problemStatusButton.setStyle("-fx-background-color: #FFD700;");
         }else{
+            statusType = "เกิดปัญหา";
             this.problemStatusButton.setStyle("-fx-background-color: #FF8C00;");
             this.normalStatusButton.setStyle("-fx-background-color: #FFD700;");
             this.sickStatusButton.setStyle("-fx-background-color: #FFD700;");

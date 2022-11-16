@@ -57,6 +57,14 @@ public class PurchaseOrder {
         return price;
     }
 
+    public String getFarmingID() {
+        return farmingID;
+    }
+
+    public void setFarmingID(String farmingID) {
+        this.farmingID = farmingID;
+    }
+
     public void setPrice(int price) {
         this.price = price;
     }
@@ -74,12 +82,13 @@ public class PurchaseOrder {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("Insert into purchase_order(O_ID,O_PURCHASE_TYPE,O_PRICE,O_STATUS,C_ID )values(?,?,?,?,?)");
+            pst = connection.prepareStatement("Insert into purchase_order(O_ID,O_PURCHASE_TYPE,O_PRICE,O_STATUS,C_ID,F_ID )values(?,?,?,?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.purchaseType);
             pst.setString(3, Integer.toString(this.price));
             pst.setString(4, this.status);
             pst.setString(5, this.customerID);
+            pst.setString(5, this.farmingID);
 
             pst.executeUpdate();
         } catch (Exception e) {

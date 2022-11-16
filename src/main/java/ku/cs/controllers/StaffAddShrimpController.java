@@ -90,7 +90,7 @@ public class StaffAddShrimpController {
     private void showProductData() {
         pondTableView.getItems().clear();
         pondTableView.getColumns().clear();
-        pondObservableList = FXCollections.observableArrayList(pondList.getPonds());
+        pondObservableList = FXCollections.observableArrayList(pondList.getStaffPond());
         pondTableView.setItems(pondObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
@@ -108,7 +108,6 @@ public class StaffAddShrimpController {
     @FXML
     public void enterButton(ActionEvent actionEvent){
         try {
-//          vendorOrderList.updateVendorOrder(vendorOrder, "user01");
             int farmingID = farmingList.count()+1;
             String farmingIDString = "F"+ farmingID;
             String pondID = selectedPond().getId();
@@ -140,6 +139,7 @@ public class StaffAddShrimpController {
             System.err.println("ใส่ข้อมูลผิดพลาด");
             warningLabel.setText("ใส่ข้อมูลผิดพลาด");
         }
+
     }
 
 //    @FXML
@@ -151,9 +151,9 @@ public class StaffAddShrimpController {
 //    }
 
     private Pond selectedPond(){
-        String selectedPondString = addPondListView.getSelectionModel().selectedItemProperty().get();
-        Pond pond = pondList.getPondById(selectedPondString);
-        return pond;
+        Pond selectedPondString = pondTableView.getSelectionModel().selectedItemProperty().get();
+//        Pond pond = pondList.getPondById(selectedPondString);
+        return selectedPondString;
     }
 
     private void clearSelectedProduct() {

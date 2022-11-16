@@ -32,6 +32,9 @@ public class ManagerCheckStockController {
     private Label dateLabel;
     @FXML
     private TextField priceTextField;
+    @FXML
+    private TextField sellDateTextField;
+
 
     @FXML private TableView<Farming> farmingTableView1;
 
@@ -162,6 +165,8 @@ public class ManagerCheckStockController {
         String price = priceTextField.getText();
         String farmingID = selectedFarming().getFarmingID();
 
+        String sellDate = sellDateTextField.getText();
+
         passItem.add(name);
         passItem.add(phone);
         passItem.add(id);
@@ -169,6 +174,7 @@ public class ManagerCheckStockController {
         passItem.add(purchaseType);
         passItem.add(farmingID);
         passItem.add(price);
+        passItem.add(sellDate);
 
         com.github.saacsos.FXRouter.goTo(location,passItem);
     }
@@ -176,7 +182,7 @@ public class ManagerCheckStockController {
     @FXML
     public void backBtn(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("managerHome");
+            com.github.saacsos.FXRouter.goTo("managerSellOrder");
         } catch (IOException ex) {
             System.err.println(ex.toString());
             System.err.println("ไม่สามารถเข้าหน้า managerHome");
