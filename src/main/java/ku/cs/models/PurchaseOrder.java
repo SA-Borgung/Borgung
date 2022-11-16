@@ -88,7 +88,7 @@ public class PurchaseOrder {
             pst.setString(3, Integer.toString(this.price));
             pst.setString(4, this.status);
             pst.setString(5, this.customerID);
-            pst.setString(5, this.farmingID);
+            pst.setString(6, this.farmingID);
 
             pst.executeUpdate();
         } catch (Exception e) {

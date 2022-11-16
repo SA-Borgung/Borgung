@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class StaffHomeController {
 
-    @FXML
-    private Label userLabel;
 
     private ArrayList<String> getItem;
     private ArrayList<String> passItem;
@@ -22,7 +20,7 @@ public class StaffHomeController {
         getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
         String userID  = getItem.get(0);
         System.out.println("userID is " + userID);
-        userLabel.setText(userID);
+
 
         passItem = new ArrayList<>();
     }

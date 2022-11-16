@@ -129,7 +129,18 @@ public class StaffQcController {
 
     @FXML
     private void clickFinishedButton() {
-        if (qcStatus == ""){
+        int qcID = qcList.count()+1;
+        String qcIDString =  "QC"+ qcID;
+        String date = qcTimeTextField.getText();
+        String note = failedReason.getText();
+        String farmingId = selectedFarming().getFarmingID();
+        String userID  = getItem.get(0);
+
+        QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+        qc.insertToSql();
+        qcList.addQC(qc);
+        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+        /*if (qcStatus == ""){
             warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
             System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน1");
         }
@@ -143,7 +154,8 @@ public class StaffQcController {
                 warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
                 System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน3");
             }
-        } else {
+        }
+        else {
             int qcID = qcList.count()+1;
             String qcIDString =  "QC"+ qcID;
             String date = qcTimeTextField.getText();
@@ -155,7 +167,7 @@ public class StaffQcController {
             qc.insertToSql();
             qcList.addQC(qc);
             warningLabel.setText("ดำเนินการเสร็จสิ้น !");
-        }
+        }*/
     }
 
 

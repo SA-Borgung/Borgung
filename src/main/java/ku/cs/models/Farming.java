@@ -128,7 +128,7 @@ public class Farming {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("Insert into farming(F_ID,W_ID,P_ID,F_ROUND,F_AMOUNT,F_GETDATE,F_SELLDATE,F_STATUS,R_ID)values(?,?,?,?,?,?,?,?,?,?)");
+            pst = connection.prepareStatement("Insert into farming(F_ID,W_ID,P_ID,F_ROUND,F_AMOUNT,F_GETDATE,F_SELLDATE,F_STATUS,R_ID)values(?,?,?,?,?,?,?,?,?)");
             pst.setString(1, this.farmingID);
             pst.setString(2, this.pondID);
             pst.setString(3, this.prawnID);
@@ -137,7 +137,7 @@ public class Farming {
             pst.setString(6, this.getDate);
             pst.setString(7, this.sellDate);
             pst.setString(8, this.farmingStatus);
-            pst.setString(10, this.vendorOrderID);
+            pst.setString(9, this.vendorOrderID);
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
