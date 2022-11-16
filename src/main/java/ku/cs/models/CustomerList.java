@@ -29,4 +29,13 @@ public class CustomerList {
         return null;
     }
 
+    public Customer getCustomerByName(String name){
+        for (Customer customer : customers) {
+            if (customer.checkName(name)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
 }

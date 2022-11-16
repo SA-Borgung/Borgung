@@ -116,10 +116,10 @@ public class ManagerCheckStockController {
     }
 
     public Farming selectedFarming(){
-        String selectedFarmingString = farmingListView.getSelectionModel().selectedItemProperty().get();
-        System.out.println(selectedFarmingString);
-        Farming farming = farmingList.getFarmingById(selectedFarmingString);
-        return farming;
+        Farming selectedFarmingString = farmingTableView1.getSelectionModel().selectedItemProperty().get();
+//        System.out.println(selectedFarmingString);
+//        Farming farming = farmingList.getFarmingById(selectedFarmingString);
+        return selectedFarmingString;
     }
 
     public void  showSelectedFarming(Farming farming){
@@ -157,6 +157,7 @@ public class ManagerCheckStockController {
         String phone  = getItem.get(1);
         String id  = getItem.get(2);
         String address  = getItem.get(3);
+        String purchaseType = getItem.get(4);
 
         String price = priceTextField.getText();
         String farmingID = selectedFarming().getFarmingID();
@@ -165,6 +166,7 @@ public class ManagerCheckStockController {
         passItem.add(phone);
         passItem.add(id);
         passItem.add(address);
+        passItem.add(purchaseType);
         passItem.add(farmingID);
         passItem.add(price);
 

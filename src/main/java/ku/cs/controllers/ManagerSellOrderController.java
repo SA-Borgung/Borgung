@@ -48,10 +48,12 @@ public class ManagerSellOrderController {
         String phone = phoneTextField.getText();
         String id = idCardTextField.getText();
         String address = addressTextArea.getText();
+        String purchaseType = "test";
         passItem.add(name);
         passItem.add(phone);
         passItem.add(id);
         passItem.add(address);
+        passItem.add(purchaseType);
 
     }
 

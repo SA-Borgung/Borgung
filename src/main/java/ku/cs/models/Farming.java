@@ -18,7 +18,6 @@ public class Farming {
     private String getDate;
     private String sellDate;
     private String farmingStatus;
-    private String orderID;
     private String vendorOrderID;
 
     private Connection connection;
@@ -26,7 +25,7 @@ public class Farming {
     private String databaseName = "borgung";
 
 
-    public Farming(String farmingID ,String pondID, int round, int prawnAmount, String prawnID, String getDate, String sellDate,String FarmingStatus, String orderID, String vendorOrderID) {
+    public Farming(String farmingID ,String pondID, int round, int prawnAmount, String prawnID, String getDate, String sellDate,String FarmingStatus, String vendorOrderID) {
 
         this.farmingID = farmingID;
         this.pondID = pondID;
@@ -36,7 +35,6 @@ public class Farming {
         this.getDate = getDate;
         this.sellDate = sellDate;
         this.farmingStatus = FarmingStatus;
-        this.orderID = orderID;
         this.vendorOrderID = vendorOrderID;
 
     }
@@ -97,13 +95,7 @@ public class Farming {
         this.sellDate = sellDate;
     }
 
-    public String getOrderID() {
-        return orderID;
-    }
 
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
-    }
 
     public String getVendorOrderID() {
         return vendorOrderID;
@@ -136,7 +128,7 @@ public class Farming {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("Insert into farming(F_ID,W_ID,P_ID,F_ROUND,F_AMOUNT,F_GETDATE,F_SELLDATE,F_STATUS,O_ID,R_ID)values(?,?,?,?,?,?,?,?,?,?)");
+            pst = connection.prepareStatement("Insert into farming(F_ID,W_ID,P_ID,F_ROUND,F_AMOUNT,F_GETDATE,F_SELLDATE,F_STATUS,R_ID)values(?,?,?,?,?,?,?,?,?,?)");
             pst.setString(1, this.farmingID);
             pst.setString(2, this.pondID);
             pst.setString(3, this.prawnID);
@@ -145,7 +137,6 @@ public class Farming {
             pst.setString(6, this.getDate);
             pst.setString(7, this.sellDate);
             pst.setString(8, this.farmingStatus);
-            pst.setString(9, this.orderID);
             pst.setString(10, this.vendorOrderID);
             pst.executeUpdate();
         } catch (Exception e) {

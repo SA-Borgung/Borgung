@@ -121,7 +121,7 @@ public class StaffAddShrimpController {
             String vendorId = vendorOrder.getId();
 
             if (handleAddFarming(roundString,dateString)){
-                farming = new Farming(farmingIDString, pondID, round, amount, prawnId, dateString,null, "ปกติ",null, vendorId);
+                farming = new Farming(farmingIDString, pondID, round, amount, prawnId, dateString,null, "ปกติ", vendorId);
                 handleAddFarming(roundString,dateString);
                 farming.insertToSql();
                 vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
