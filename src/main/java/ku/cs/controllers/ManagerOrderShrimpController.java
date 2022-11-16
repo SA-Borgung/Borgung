@@ -18,7 +18,7 @@ public class ManagerOrderShrimpController {
     @FXML
     TextField prawnAmountField,shopNameField;
     @FXML
-    private Label employeeLabel;
+    private Label employeeLabel, warningLabel;
     @FXML
     private Label prawnTypeLabel;
 
@@ -28,6 +28,7 @@ public class ManagerOrderShrimpController {
     private ObservableList<Employee> ObservableList;
     private ObservableList<Prawn> ObservableList2;
     private DataSource<VendorOrderList> vendorDataSource;
+    private VendorOrder vendorOrder;
     private VendorOrderList vendorOrderList;
     private DataSource<EmployeeList> employeeDataSource;
     private EmployeeList employeeList;
@@ -45,10 +46,9 @@ public class ManagerOrderShrimpController {
         vendorDataSource = new VendorOrderDataSource();
         vendorOrderList = vendorDataSource.readData();
 
-
-
         showEmployeeData();
         showPrawnData();
+        clearSelectedRow();
 
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -102,19 +102,23 @@ public class ManagerOrderShrimpController {
 
     @FXML
     private void clickFinishedButton() {
-        int vendorOrderID = vendorOrderList.count()+1;
-        String vendorOrderIDString = "GET"+vendorOrderID;
-        int amount = Integer.parseInt(prawnAmountField.getText());
-        String sellerName = shopNameField.getText();
-        String prawnID = selectedPrawn().getId();
-        String employeeID = selectedEmployee().getId();
+        if (prawnAmountField.getText().isEmpty() || shopNameField.getText().isEmpty()) {
+            System.out.println("กรุณากรอกข้อมูลให้ครบ");
+            warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+        } else {
+            int vendorOrderID = vendorOrderList.count() + 1;
+            String vendorOrderIDString = "GET" + vendorOrderID;
+            int amount = Integer.parseInt(prawnAmountField.getText());
+            String sellerName = shopNameField.getText();
+            String prawnID = selectedPrawn().getId();
+            String employeeID = selectedEmployee().getId();
 
-        VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,employeeID);
-        vendorOrder.insertToSql();
+            VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount, sellerName, "รอดำเนินการ", prawnID, employeeID);
+            vendorOrder.insertToSql();
+        }
 
 //        finishLB.setText("กรอกข้อมูลสำเร็จ ");
 //        finishLB.setTextFill(Color.web("#ff0000", 1));
-
     }
 
 
@@ -194,20 +198,16 @@ public class ManagerOrderShrimpController {
     private void clearSelectedRow() {
         employeeLabel.setText("");
         prawnTypeLabel.setText("");
+        warningLabel.setText("");
     }
 
     private void showSelectedEmployee(Employee employee) {
         employeeLabel.setText(employee.getName());
-
     }
 
     private void showSelectedPrawnType(Prawn prawn) {
-
         prawnTypeLabel.setText(prawn.getSpecies());
     }
-
-
-
 
     public void saveBtn(ActionEvent event){
 
@@ -225,16 +225,12 @@ public class ManagerOrderShrimpController {
 //        vendorOrderList.addVendorOrder(order);
 
 //        VendorOrderDataSource.insertData(); //insert data
-
-
-
-        try {
-            com.github.saacsos.FXRouter.goTo("login");
-        } catch (IOException e) {
-            System.err.println("ไปที่หน้า login ไม่ได้");
-            System.err.println("ให้ตรวจสอบการกำหนด route");
-        }
-
+            try {
+                com.github.saacsos.FXRouter.goTo("login");
+            } catch (IOException e) {
+                System.err.println("ไปที่หน้า login ไม่ได้");
+                System.err.println("ให้ตรวจสอบการกำหนด route");
+            }
     }
     @FXML
     public void backBtn(ActionEvent actionEvent) {

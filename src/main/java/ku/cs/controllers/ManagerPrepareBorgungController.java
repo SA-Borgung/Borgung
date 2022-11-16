@@ -65,6 +65,7 @@ public class ManagerPrepareBorgungController {
 
         showEmployeeData();
         showPondData();
+        clearSelectedRow();
 
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -221,9 +222,6 @@ public class ManagerPrepareBorgungController {
         employeeLabel.setText("");
         pondIdLabel.setText("");
         finishLB.setText("");
-
-
-
     }
 
     private void showSelectedEmployee(Employee employee) {

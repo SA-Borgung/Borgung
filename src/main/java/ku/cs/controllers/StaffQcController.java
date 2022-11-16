@@ -27,8 +27,8 @@ public class StaffQcController {
     @FXML private Label measureWeightLabel;
     @FXML private Label manageStatusLabel;
     @FXML private ListView<String> farmingListView;
-    @FXML
-    private TableView<Farming> farmingTableView;
+    @FXML private Label warningLabel;
+    @FXML private TableView<Farming> farmingTableView;
 
     private ObservableList<Farming> ObservableList;
     private FarmingList farmingList;
@@ -106,8 +106,9 @@ public class StaffQcController {
         pondIdLabel.setText("");
         manageStatusLabel.setText("");
         measureWeightLabel.setText("");
+        warningLabel.setText("");
+        qcStatus = "";
     }
-
 
     @FXML
     private void clickOnFailedButton() {
@@ -117,7 +118,6 @@ public class StaffQcController {
         this.passedButton.setStyle("-fx-background-color: #FFD700;");
 
     }
-
     @FXML
     private void clickOnPassedButton() {
         qcStatus = "ผ่าน";
@@ -129,16 +129,33 @@ public class StaffQcController {
 
     @FXML
     private void clickFinishedButton() {
-        int qcID = qcList.count()+1;
-        String qcIDString =  "QC"+ qcID;
-        String date = qcTimeTextField.getText();
-        String note = failedReason.getText();
-        String farmingId = selectedFarming().getFarmingID();
-        String userID  = getItem.get(0);
+        if (qcStatus == ""){
+            warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+            System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน1");
+        }
+        else if (qcStatus == "ไม่ผ่าน") {
+            if(qcTimeTextField.getText().isEmpty() || failedReason.getText().isEmpty()){
+                warningLabel.setText("กรุณากรอกสาเหตุที่ไม่ผ่าน");
+                System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน2");
+            }
+        } else if (qcStatus == "ผ่าน"){
+            if (qcTimeTextField.getText().isEmpty()){
+                warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+                System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน3");
+            }
+        } else {
+            int qcID = qcList.count()+1;
+            String qcIDString =  "QC"+ qcID;
+            String date = qcTimeTextField.getText();
+            String note = failedReason.getText();
+            String farmingId = selectedFarming().getFarmingID();
+            String userID  = getItem.get(0);
 
-        QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-        qc.insertToSql();
-        qcList.addQC(qc);
+            QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+            qc.insertToSql();
+            qcList.addQC(qc);
+            warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+        }
     }
 
 
