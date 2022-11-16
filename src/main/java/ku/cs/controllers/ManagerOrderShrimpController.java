@@ -18,16 +18,9 @@ public class ManagerOrderShrimpController {
     @FXML
     TextField prawnAmountField,shopNameField;
     @FXML
-    private ListView<String> employeeListView;
-    @FXML
-    private ListView<String> prawnListView;
-    @FXML
     private Label employeeLabel;
     @FXML
     private Label prawnTypeLabel;
-    @FXML
-    Label finishLB;
-    public static final String ANSI_RESET = "\u001B[0m";
 
     @FXML private TableView<Employee> employeeTableView;
     @FXML private TableView<Prawn> prawnTableView;
@@ -52,18 +45,10 @@ public class ManagerOrderShrimpController {
         vendorDataSource = new VendorOrderDataSource();
         vendorOrderList = vendorDataSource.readData();
 
-//        showEmployeeListView();
-        clearSelectedRow();
-        handleSelectedEmployeeListView();
-
-//        showPrawnListView();
-        handleSelectedPrawnListView();
 
 
         showEmployeeData();
         showPrawnData();
-
-//        handleSelectedListView();
 
         employeeTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -149,19 +134,19 @@ public class ManagerOrderShrimpController {
 //        employeeListView.setItems(ObservableList);
 //    }
 
-    private void handleSelectedEmployeeListView() {
-        employeeListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        Employee selectedEmployee = employeeList.getEmployeeById(newValue);
-                        System.out.println(selectedEmployee + " is selected");
-                        showSelectedEmployee(selectedEmployee);
-                        selectedEmployee();
-                    }
-                });
-    }
+//    private void handleSelectedEmployeeListView() {
+//        employeeListView.getSelectionModel().selectedItemProperty().addListener(
+//                new ChangeListener<String>() {
+//                    @Override
+//                    public void changed(ObservableValue<? extends String> observableValue,
+//                                        String oldValue, String newValue) {
+//                        Employee selectedEmployee = employeeList.getEmployeeById(newValue);
+//                        System.out.println(selectedEmployee + " is selected");
+//                        showSelectedEmployee(selectedEmployee);
+//                        selectedEmployee();
+//                    }
+//                });
+//    }
 
 
 
@@ -179,31 +164,31 @@ public class ManagerOrderShrimpController {
 //        prawnListView.setItems(ObservableList2);
 //    }
 
-    private void handleSelectedPrawnListView() {
-        prawnListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        Prawn selectedPrawn = prawnList.getPrawnById(newValue);
-                        System.out.println(selectedPrawn + " is selected");
-                        showSelectedPrawnType(selectedPrawn);
-                        selectedPrawn();
-                    }
-                });
-    }
+//    private void handleSelectedPrawnListView() {
+//        prawnListView.getSelectionModel().selectedItemProperty().addListener(
+//                new ChangeListener<String>() {
+//                    @Override
+//                    public void changed(ObservableValue<? extends String> observableValue,
+//                                        String oldValue, String newValue) {
+//                        Prawn selectedPrawn = prawnList.getPrawnById(newValue);
+//                        System.out.println(selectedPrawn + " is selected");
+//                        showSelectedPrawnType(selectedPrawn);
+//                        selectedPrawn();
+//                    }
+//                });
+//    }
 
     private Employee selectedEmployee(){
-        String selectedEmployeeString = employeeListView.getSelectionModel().selectedItemProperty().get();
+        Employee selectedEmployeeString = employeeTableView.getSelectionModel().selectedItemProperty().get();
         //System.out.println(selectedVendorOrderString);
-        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
-        return employee;
+//        Employee employee = employeeList.getEmployeeById(selectedEmployeeString);
+        return selectedEmployeeString;
     }
     private Prawn selectedPrawn(){
-        String selectedPrawnString = prawnListView.getSelectionModel().selectedItemProperty().get();
+        Prawn selectedPrawnString = prawnTableView.getSelectionModel().selectedItemProperty().get();
         //System.out.println(selectedVendorOrderString);
-        Prawn prawn = prawnList.getPrawnById(selectedPrawnString);
-        return prawn;
+//        Prawn prawn = prawnList.getPrawnById(selectedPrawnString);
+        return selectedPrawnString;
     }
 
     private void clearSelectedRow() {

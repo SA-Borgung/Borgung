@@ -57,11 +57,11 @@ public class ManagerPrepareBorgungController {
         preparePondList = preparePondListDataSource.readData();
 
 //        showEmployeeListView();
-        clearSelectedRow();
-        handleSelectedEmployeeListView();
+//        clearSelectedRow();
+//        handleSelectedEmployeeListView();
 
 //        showPondListView();
-        handleSelectedPondListView();
+//        handleSelectedPondListView();
 
         showEmployeeData();
         showPondData();

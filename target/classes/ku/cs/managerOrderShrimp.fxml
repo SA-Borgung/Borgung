@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerOrderShrimpController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style1.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.controllers.ManagerOrderShrimpController">
    <children>
       <ImageView fitHeight="614.0" fitWidth="851.0" layoutX="-7.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,19 +16,29 @@
       <Button layoutX="403.0" layoutY="495.0" mnemonicParsing="false" onAction="#clickFinishedButton" prefHeight="36.0" prefWidth="291.0" text="บันทึก" />
       <TextField fx:id="shopNameField" layoutX="398.0" layoutY="424.0" prefHeight="36.0" prefWidth="291.0" promptText="ชื่อร้าน" />
       <TextField fx:id="prawnAmountField" layoutX="397.0" layoutY="382.0" prefHeight="36.0" prefWidth="291.0" promptText="จำนวนกุ้ง" />
-      <Label layoutX="441.0" layoutY="335.0" text="สายพันธุ์:">
+      <Label layoutX="426.0" layoutY="335.0" text="สายพันธุ์:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Label fx:id="prawnTypeLabel" layoutX="512.0" layoutY="339.0" prefHeight="17.0" prefWidth="120.0" />
-      <Label layoutX="233.0" layoutY="334.0" text="พนักงาน:">
+      <Label layoutX="166.0" layoutY="333.0" text="พนักงาน:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Label fx:id="employeeLabel" layoutX="299.0" layoutY="337.0" prefHeight="17.0" prefWidth="114.0" />
-      <ListView fx:id="prawnListView" layoutX="426.0" layoutY="135.0" prefHeight="177.0" prefWidth="185.0" />
-      <ListView fx:id="employeeListView" layoutX="228.0" layoutY="135.0" prefHeight="177.0" prefWidth="185.0" />
+      <TableView fx:id="employeeTableView" layoutX="103.0" layoutY="112.0" prefHeight="210.0" prefWidth="263.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <TableView fx:id="prawnTableView" layoutX="412.0" layoutY="112.0" prefHeight="210.0" prefWidth="291.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
