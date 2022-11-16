@@ -87,7 +87,7 @@ public class ManagerOrderShrimpController {
         prawnTableView.setItems(ObservableList2);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:id"));
+        configs.add(new StringConfiguration("title:species", "field:species"));
 //        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
 
 

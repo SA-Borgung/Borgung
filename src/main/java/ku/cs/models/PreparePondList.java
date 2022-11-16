@@ -30,4 +30,17 @@ public class PreparePondList {
         return null;
     }
 
+    public ArrayList<PreparePond> getStaffPreparePond(String userID){
+        ArrayList<PreparePond> staffPreparePond = new ArrayList<>();
+        for (PreparePond preparePond : preparePonds){
+            if (preparePond.getEmployeeID().equals(userID)){
+                if (preparePond.getStatus().equals("รอดำเนินการ") || preparePond.getStatus().equals("กำลังดำเนินการ")){
+                    staffPreparePond.add(preparePond);
+                }
+            }
+        }
+
+        return staffPreparePond;
+    }
+
 }

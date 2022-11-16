@@ -35,13 +35,15 @@ public class PreparePondDataSource implements DataSource<PreparePondList> {
             while (queryOutput != null && queryOutput.next()){
                 String prepareID = queryOutput.getString("T_ID");
                 String status = queryOutput.getString("T_STATUS");
+                String note = queryOutput.getString("T_NOTE");
                 String employeeID = queryOutput.getString("E_ID");
                 String pondID = queryOutput.getString("W_ID");
 
                 list.addPreparePond(
                         new PreparePond(
-                                pondID,
+                                prepareID,
                                 status,
+                                note,
                                 employeeID,
                                 pondID
 

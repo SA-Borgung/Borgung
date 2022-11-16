@@ -19,6 +19,14 @@ public class QC {
         this.farmingID = farmingID;
     }
 
+    public String getFarmingID() {
+        return farmingID;
+    }
+
+    public void setFarmingID(String farmingID) {
+        this.farmingID = farmingID;
+    }
+
     public String getId() {
         return id;
     }

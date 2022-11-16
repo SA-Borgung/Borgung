@@ -28,4 +28,15 @@ public class PurchaseOrderList {
         }
         return null;
     }
+
+    public ArrayList<PurchaseOrder> getStaffPurchaseOrder(){
+        ArrayList<PurchaseOrder> staffPurchaseOrder = new ArrayList<>();
+        for (PurchaseOrder purchaseOrder : purchaseOrders){
+            if (purchaseOrder.getStatus().equals("ยังไม่ส่ง")){
+                staffPurchaseOrder.add(purchaseOrder);
+            }
+        }
+
+        return staffPurchaseOrder;
+    }
 }

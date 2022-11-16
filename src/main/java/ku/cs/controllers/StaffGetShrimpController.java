@@ -67,7 +67,7 @@ public class StaffGetShrimpController {
     private void showProductData() {
         addVendorTableView.getItems().clear();
         addVendorTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(vendorOrderList.getAllVendorOrder());
+        ObservableList = FXCollections.observableArrayList(vendorOrderList.getStaffVendorOrder());
         addVendorTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();

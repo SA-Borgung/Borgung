@@ -8,13 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import ku.cs.models.Farming;
-import ku.cs.models.FarmingList;
-import ku.cs.models.ManagePrawnList;
-import ku.cs.services.DataSource;
-import ku.cs.services.FarmingDataSource;
-import ku.cs.services.ManagePrawnDataSource;
-import ku.cs.services.StringConfiguration;
+import ku.cs.models.*;
+import ku.cs.services.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,22 +38,42 @@ public class ManagerCheckStockController {
     private ObservableList<Farming> ObservableList;
 
     private FarmingList farmingList;
+    private FarmingList farmingCheckQC;
     private DataSource<FarmingList> farmingListDataSource;
     private ManagePrawnList managePrawnList;
     private DataSource<ManagePrawnList> managePrawnListDataSource;
+    private PrawnList prawnList;
+    private DataSource<PrawnList> prawnListDataSource;
+    private QCList qcList;
+    private DataSource<QCList> qcListDataSource;
+
+    private ArrayList<String> getItem;
+    private ArrayList<String> passItem;
 
     @FXML
     public void initialize() {
+
+        getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
+        String name  = getItem.get(0);
+        String phone  = getItem.get(1);
+        String id  = getItem.get(2);
+        String address  = getItem.get(3);
+
+        passItem = new ArrayList<>();
 
         farmingListDataSource = new FarmingDataSource();
         farmingList = farmingListDataSource.readData();
         managePrawnListDataSource = new ManagePrawnDataSource();
         managePrawnList = managePrawnListDataSource.readData();
+        prawnListDataSource = new PrawnDataSource();
+        prawnList = prawnListDataSource.readData();
+        qcListDataSource = new QCDataSource();
+        qcList = qcListDataSource.readData();
 
-//        showListView();
+        farmingCheckQC = new FarmingList();
+
         clearSelectedProduct();
         showProductData();
-//        handleSelectedListView();
         farmingTableView1.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 showSelectedFarming(newValue);
@@ -66,15 +81,31 @@ public class ManagerCheckStockController {
         });
     }
 
+    private void qcCheck(){
+        for (Farming farming : farmingList.getManagerFarming()) {
+            QC latestQC = qcList.latestQC(farming.getFarmingID());
+//            System.out.println(farming.getFarmingID() +" is " + qcList.latestQC(farming.getFarmingID()));
+            if (latestQC != null){
+                if (latestQC.getManageStatus().equals("ผ่าน")) {
+                    farmingCheckQC.addFarming(farming);
+                    System.out.println("this is "+farming.getFarmingID());
+
+                }
+            }
+        }
+
+    }
+
     private void showProductData() {
         farmingTableView1.getItems().clear();
         farmingTableView1.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
+        qcCheck();
+        ObservableList = FXCollections.observableArrayList(farmingCheckQC.getFarmings());
         farmingTableView1.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:farmingID"));
-//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+        configs.add(new StringConfiguration("title:pondID", "field:pondID"));
+        configs.add(new StringConfiguration("title:prawnID", "field:prawnID"));
 
 
         for (StringConfiguration conf: configs) {
@@ -82,38 +113,6 @@ public class ManagerCheckStockController {
             col.setCellValueFactory(new PropertyValueFactory<>(conf.get("field")));
             farmingTableView1.getColumns().add(col);
         }
-    }
-
-//    private void showListView() {
-//        ListView<String> listView = new ListView<>();
-//        ObservableList = FXCollections.observableArrayList();
-//        ArrayList<Farming> tempFarmingList = new ArrayList<Farming>();
-//        for (int i = farmingList.count()-1; i>=0; i--){
-//            Farming farming = farmingList.getFarmingNumber(i);
-//            if (!farming.getFarmingStatus().equals("ขายแล้ว")){
-//                if (!farming.getFarmingStatus().equals("เกิดปัญหา")){
-//                    tempFarmingList.add(farming);
-//                    String showList = farming.getFarmingID();
-//                    ObservableList.add(showList);
-//                }
-//
-//            }
-//        }
-//        farmingListView.setItems(ObservableList);
-//    }
-
-    private void handleSelectedListView() {
-        farmingListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue,
-                                        String oldValue, String newValue) {
-                        Farming selectedFarming = farmingList.getFarmingById(newValue);
-                        System.out.println(selectedFarming + " is selected");
-                        showSelectedFarming(selectedFarming);
-                        selectedFarming();
-                    }
-                });
     }
 
     public Farming selectedFarming(){
@@ -125,8 +124,11 @@ public class ManagerCheckStockController {
 
     public void  showSelectedFarming(Farming farming){
         pondLabel.setText(farming.getPondID());
-        prawnLabel.setText("ไปเรียกข้อมูลซะ");
-        weightLabel.setText("ไปเรียกข้อมูลซะ");
+        String prawn = prawnList.getPrawnById(farming.getPrawnID()).getSpecies();
+        prawnLabel.setText(prawn);
+
+        String weight = managePrawnList.latestManagePrawn(farming.getFarmingID()).getNote();
+        weightLabel.setText(weight);
         amountLabel.setText(Integer.toString(farming.getPrawnAmount()));
         dateLabel.setText(farming.getGetDate());
     }
@@ -137,6 +139,36 @@ public class ManagerCheckStockController {
         weightLabel.setText("");
         amountLabel.setText("");
         dateLabel.setText("");
+    }
+
+    @FXML
+    private void enterButton(ActionEvent actionEvent){
+        try {
+            setPassItem("managerCreatePurchaseOrder");
+        } catch (IOException e) {
+            System.err.println(e.toString());
+            System.err.println("ไม่สามารถเข้าหน้า managerCreatePurchaseOrder");
+        }
+    }
+
+    private void setPassItem(String location) throws IOException {
+
+        String name  = getItem.get(0);
+        String phone  = getItem.get(1);
+        String id  = getItem.get(2);
+        String address  = getItem.get(3);
+
+        String price = priceTextField.getText();
+        String farmingID = selectedFarming().getFarmingID();
+
+        passItem.add(name);
+        passItem.add(phone);
+        passItem.add(id);
+        passItem.add(address);
+        passItem.add(farmingID);
+        passItem.add(price);
+
+        com.github.saacsos.FXRouter.goTo(location,passItem);
     }
 
     @FXML

@@ -65,11 +65,11 @@ public class StaffQcController {
     private void showProductData() {
         farmingTableView.getItems().clear();
         farmingTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
+        ObservableList = FXCollections.observableArrayList(farmingList.getStaffFarming());
         farmingTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:farmingID"));
+        configs.add(new StringConfiguration("title:pondID", "field:pondID"));
         configs.add(new StringConfiguration("title:รอบ", "field:round"));
 
 
@@ -82,10 +82,10 @@ public class StaffQcController {
 
 
     public Farming selectedFarming(){
-        String selectedFarmingString = farmingListView.getSelectionModel().selectedItemProperty().get();
-        System.out.println(selectedFarmingString);
-        Farming farming = farmingList.getFarmingById(selectedFarmingString);
-        return farming;
+        Farming selectedFarmingString = farmingTableView.getSelectionModel().selectedItemProperty().get();
+//        System.out.println(selectedFarmingString);
+//        Farming farming = farmingList.getFarmingById(selectedFarmingString);
+        return selectedFarmingString;
     }
 
     public void  showSelectedFarming(Farming farming){
@@ -94,7 +94,12 @@ public class StaffQcController {
 
         ManagePrawn managePrawn = managePrawnList.latestManagePrawn(farming.getFarmingID());
 //        System.out.println("this is: " + managePrawn);
-        measureWeightLabel.setText(managePrawn.getNote());
+        if (managePrawnList.latestManagePrawn(farming.getFarmingID()) == null){
+            measureWeightLabel.setText("ไม่มีการวัดน้ำหนัก");
+        }else {
+            measureWeightLabel.setText(managePrawn.getNote());
+        }
+
     }
 
     private void clearSelectedProduct() {

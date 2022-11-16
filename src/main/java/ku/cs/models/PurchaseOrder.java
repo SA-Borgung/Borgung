@@ -6,18 +6,19 @@ import java.sql.PreparedStatement;
 
 public class PurchaseOrder {
 
-    private String id,purchaseType,status, customerID;
+    private String id,purchaseType,status, customerID, farmingID;
     private int price;
     private Connection connection;
     private PreparedStatement pst;
     private String databaseName = "borgung";
 
-    public PurchaseOrder(String id, String purchaseType, int price , String status, String customerID) {
+    public PurchaseOrder(String id, String purchaseType, int price , String status, String customerID, String farmingID) {
         this.id = id;
         this.purchaseType = purchaseType;
         this.status = status;
         this.customerID = customerID;
         this.price = price;
+        this.farmingID = farmingID;
     }
 
     public String getId() {

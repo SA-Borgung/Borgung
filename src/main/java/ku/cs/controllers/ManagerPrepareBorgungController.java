@@ -86,7 +86,7 @@ public class ManagerPrepareBorgungController {
         employeeTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:id"));
+        configs.add(new StringConfiguration("title:ชื่อพนักงาน", "field:name"));
 //        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
 
 
@@ -99,11 +99,16 @@ public class ManagerPrepareBorgungController {
     private void showPondData() {
         pondTableView.getItems().clear();
         pondTableView.getColumns().clear();
-        ObservableList2 = FXCollections.observableArrayList(pondList.getPonds());
+//        ArrayList<Pond> pondsWithManageCheck = new ArrayList<>();
+//        for (Pond pond : pondList.getManagerPond()){
+//            if (){
+//            }
+//        }
+        ObservableList2 = FXCollections.observableArrayList(pondList.getManagerPond());
         pondTableView.setItems(ObservableList2);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:id"));
+        configs.add(new StringConfiguration("title:หมายเลขบ่อ", "field:id"));
 //        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
 
 
@@ -118,13 +123,17 @@ public class ManagerPrepareBorgungController {
     private void clickFinishedButton() {
         int preparePondID = preparePondList.count()+1;
         String preparePondIDString = "TB"+preparePondID;
-        String status = infoTextArea.getText();
+        String status = "รอดำเนินการ";
+        String note = infoTextArea.getText();
         String employeeID = selectedEmployee().getId();
         String pondID = selectedPond().getId();
 
-        PreparePond preparePond = new PreparePond(preparePondIDString,status,employeeID,pondID );
+        PreparePond preparePond = new PreparePond(preparePondIDString,status,note,employeeID,pondID );
         preparePond.insertToSql();
         preparePondList.addPreparePond(preparePond);
+
+        selectedPond().setStatus("รอดำเนินการ");
+        selectedPond().updateToSql();
 
         finishLB.setText("อัพเดทข้อมูลสำเร็จ");
 //        finishLB.setTextFill(Color.web("#ff0000", 1));

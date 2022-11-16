@@ -71,4 +71,26 @@ public class FarmingList {
         }
         return true;
     }
+
+    public ArrayList<Farming> getStaffFarming(){
+        ArrayList<Farming> staffFarming = new ArrayList<>();
+        for (Farming farming : farmings){
+            if (farming.getFarmingStatus().equals("ปกติ") || farming.getFarmingStatus().equals("ป่วย")){
+                staffFarming.add(farming);
+            }
+        }
+
+        return staffFarming;
+    }
+
+    public ArrayList<Farming> getManagerFarming(){
+        ArrayList<Farming> managerFarming = new ArrayList<>();
+        for (Farming farming : farmings){
+            if (farming.getFarmingStatus().equals("ปกติ")){
+                managerFarming.add(farming);
+            }
+        }
+
+        return managerFarming;
+    }
 }

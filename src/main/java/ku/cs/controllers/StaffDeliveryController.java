@@ -51,7 +51,7 @@ public class StaffDeliveryController {
     private void showProductData() {
         staffDeliveryTableView.getItems().clear();
         staffDeliveryTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(purchaseOrderList.getPurchaseOrders());
+        ObservableList = FXCollections.observableArrayList(purchaseOrderList.getStaffPurchaseOrder());
         staffDeliveryTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
@@ -69,10 +69,10 @@ public class StaffDeliveryController {
 
 
     private PurchaseOrder selectedPurchaseOrder(){
-        String selectedPurchaseOrderString = purchaseOrderListView.getSelectionModel().selectedItemProperty().get();
-        System.out.println(selectedPurchaseOrderString);
-        PurchaseOrder purchaseOrder = purchaseOrderList.getPurchaseOrderById(selectedPurchaseOrderString);
-        return purchaseOrder;
+        PurchaseOrder selectedPurchaseOrderString = staffDeliveryTableView.getSelectionModel().selectedItemProperty().get();
+//        System.out.println(selectedPurchaseOrderString);
+//        PurchaseOrder purchaseOrder = purchaseOrderList.getPurchaseOrderById(selectedPurchaseOrderString);
+        return selectedPurchaseOrderString;
     }
 
     private void showSelectedPurchaseOrder(PurchaseOrder purchaseOrder) {
@@ -105,7 +105,7 @@ public class StaffDeliveryController {
 //            String customerID = selectedPurchaseOrder().getCustomerID();
 //            PurchaseOrder purchaseOrder = new PurchaseOrder(purchaseOrderIdString,purchaseType,price, status, customerID);
 
-            selectedPurchaseOrder().setStatus("จ่ายเงินแล้ว");
+            selectedPurchaseOrder().setStatus("ส่งของเสร็จสิิ้น");
             selectedPurchaseOrder().updateToSql();
             System.out.println("กดติดแล้ว");
         }catch (Exception e) {
@@ -117,7 +117,7 @@ public class StaffDeliveryController {
     @FXML
     public void BackButton(ActionEvent actionEvent){
         try {
-            com.github.saacsos.FXRouter.goTo("staffGetShrimp");
+            com.github.saacsos.FXRouter.goTo("staffHome");
         } catch (IOException e) {
             System.err.println("ไปที่หน้า home ไม่ได้");
             System.err.println("ให้ตรวจสอบการกำหนด route");

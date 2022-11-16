@@ -6,16 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public class PreparePond {
-    private String prepareID,status,employeeID,pondID;
+    private String prepareID,status,note,employeeID,pondID;
     private Connection connection;
     private PreparedStatement pst;
     private String databaseName = "borgung";
 
-    public PreparePond(String prepareID, String status, String employeeID, String pondID) {
+    public PreparePond(String prepareID, String status, String note,  String employeeID, String pondID) {
         this.prepareID = prepareID;
-        this.status = status; //คือหมายเหตุ
+        this.status = status;
+        this.note = note;
         this.employeeID = employeeID;
         this.pondID = pondID;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getPrepareID() {
@@ -63,15 +72,35 @@ public class PreparePond {
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
             connection = DriverManager.getConnection(url , "root","");
-            pst = connection.prepareStatement("Insert into prepare_pond(T_ID ,T_STATUS,E_ID, W_ID)values(?,?,?,?)");
+            pst = connection.prepareStatement("Insert into prepare_pond(T_ID ,T_STATUS,T_NOTE,E_ID, W_ID)values(?,?,?,?,?)");
             pst.setString(1, this.prepareID);
             pst.setString(2, this.status);
-            pst.setString(3, this.employeeID);
-            pst.setString(4, this.pondID);
+            pst.setString(3, this.note);
+            pst.setString(4, this.employeeID);
+            pst.setString(5, this.pondID);
 
             //String id, String status, String detail
 
 
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("UPDATE prepare_pond SET T_STATUS = ?WHERE T_ID=?");
+            pst.setString(1, this.status);
+            pst.setString(2, this.prepareID);
 
             pst.executeUpdate();
         } catch (Exception e) {

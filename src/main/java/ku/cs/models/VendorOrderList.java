@@ -34,5 +34,16 @@ public class VendorOrderList {
         vendorOrder.setEmployeeID(userId);
     }
 
+    public ArrayList<VendorOrder> getStaffVendorOrder(){
+        ArrayList<VendorOrder> staffVendorOrder = new ArrayList<>();
+        for (VendorOrder vendorOrder : vendorOrders){
+            if (vendorOrder.getStatus().equals("รอดำเนินการ")){
+                staffVendorOrder.add(vendorOrder);
+            }
+        }
+
+        return staffVendorOrder;
+    }
+
 
 }

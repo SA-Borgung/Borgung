@@ -31,6 +31,7 @@ public class StaffPrepareBorgungController {
     private DataSource<PondList> pondListDataSource;
     private PreparePondList preparePondList;
     private DataSource<PreparePondList> preparePondListDataSource;
+    private PreparePond preparePond;
 
     private ArrayList<String> getItem;
 
@@ -58,6 +59,8 @@ public class StaffPrepareBorgungController {
         try {
             pond.setStatus("กำลังดำเนินการ");
             pond.updateToSql();
+            preparePond.setStatus("กำลังดำเนินการ");
+            preparePond.updateToSql();
             showPond();
             System.out.println(pond.getStatus());
         }catch (Exception e) {
@@ -70,6 +73,8 @@ public class StaffPrepareBorgungController {
         try {
             pond.setStatus("เตรียมบ่อเสร็จสิ้น");
             pond.updateToSql();
+            preparePond.setStatus("ดำเนินการเสร็จสิ้น");
+            preparePond.updateToSql();
             showPond();
             System.out.println(pond.getStatus());
         }catch (Exception e) {
@@ -80,12 +85,13 @@ public class StaffPrepareBorgungController {
     private void showProductData() {
         preparePondTableView.getItems().clear();
         preparePondTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(preparePondList.getPreparePonds());
+        String userID  = getItem.get(0);
+        ObservableList = FXCollections.observableArrayList(preparePondList.getStaffPreparePond(userID));
         preparePondTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:prepareID"));
-        configs.add(new StringConfiguration("title:รหัสพนักงาน", "field:employeeID"));
+        configs.add(new StringConfiguration("title:pondID", "field:pondID"));
+        configs.add(new StringConfiguration("title:status", "field:status"));
 
 
         for (StringConfiguration conf: configs) {
@@ -97,15 +103,18 @@ public class StaffPrepareBorgungController {
 
     private void selectedPreparePond(){
         PreparePond selectedPreparePondString = preparePondTableView.getSelectionModel().selectedItemProperty().get();
-        String pondString = selectedPreparePondString.getPrepareID();
+        String preparePondString = selectedPreparePondString.getPrepareID();
+        String pondString = selectedPreparePondString.getPondID();
+        System.out.println(pondString);
         pond = pondList.getPondById(pondString);
+        preparePond = preparePondList.getPreparePondById(preparePondString);
     }
 
     private void showSelectedPond(PreparePond preparePond) {
-        pondIdLabel.setText(preparePond.getPrepareID());
+        pondIdLabel.setText(preparePond.getPondID());
         String pondStatus = pondList.getPondById(preparePond.getPondID()).getStatus();
         pondStatusLabel.setText(pondStatus);
-        preparePondStatusLabel.setText(preparePond.getStatus());
+        preparePondStatusLabel.setText(preparePond.getNote());
     }
 
     private void showPond(){

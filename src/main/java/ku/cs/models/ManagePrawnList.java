@@ -65,11 +65,12 @@ public class ManagePrawnList {
         int max = 0 ;
         for (ManagePrawn managePrawn : managePrawns) {
             if (managePrawn.getFarmingID().equals(farmingID)){
-                if (managePrawn.getType().equals("วัดน้ำหนัก")){}
-                String idString = managePrawn.getId();
-                System.out.println("idString is: " + idString);
-                Integer idInt = Integer.parseInt(idString.substring(2));
-                id.add(idInt);
+                if (managePrawn.getType().equals("วัดน้ำหนัก")){
+                    String idString = managePrawn.getId();
+                    System.out.println("idString is: " + idString);
+                    Integer idInt = Integer.parseInt(idString.substring(2));
+                    id.add(idInt);
+                }
             }
         }
         for (int i = 0; i < id.size(); i++){

@@ -38,6 +38,7 @@ public class PurchaseOrderDataSource implements DataSource<PurchaseOrderList> {
                 String price = queryOutput.getString("O_PRICE");
                 String status = queryOutput.getString("O_STATUS");
                 String customerID = queryOutput.getString("C_ID");
+                String farmingID = queryOutput.getString("F_ID");
 
 
 
@@ -47,7 +48,8 @@ public class PurchaseOrderDataSource implements DataSource<PurchaseOrderList> {
                                 purchaseType,
                                 Integer.parseInt(price),
                                 status,
-                                customerID
+                                customerID,
+                                farmingID
 
                         )
                 );

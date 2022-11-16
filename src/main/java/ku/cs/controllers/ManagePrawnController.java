@@ -55,12 +55,12 @@ public class ManagePrawnController {
     private void showProductData() {
         farmingTableView.getItems().clear();
         farmingTableView.getColumns().clear();
-        ObservableList = FXCollections.observableArrayList(farmingList.getFarmings());
+        ObservableList = FXCollections.observableArrayList(farmingList.getStaffFarming());
         farmingTableView.setItems(ObservableList);
         ///แสดงแถวแนวตรง
         ArrayList<StringConfiguration> configs = new ArrayList<>();
-        configs.add(new StringConfiguration("title:ID", "field:farmingID"));
-        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
+        configs.add(new StringConfiguration("title:pondID", "field:pondID"));
+//        configs.add(new StringConfiguration("title:หมายเลข", "field:pondID"));
 
 
         for (StringConfiguration conf: configs) {
