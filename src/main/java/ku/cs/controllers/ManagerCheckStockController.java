@@ -61,8 +61,7 @@ public class ManagerCheckStockController {
         getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
         String name  = getItem.get(0);
         String phone  = getItem.get(1);
-        String id  = getItem.get(2);
-        String address  = getItem.get(3);
+        String address  = getItem.get(2);
 
         passItem = new ArrayList<>();
 
@@ -177,9 +176,8 @@ public class ManagerCheckStockController {
 
         String name  = getItem.get(0);
         String phone  = getItem.get(1);
-        String id  = getItem.get(2);
-        String address  = getItem.get(3);
-        String purchaseType = getItem.get(4);
+        String address  = getItem.get(2);
+        String purchaseType = getItem.get(3);
 
         String price = priceTextField.getText();
         String farmingID = selectedFarming().getFarmingID();
@@ -188,7 +186,6 @@ public class ManagerCheckStockController {
 
         passItem.add(name);
         passItem.add(phone);
-        passItem.add(id);
         passItem.add(address);
         passItem.add(purchaseType);
         passItem.add(farmingID);

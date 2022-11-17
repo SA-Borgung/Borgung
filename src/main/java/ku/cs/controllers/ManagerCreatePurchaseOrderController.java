@@ -37,12 +37,11 @@ public class ManagerCreatePurchaseOrderController {
         getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
         String name  = getItem.get(0);
         String phone  = getItem.get(1);
-        String id  = getItem.get(2);
-        String address = getItem.get(3);
-        String purchaseType = getItem.get(4);
-        String farmingID  = getItem.get(5);
-        String price  = getItem.get(6);
-        String sellDate  = getItem.get(7);
+        String address = getItem.get(2);
+        String purchaseType = getItem.get(3);
+        String farmingID  = getItem.get(4);
+        String price  = getItem.get(5);
+        String sellDate  = getItem.get(6);
 
         purchaseOrderListDataSource = new PurchaseOrderDataSource();
         purchaseOrderList = purchaseOrderListDataSource.readData();
@@ -61,11 +60,11 @@ public class ManagerCreatePurchaseOrderController {
     private void showData() {
         String name  = getItem.get(0);
         String phone  = getItem.get(1);
-        String id  = getItem.get(2);
-        String address = getItem.get(3);
-        String purchaseType = getItem.get(4);
-        String farmingID  = getItem.get(5);
-        String price  = getItem.get(6);
+        String address = getItem.get(2);
+        String purchaseType = getItem.get(3);
+        String farmingID  = getItem.get(4);
+        String price  = getItem.get(5);
+        String sellDate  = getItem.get(6);
 
         Farming farming = farmingList.getFarmingById(farmingID);
         String prawnString = farming.getPrawnID();
@@ -81,12 +80,15 @@ public class ManagerCreatePurchaseOrderController {
 
     private void handleSql(){
 
-        int customerID = customerList.count()+1;
-        String customerIDString = "C" + customerID;
         String name  = getItem.get(0);
         String phone  = getItem.get(1);
-        String address = getItem.get(3);
-        String farmingID  = getItem.get(5);
+        String address = getItem.get(2);
+        String purchaseType = getItem.get(3);
+        String farmingID  = getItem.get(4);
+        String sellDate  = getItem.get(6);
+
+        int customerID = customerList.count()+1;
+        String customerIDString = "C" + customerID;
 
         Customer customer = new Customer(customerIDString, name, phone, address);
         if (!customerList.checkCustomerByName(customer.getName())){
@@ -94,15 +96,13 @@ public class ManagerCreatePurchaseOrderController {
         }
 
         Farming farming = farmingList.getFarmingById(farmingID);
-        String sellDate  = getItem.get(7);
         farming.setSellDate(sellDate);
         farming.setFarmingStatus("ขายแล้ว");
         farming.updateToSql();
 
         int orderId = purchaseOrderList.count()+1;
         String orderIDString = "OR"+ orderId;
-        String purchaseType = getItem.get(4);
-        String priceString  = getItem.get(6);
+        String priceString  = getItem.get(5);
         int price = Integer.parseInt(priceString);
 
         PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customer.getId(), farmingID);

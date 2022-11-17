@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ManagerSellOrderController {
 
 
-    @FXML private TextField nameTextField,phoneTextField,idCardTextField;
+    @FXML private TextField nameTextField,phoneTextField;
     @FXML private TableView<Customer> customerTableView;
     @FXML private TextArea addressTextArea;
     @FXML private Label warningLabel;
@@ -69,12 +69,10 @@ public class ManagerSellOrderController {
     private void enterCustomerDetail(){
         String name = nameTextField.getText();
         String phone = phoneTextField.getText();
-        String id = idCardTextField.getText();
         String address = addressTextArea.getText();
         String purchaseType = this.purchaseType;
         passItem.add(name);
         passItem.add(phone);
-        passItem.add(id);
         passItem.add(address);
         passItem.add(purchaseType);
     }
@@ -89,7 +87,6 @@ public class ManagerSellOrderController {
     public void showSelectedCustomer(Customer customer){
         this.nameTextField.setText(customer.getName());
         this.phoneTextField.setText(customer.getPhoneNumber());
-        this.idCardTextField.setText(customer.getId());
         this.addressTextArea.setText(customer.getAddress());
     }
 
@@ -128,7 +125,7 @@ public class ManagerSellOrderController {
     @FXML
     public void checkStockButton(ActionEvent actionEvent) throws IOException {
         if (nameTextField.getText().isEmpty() || phoneTextField.getText().isEmpty()
-                || idCardTextField.getText().isEmpty() || addressTextArea.getText().isEmpty()) {
+                || addressTextArea.getText().isEmpty()) {
             System.out.println("กรอกข้อมูลให้ครบ");
             warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
         } else {
