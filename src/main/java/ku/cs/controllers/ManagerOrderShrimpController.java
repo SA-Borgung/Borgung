@@ -99,6 +99,7 @@ public class ManagerOrderShrimpController {
             VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,null);
             vendorOrder.insertToSql();
             vendorOrderList.addVendorOrder(vendorOrder);
+            warningLabel.setText("สั่งกุ้งเสร็จสิ้น");
         }
 
 
