@@ -75,13 +75,13 @@ public class StaffAddShrimpController {
                 return true;
             }
             else {
-                warningLabel.setText("กรุณากรอกวันที่ให้อยู่ในรูปแบบ dd-mm-yyyy");
+                warningLabel.setText("กรอกวันที่ไม่ถูกต้อง");
                 System.out.println("วันที่ผิด");
                 return false;
             }
         }
         else {
-            warningLabel.setText("กรุณากรอกรอบให้ถูกต้อง");
+            warningLabel.setText("กรอกรอบไม่ถูกต้อง");
             System.out.println("รอบผิด");
             return false;
         }

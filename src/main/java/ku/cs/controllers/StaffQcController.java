@@ -150,6 +150,7 @@ public class StaffQcController {
                 warningLabel.setText("กรุณากรอกสาเหตุที่ไม่ผ่าน");
                 System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน2");
             }else {
+
                 int qcID = qcList.count()+1;
                 String qcIDString =  "QC"+ qcID;
                 String date = qcTimeTextField.getText();
@@ -157,10 +158,18 @@ public class StaffQcController {
                 String farmingId = selectedFarming().getFarmingID();
                 String userID  = getItem.get(0);
 
-                QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-                qc.insertToSql();
-                qcList.addQC(qc);
-                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                if (farmingList.validateJavaDate(date)){
+                    QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+                    qc.insertToSql();
+                    qcList.addQC(qc);
+                    warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                }
+                else {
+                    warningLabel.setText("กรอกวันที่ไม่ถูกต้อง");
+                    System.out.println("วันที่ผิด");
+                }
+
+
             }
         } else if (qcStatus == "ผ่าน"){
             if (qcTimeTextField.getText().isEmpty()){
@@ -174,10 +183,16 @@ public class StaffQcController {
                 String farmingId = selectedFarming().getFarmingID();
                 String userID  = getItem.get(0);
 
-                QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-                qc.insertToSql();
-                qcList.addQC(qc);
-                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                if (farmingList.validateJavaDate(date)){
+                    QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
+                    qc.insertToSql();
+                    qcList.addQC(qc);
+                    warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                }
+                else {
+                    warningLabel.setText("กรอกวันที่ไม่ถูกต้อง");
+                    System.out.println("วันที่ผิด");
+                }
             }
         }
     }
