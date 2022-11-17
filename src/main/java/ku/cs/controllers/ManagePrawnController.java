@@ -48,6 +48,7 @@ public class ManagePrawnController {
         clearSelectedProduct();
         farmingTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                warningLabel.setText("");
                 showSelectedFarming(newValue);
             }
         });
@@ -115,13 +116,15 @@ public class ManagePrawnController {
             if (managePrawnList.validateJavaDate(date)){
                 ManagePrawn managePrawn = new ManagePrawn(manageIDString, manageType, manageNote, date, farmingId);
                 managePrawn.insertToSql();
+                managePrawnList.addManagePrawn(managePrawn);
                 Farming farming = farmingList.getFarmingById(farmingId);
                 farming.setFarmingStatus(statusType);
                 farming.updateToSql();
+//                farmingList.addFarming(farming);
                 warningLabel.setText("บันทึกเสร็จสิ้น");
                 System.out.println("บันทึกแล้ว");
             }else {
-                warningLabel.setText("กรุณาใส่วันที่ในรูปแบบ dd-mm-yyyy");
+                warningLabel.setText("ใส่ข้อมูลผิดพลาด");
                 System.out.println("ใส่วันที่ผิดพลาด");
             }
         }catch (Exception e) {
