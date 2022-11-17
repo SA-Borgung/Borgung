@@ -32,9 +32,11 @@ public class CustomerList {
     public Customer getCustomerByName(String name){
         for (Customer customer : customers) {
             if (customer.checkName(name)) {
+                System.out.println("customer" + customer.getId());
                 return customer;
             }
         }
+        System.out.println("Fail");
         return null;
     }
 

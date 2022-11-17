@@ -57,7 +57,7 @@ public class Customer {
     }
 
     public boolean checkName(String name) {
-        return this.id.equals(name);
+        return this.name.equals(name);
     }
 
     public void insertToSql() {
@@ -84,7 +84,25 @@ public class Customer {
         }
     }
 
+    public void updateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "root","");
+            pst = connection.prepareStatement("UPDATE customer SET C_TEL = ?,C_ADDRESS = ? WHERE C_ID=?");
+            pst.setString(1, this.phoneNumber);
+            pst.setString(2, this.address);
+            pst.setString(3, this.id);
 
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 
 }

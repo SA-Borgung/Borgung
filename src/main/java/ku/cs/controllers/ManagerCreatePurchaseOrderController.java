@@ -91,26 +91,34 @@ public class ManagerCreatePurchaseOrderController {
         String customerIDString = "C" + customerID;
 
         Customer customer = new Customer(customerIDString, name, phone, address);
-        if (!customerList.checkCustomerByName(customer.getName())){
+        if (customerList.checkCustomerByName(customer.getName())) {
             customer.insertToSql();
         }
-
-        Farming farming = farmingList.getFarmingById(farmingID);
-        farming.setSellDate(sellDate);
-        farming.setFarmingStatus("ขายแล้ว");
-        farming.updateToSql();
-
-        int orderId = purchaseOrderList.count()+1;
-        String orderIDString = "OR"+ orderId;
-        String priceString  = getItem.get(5);
-        int price = Integer.parseInt(priceString);
-
-        PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customer.getId(), farmingID);
-        purchaseOrder.insertToSql();
-
-        Pond pond = pondList.getPondById(farming.getPondID());
-        pond.setStatus("ยังไม่ดำเนินการ");
-        pond.updateToSql();
+        else {
+            System.out.println(name);
+            customerList.getCustomerByName(name);
+//            Customer updateCustomer = customerList.getCustomerByName(name);
+//            updateCustomer.setAddress(address);
+//            updateCustomer.setPhoneNumber(phone);
+//            updateCustomer.updateToSql();
+        }
+//
+//        Farming farming = farmingList.getFarmingById(farmingID);
+//        farming.setSellDate(sellDate);
+//        farming.setFarmingStatus("ขายแล้ว");
+//        farming.updateToSql();
+//
+//        int orderId = purchaseOrderList.count()+1;
+//        String orderIDString = "OR"+ orderId;
+//        String priceString  = getItem.get(5);
+//        int price = Integer.parseInt(priceString);
+//
+//        PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customer.getId(), farmingID);
+//        purchaseOrder.insertToSql();
+//
+//        Pond pond = pondList.getPondById(farming.getPondID());
+//        pond.setStatus("ยังไม่ดำเนินการ");
+//        pond.updateToSql();
 
 
 
