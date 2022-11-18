@@ -85,22 +85,27 @@ public class ManagerOrderShrimpController {
 
     @FXML
     private void clickFinishedButton() {
+        try{
+            if (prawnAmountField.getText().isEmpty() || shopNameField.getText().isEmpty()) {
+                System.out.println("โปรดกรอกข้อมูลให้ครบ");
+                warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+            } else {
+                int vendorOrderID = vendorOrderList.count()+1;
+                String vendorOrderIDString = "GET"+vendorOrderID;
+                int amount = Integer.parseInt(prawnAmountField.getText());
+                String sellerName = shopNameField.getText();
+                String prawnID = selectedPrawn().getId();
 
-        if (prawnAmountField.getText().isEmpty() || shopNameField.getText().isEmpty()) {
-            System.out.println("กรุณากรอกข้อมูลให้ครบ");
-            warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
-        } else {
-            int vendorOrderID = vendorOrderList.count()+1;
-            String vendorOrderIDString = "GET"+vendorOrderID;
-            int amount = Integer.parseInt(prawnAmountField.getText());
-            String sellerName = shopNameField.getText();
-            String prawnID = selectedPrawn().getId();
-
-            VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,null);
-            vendorOrder.insertToSql();
-            vendorOrderList.addVendorOrder(vendorOrder);
-            warningLabel.setText("สั่งกุ้งเสร็จสิ้น");
+                VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,null);
+                vendorOrder.insertToSql();
+                vendorOrderList.addVendorOrder(vendorOrder);
+                warningLabel.setText("สั่งกุ้งเสร็จสิ้น");
+            }
+        }catch (Exception e){
+            warningLabel.setText("โปรดใส่เป็นตัวเลข");
         }
+
+
 
 
 //        finishLB.setText("กรอกข้อมูลสำเร็จ ");

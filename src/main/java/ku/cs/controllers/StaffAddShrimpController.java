@@ -70,12 +70,13 @@ public class StaffAddShrimpController {
     }
 
     private boolean handleAddFarming(String roundString, String date){
+        int round = Integer.parseInt(roundString);
         if (farmingList.addFarmingInputCheck(roundString)){
             if (farmingList.validateJavaDate(date)){
                 return true;
             }
             else {
-                warningLabel.setText("กรอกวันที่ไม่ถูกต้อง");
+                warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
                 System.out.println("วันที่ผิด");
                 return false;
             }
@@ -84,6 +85,16 @@ public class StaffAddShrimpController {
             warningLabel.setText("กรอกรอบไม่ถูกต้อง");
             System.out.println("รอบผิด");
             return false;
+        }
+    }
+
+    private boolean handleAddRound(int round){
+        if (round > 4 || round <= 1){
+            warningLabel.setText("โปรดใส่รอบในช่วง1ถึง4");
+            return false;
+        }
+        else {
+            return true;
         }
     }
 
@@ -120,22 +131,25 @@ public class StaffAddShrimpController {
             String vendorId = vendorOrder.getId();
 
             if (handleAddFarming(roundString,dateString)){
-                farming = new Farming(farmingIDString, pondID, round, amount, prawnId, dateString,null, "ปกติ", vendorId);
-                handleAddFarming(roundString,dateString);
-                farming.insertToSql();
-                vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
-                String userID = getItem.get(1);
-                vendorOrder.setEmployeeID(userID);
-                System.out.println("vendor status change");
-                warningLabel.setText("ดำเนินการเสร็จสิ้น");
-                vendorOrder.updateToSql();
+                if (handleAddRound(round)){
+                    farming = new Farming(farmingIDString, pondID, round, amount, prawnId, dateString,null, "ปกติ", vendorId);
+                    handleAddFarming(roundString,dateString);
+                    farming.insertToSql();
+                    vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
+                    String userID = getItem.get(1);
+                    vendorOrder.setEmployeeID(userID);
+                    System.out.println("vendor status change");
+                    warningLabel.setText("ดำเนินการเสร็จสิ้น");
+                    vendorOrder.updateToSql();
 
-                Pond pond = pondList.getPondById(pondIdLabel.getText());
-                pond.setStatus("เลี้ยงกุ้ง");
-                pond.updateToSql();
-                staffHome();
+                    Pond pond = pondList.getPondById(pondIdLabel.getText());
+                    pond.setStatus("เลี้ยงกุ้ง");
+                    pond.updateToSql();
+                    staffHome();
+                }
             }
         }catch (Exception e) {
+//
             System.err.println("ใส่ข้อมูลผิดพลาด");
             warningLabel.setText("ใส่ข้อมูลผิดพลาด");
         }

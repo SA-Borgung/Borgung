@@ -165,7 +165,7 @@ public class StaffQcController {
                     warningLabel.setText("ดำเนินการเสร็จสิ้น !");
                 }
                 else {
-                    warningLabel.setText("กรอกวันที่ไม่ถูกต้อง");
+                    warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
                     System.out.println("วันที่ผิด");
                 }
 
@@ -190,7 +190,7 @@ public class StaffQcController {
                     warningLabel.setText("ดำเนินการเสร็จสิ้น !");
                 }
                 else {
-                    warningLabel.setText("กรอกวันที่ไม่ถูกต้อง");
+                    warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
                     System.out.println("วันที่ผิด");
                 }
             }

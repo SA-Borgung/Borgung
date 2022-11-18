@@ -35,6 +35,7 @@ public class ManagerSellOrderController {
     private ArrayList<String> passItem;
     private String purchaseType;
 
+
     @FXML
     public void initialize() {
         customerListDataSource = new CustomerDataSource();
@@ -75,6 +76,19 @@ public class ManagerSellOrderController {
         passItem.add(phone);
         passItem.add(address);
         passItem.add(purchaseType);
+
+        int customerID = customerList.count()+1;
+        String customerIDString = "C" + customerID;
+
+        Customer customer = new Customer(customerIDString, name, phone, address);
+        if (!customerList.checkCustomerByName(customer.getName())) {
+            System.out.println(name);
+            customerList.getCustomerByName(name);
+            Customer updateCustomer = customerList.getCustomerByName(name);
+            updateCustomer.setAddress(address);
+            updateCustomer.setPhoneNumber(phone);
+            updateCustomer.updateToSql();
+        }
     }
 
 //    public Farming selectedFarming(){
@@ -127,10 +141,10 @@ public class ManagerSellOrderController {
         if (nameTextField.getText().isEmpty() || phoneTextField.getText().isEmpty()
                 || addressTextArea.getText().isEmpty()) {
             System.out.println("กรอกข้อมูลให้ครบ");
-            warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+            warningLabel.setText("โปรดกรอกข้อมูลให้ครบ");
         } else {
             if (purchaseType == null){
-                warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+                warningLabel.setText("โปรดกรอกข้อมูลให้ครบ");
             }
             else {
                 enterCustomerDetail();

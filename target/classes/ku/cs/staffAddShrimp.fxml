@@ -81,7 +81,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="warningLabel" layoutX="520.0" layoutY="528.0" text="warningLabel" textFill="RED">
+      <Label fx:id="warningLabel" alignment="CENTER" layoutX="403.0" layoutY="530.0" prefHeight="22.0" prefWidth="327.0" text="warningLabel" textAlignment="CENTER" textFill="RED">
          <font>
             <Font size="15.0" />
          </font>

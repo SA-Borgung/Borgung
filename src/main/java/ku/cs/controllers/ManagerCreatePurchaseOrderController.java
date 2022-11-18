@@ -138,7 +138,7 @@ public class ManagerCreatePurchaseOrderController {
     @FXML
     public void backBtn(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("managerCheckStock");
+            com.github.saacsos.FXRouter.goTo("managerSellOrder");
         } catch (IOException ex) {
             System.err.println(ex.toString());
             System.err.println("ไม่สามารถเข้าหน้า managerHome");

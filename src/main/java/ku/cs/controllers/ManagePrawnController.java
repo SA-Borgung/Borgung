@@ -124,7 +124,7 @@ public class ManagePrawnController {
                 warningLabel.setText("บันทึกเสร็จสิ้น");
                 System.out.println("บันทึกแล้ว");
             }else {
-                warningLabel.setText("ใส่ข้อมูลผิดพลาด");
+                warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
                 System.out.println("ใส่วันที่ผิดพลาด");
             }
         }catch (Exception e) {
