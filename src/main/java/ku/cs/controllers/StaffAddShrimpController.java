@@ -89,7 +89,7 @@ public class StaffAddShrimpController {
     }
 
     private boolean handleAddRound(int round){
-        if (round > 4 || round <= 1){
+        if (round > 4 || round < 1){
             warningLabel.setText("โปรดใส่รอบในช่วง1ถึง4");
             return false;
         }

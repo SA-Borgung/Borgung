@@ -77,7 +77,7 @@ public class ManagerSellOrderController {
         passItem.add(address);
         passItem.add(purchaseType);
 
-        int customerID = customerList.count()+1;
+        int customerID = customerList.count();
         String customerIDString = "C" + customerID;
 
         Customer customer = new Customer(customerIDString, name, phone, address);

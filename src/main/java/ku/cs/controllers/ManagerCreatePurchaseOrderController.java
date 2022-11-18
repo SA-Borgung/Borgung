@@ -113,8 +113,18 @@ public class ManagerCreatePurchaseOrderController {
         String priceString  = getItem.get(5);
         int price = Integer.parseInt(priceString);
 
-        PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customer.getId(), farmingID);
-        purchaseOrder.insertToSql();
+        if (customerList.checkCustomerByName(customer.getName())) {
+            PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customer.getId(), farmingID);
+            purchaseOrder.insertToSql();
+        }
+        else {
+            customerID = customerList.count();
+            customerIDString = "C" + customerID;
+
+            PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customerIDString, farmingID);
+            purchaseOrder.insertToSql();
+        }
+
 
         Pond pond = pondList.getPondById(farming.getPondID());
         pond.setStatus("ยังไม่ดำเนินการ");
