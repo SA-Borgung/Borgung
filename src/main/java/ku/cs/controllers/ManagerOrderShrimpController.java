@@ -113,7 +113,7 @@ public class ManagerOrderShrimpController {
                 }
             }
         }catch (Exception e){
-            warningLabel.setText("โปรดใส่จำนวนกุ้งให้ถูกต้อง");
+            warningLabel.setText("โปรดใส่จำนวนให้ถูกต้อง");
         }
     }
 

@@ -140,6 +140,25 @@ public class StaffQcController {
         }
     }
 
+    private boolean checkManagePrawnDate(String inputDate, String selectedFarmingDate){
+        if (farmingList.validateJavaDate(inputDate)){
+            if (managePrawnList.checkDateInQC(inputDate, selectedFarmingDate)){
+                System.out.println("work");
+                return true;
+            }
+            else {
+                warningLabel.setText("ไม่สามารถบันทึกวันที่ก่อนการดูแลกุ้งปัจจุบันได้");
+                System.out.println("not work");
+                return false;
+            }
+        }
+        else {
+            warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
+            System.out.println("วันที่ผิด");
+            return false;
+        }
+    }
+
     private boolean checkQCDate(String inputDate, String farmingId){
         if (farmingList.validateJavaDate(inputDate)){
             if (qcList.checkDateInQC(inputDate, farmingId)){
@@ -180,20 +199,42 @@ public class StaffQcController {
 
                 if (checkFarmingDate(inputDate, selectedFarmingDate)){
 
-                    if (qcList.latestQC(farmingId) == null) {
-                        QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
-                        qc.insertToSql();
-                        qcList.addQC(qc);
-                        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
-                    }
-                    else {
-                        if (checkQCDate(inputDate, farmingId)){
+                    if (managePrawnList.latestManagePrawn(farmingId) == null){
+                        if (qcList.latestQC(farmingId) == null) {
                             QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
                             qc.insertToSql();
                             qcList.addQC(qc);
                             warningLabel.setText("ดำเนินการเสร็จสิ้น !");
                         }
+                        else {
+                            if (checkQCDate(inputDate, farmingId)){
+                                QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                                qc.insertToSql();
+                                qcList.addQC(qc);
+                                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                            }
+                        }
                     }
+                    else {
+                        if (checkManagePrawnDate(inputDate, farmingId)){
+                            if (qcList.latestQC(farmingId) == null) {
+                                QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                                qc.insertToSql();
+                                qcList.addQC(qc);
+                                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                            }
+                            else {
+                                if (checkQCDate(inputDate, farmingId)){
+                                    QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                                    qc.insertToSql();
+                                    qcList.addQC(qc);
+                                    warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                                }
+                            }
+                        }
+                    }
+
+
                 }
             }
         } else if (qcStatus == "ผ่าน"){
@@ -211,20 +252,42 @@ public class StaffQcController {
 
                 if (checkFarmingDate(inputDate, selectedFarmingDate)){
 
-                    if (qcList.latestQC(farmingId) == null) {
-                        QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
-                        qc.insertToSql();
-                        qcList.addQC(qc);
-                        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
-                    }
-                    else {
-                        if (checkQCDate(inputDate, farmingId)){
+                    if (managePrawnList.latestManagePrawn(farmingId) == null){
+                        if (qcList.latestQC(farmingId) == null) {
                             QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
                             qc.insertToSql();
                             qcList.addQC(qc);
                             warningLabel.setText("ดำเนินการเสร็จสิ้น !");
                         }
+                        else {
+                            if (checkQCDate(inputDate, farmingId)){
+                                QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                                qc.insertToSql();
+                                qcList.addQC(qc);
+                                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                            }
+                        }
                     }
+                    else {
+                        if (checkManagePrawnDate(inputDate, farmingId)){
+                            if (qcList.latestQC(farmingId) == null) {
+                                QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                                qc.insertToSql();
+                                qcList.addQC(qc);
+                                warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                            }
+                            else {
+                                if (checkQCDate(inputDate, farmingId)){
+                                    QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                                    qc.insertToSql();
+                                    qcList.addQC(qc);
+                                    warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                                }
+                            }
+                        }
+                    }
+
+
                 }
             }
         }

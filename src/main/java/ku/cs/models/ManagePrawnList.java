@@ -112,4 +112,28 @@ public class ManagePrawnList {
             return false;
         }
     }
+    public boolean checkDateInQC(String inputDate, String farmingId){
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        ManagePrawn managePrawn = latestManagePrawn(farmingId);
+        try
+        {
+            Date qcDate = sdfrmt.parse(inputDate);
+            Date latestManagePrawnDate = sdfrmt.parse(managePrawn.getDate());
+
+            if (qcDate.compareTo(latestManagePrawnDate) > 0){
+                return true;
+            }
+            else if (qcDate.compareTo(latestManagePrawnDate) == 0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
+    }
 }
