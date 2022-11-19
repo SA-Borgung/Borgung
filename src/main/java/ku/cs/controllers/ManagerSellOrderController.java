@@ -67,6 +67,23 @@ public class ManagerSellOrderController {
         }
     }
 
+    private boolean checkInput(){
+        String phone = phoneTextField.getText();
+        if (phone.length() == 10){
+            try{
+                return true;
+            }
+            catch (Exception e){
+                warningLabel.setText("โปรดกรอกหมายเลขโทรศัพท์ให้ถูกต้อง");
+                return false;
+            }
+        }
+        else {
+            warningLabel.setText("โปรดกรอกหมายเลขโทรศัพท์ให้ถูกต้อง");
+            return false;
+        }
+    }
+
     private void enterCustomerDetail(){
         String name = nameTextField.getText();
         String phone = phoneTextField.getText();
@@ -147,15 +164,12 @@ public class ManagerSellOrderController {
                 warningLabel.setText("โปรดกรอกข้อมูลให้ครบ");
             }
             else {
-                enterCustomerDetail();
-                setPassItem("managerCheckStock");
+                if (checkInput()){
+                    enterCustomerDetail();
+                    setPassItem("managerCheckStock");
+                }
             }
 
-            try {
-                com.github.saacsos.FXRouter.goTo("managerCheckStock");
-            } catch (IOException e) {
-                System.err.println("ไปที่หน้า managerCheckStock ไม่ได้");
-            }
         }
     }
 

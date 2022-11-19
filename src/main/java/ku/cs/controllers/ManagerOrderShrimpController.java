@@ -81,7 +81,16 @@ public class ManagerOrderShrimpController {
         }
     }
 
-
+    private boolean checkInput(){
+        int amount = Integer.parseInt(prawnAmountField.getText());
+        if (amount <= 0){
+            warningLabel.setText("โปรดใส่จำนวนให้ถูกต้อง");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
     @FXML
     private void clickFinishedButton() {
@@ -90,93 +99,26 @@ public class ManagerOrderShrimpController {
                 System.out.println("โปรดกรอกข้อมูลให้ครบ");
                 warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
             } else {
-                int vendorOrderID = vendorOrderList.count()+1;
-                String vendorOrderIDString = "GET"+vendorOrderID;
-                int amount = Integer.parseInt(prawnAmountField.getText());
-                String sellerName = shopNameField.getText();
-                String prawnID = selectedPrawn().getId();
+                if (checkInput()){
+                    int vendorOrderID = vendorOrderList.count()+1;
+                    String vendorOrderIDString = "GET"+vendorOrderID;
+                    int amount = Integer.parseInt(prawnAmountField.getText());
+                    String sellerName = shopNameField.getText();
+                    String prawnID = selectedPrawn().getId();
 
-                VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,null);
-                vendorOrder.insertToSql();
-                vendorOrderList.addVendorOrder(vendorOrder);
-                warningLabel.setText("สั่งกุ้งเสร็จสิ้น");
+                    VendorOrder vendorOrder = new VendorOrder(vendorOrderIDString, amount,sellerName,"รอดำเนินการ",prawnID,null);
+                    vendorOrder.insertToSql();
+                    vendorOrderList.addVendorOrder(vendorOrder);
+                    warningLabel.setText("สั่งกุ้งเสร็จสิ้น");
+                }
             }
         }catch (Exception e){
-            warningLabel.setText("โปรดใส่เป็นตัวเลข");
+            warningLabel.setText("โปรดใส่จำนวนกุ้งให้ถูกต้อง");
         }
-
-
-
-
-//        finishLB.setText("กรอกข้อมูลสำเร็จ ");
-//        finishLB.setTextFill(Color.web("#ff0000", 1));
     }
-
-
-
-
-//    private void showEmployeeListView() {
-//        ListView<String> listView = new ListView<>();
-//        ObservableList = FXCollections.observableArrayList();
-//        ArrayList<Employee> tempEmployeeList = new ArrayList<Employee>();
-//        for (int i = employeeList.count()-1; i>=0; i--){
-//
-//            Employee employee = employeeList.getEmployeeNumber(i);
-//            tempEmployeeList.add(employee);
-//            ObservableList.add(employee.getId());
-//
-//        }
-//        employeeListView.setItems(ObservableList);
-//    }
-
-//    private void handleSelectedEmployeeListView() {
-//        employeeListView.getSelectionModel().selectedItemProperty().addListener(
-//                new ChangeListener<String>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends String> observableValue,
-//                                        String oldValue, String newValue) {
-//                        Employee selectedEmployee = employeeList.getEmployeeById(newValue);
-//                        System.out.println(selectedEmployee + " is selected");
-//                        showSelectedEmployee(selectedEmployee);
-//                        selectedEmployee();
-//                    }
-//                });
-//    }
-
-
-
-//    private void showPrawnListView() {
-//        ListView<String> listView = new ListView<>();
-//
-//        ObservableList = FXCollections.observableArrayList();
-//        ArrayList<Prawn> tempPrawnList = new ArrayList<Prawn>();
-//        for (int i = prawnList.count()-1; i>=0; i--){
-//            Prawn prawn = prawnList.getPrawnNumber(i);
-//            tempPrawnList.add(prawn);
-//            ObservableList2.add(prawn.getId());
-//
-//        }
-//        prawnListView.setItems(ObservableList2);
-//    }
-
-//    private void handleSelectedPrawnListView() {
-//        prawnListView.getSelectionModel().selectedItemProperty().addListener(
-//                new ChangeListener<String>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends String> observableValue,
-//                                        String oldValue, String newValue) {
-//                        Prawn selectedPrawn = prawnList.getPrawnById(newValue);
-//                        System.out.println(selectedPrawn + " is selected");
-//                        showSelectedPrawnType(selectedPrawn);
-//                        selectedPrawn();
-//                    }
-//                });
-//    }
 
     private Prawn selectedPrawn(){
         Prawn selectedPrawnString = prawnTableView.getSelectionModel().selectedItemProperty().get();
-        //System.out.println(selectedVendorOrderString);
-//        Prawn prawn = prawnList.getPrawnById(selectedPrawnString);
         return selectedPrawnString;
     }
 

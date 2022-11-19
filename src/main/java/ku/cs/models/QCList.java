@@ -93,4 +93,29 @@ public class QCList {
             return false;
         }
     }
+
+    public boolean checkDateInCheckStock(String inputDate, String farmingId){
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        QC latestQCDate = latestQC(farmingId);
+        try
+        {
+            Date sellDate = sdfrmt.parse(inputDate);
+            Date qcDate = sdfrmt.parse(latestQCDate.getTime());
+
+            if (sellDate.compareTo(qcDate) > 0){
+                return true;
+            }
+            else if (sellDate.compareTo(qcDate) == 0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
+    }
 }

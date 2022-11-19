@@ -146,6 +146,36 @@ public class ManagerCheckStockController {
         warningLabel.setText("");
     }
 
+    private boolean checkInput(){
+
+        try{
+            int amount = Integer.parseInt(priceTextField.getText());
+            if (amount <= 0){
+                warningLabel.setText("โปรดใส่ราคาให้ถูกต้อง");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (Exception e) {
+            warningLabel.setText("โปรดใส่ราคาให้ถูกต้อง");
+            return false;
+        }
+    }
+
+    private boolean checkQcDate(){
+        String sellDate = sellDateTextField.getText();
+        String farmingID = selectedFarming().getFarmingID();
+        if (qcList.checkDateInCheckStock(sellDate, farmingID)){
+            return true;
+        }
+        else {
+            warningLabel.setText("ไม่สามารถบันทึกวันที่ก่อนวันqcได้");
+            return false;
+        }
+    }
+
     @FXML
     private void enterButton(ActionEvent actionEvent){
         if (priceTextField.getText().isEmpty()) {
@@ -163,12 +193,18 @@ public class ManagerCheckStockController {
             warningLabel.setText("ใส่วันที่ไม่ถูกต้อง");
         }
         else {
-            try {
-                setPassItem("managerCreatePurchaseOrder");
-            } catch (IOException e) {
-                System.err.println(e.toString());
-                System.err.println("ไม่สามารถเข้าหน้า managerCreatePurchaseOrder");
+            if (checkInput()){
+                if (checkQcDate()){
+                    try {
+                        setPassItem("managerCreatePurchaseOrder");
+                    } catch (IOException e) {
+                        System.err.println(e.toString());
+                        System.err.println("ไม่สามารถเข้าหน้า managerCreatePurchaseOrder");
+                    }
+                }
+
             }
+
         }
     }
 
