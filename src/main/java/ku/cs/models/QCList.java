@@ -1,6 +1,9 @@
 package ku.cs.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class QCList {
     private ArrayList<QC> qualityControls;
@@ -66,5 +69,28 @@ public class QCList {
         }
     }
 
+    public boolean checkDateInQC(String inputDate, String farmingId){
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        QC qc = latestQC(farmingId);
+        try
+        {
+            Date qcDate = sdfrmt.parse(inputDate);
+            Date latestQc = sdfrmt.parse(qc.getTime());
 
+            if (qcDate.compareTo(latestQc) > 0){
+                return true;
+            }
+            else if (qcDate.compareTo(latestQc) == 0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
+    }
 }

@@ -109,6 +109,10 @@ public class Farming {
         return this.farmingID.equals(id);
     }
 
+//    public boolean checkRound(int round) {
+//        if (round)
+//    }
+
     public String getFarmingStatus() {
         return farmingStatus;
     }

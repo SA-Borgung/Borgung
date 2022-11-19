@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,10 +9,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ku.cs.models.*;
 import ku.cs.services.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StaffQcController {
@@ -127,22 +121,47 @@ public class StaffQcController {
         this.failedReason.clear();
     }
 
+    private boolean checkFarmingDate(String inputDate, String selectedFarmingDate){
+        if (farmingList.validateJavaDate(inputDate)){
+            if (farmingList.checkDateInQc(inputDate, selectedFarmingDate)){
+                System.out.println("work");
+                return true;
+            }
+            else {
+                warningLabel.setText("ไม่สามารถบันทึกวันที่ก่อนลงบ่อได้");
+                System.out.println("not work");
+                return false;
+            }
+        }
+        else {
+            warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
+            System.out.println("วันที่ผิด");
+            return false;
+        }
+    }
+
+    private boolean checkQCDate(String inputDate, String farmingId){
+        if (farmingList.validateJavaDate(inputDate)){
+            if (qcList.checkDateInQC(inputDate, farmingId)){
+                return true;
+            }
+            else {
+                warningLabel.setText("ไม่สามารถบันทึกวันที่ในอดีตได้");
+                return false;
+            }
+        }
+        else {
+            warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
+            System.out.println("วันที่ผิด");
+            return false;
+        }
+    }
+
     @FXML
     private void clickFinishedButton() {
-//        int qcID = qcList.count()+1;
-//        String qcIDString =  "QC"+ qcID;
-//        String date = qcTimeTextField.getText();
-//        String note = failedReason.getText();
-//        String farmingId = selectedFarming().getFarmingID();
-//        String userID  = getItem.get(0);
-//
-//        QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-//        qc.insertToSql();
-//        qcList.addQC(qc);
-//        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
 
         if (qcStatus == ""){
-            warningLabel.setText("กรุณากรอกข้อมูลให้ครบ");
+            warningLabel.setText("กรุณาเลือกสถานะ qc");
             System.out.println("กรุณากรอกสาเหตุที่ไม่ผ่าน1");
         }
         else if (qcStatus == "ไม่ผ่าน") {
@@ -153,23 +172,29 @@ public class StaffQcController {
 
                 int qcID = qcList.count()+1;
                 String qcIDString =  "QC"+ qcID;
-                String date = qcTimeTextField.getText();
+                String inputDate = qcTimeTextField.getText();
                 String note = failedReason.getText();
                 String farmingId = selectedFarming().getFarmingID();
                 String userID  = getItem.get(0);
+                String selectedFarmingDate = selectedFarming().getGetDate();
 
-                if (farmingList.validateJavaDate(date)){
-                    QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-                    qc.insertToSql();
-                    qcList.addQC(qc);
-                    warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                if (checkFarmingDate(inputDate, selectedFarmingDate)){
+
+                    if (qcList.latestQC(farmingId) == null) {
+                        QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                        qc.insertToSql();
+                        qcList.addQC(qc);
+                        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                    }
+                    else {
+                        if (checkQCDate(inputDate, farmingId)){
+                            QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                            qc.insertToSql();
+                            qcList.addQC(qc);
+                            warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                        }
+                    }
                 }
-                else {
-                    warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
-                    System.out.println("วันที่ผิด");
-                }
-
-
             }
         } else if (qcStatus == "ผ่าน"){
             if (qcTimeTextField.getText().isEmpty()){
@@ -178,20 +203,28 @@ public class StaffQcController {
             }else {
                 int qcID = qcList.count()+1;
                 String qcIDString =  "QC"+ qcID;
-                String date = qcTimeTextField.getText();
+                String inputDate = qcTimeTextField.getText();
                 String note = failedReason.getText();
                 String farmingId = selectedFarming().getFarmingID();
                 String userID  = getItem.get(0);
+                String selectedFarmingDate = selectedFarming().getGetDate();
 
-                if (farmingList.validateJavaDate(date)){
-                    QC qc = new QC(qcIDString, date, qcStatus, note, userID, farmingId);
-                    qc.insertToSql();
-                    qcList.addQC(qc);
-                    warningLabel.setText("ดำเนินการเสร็จสิ้น !");
-                }
-                else {
-                    warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
-                    System.out.println("วันที่ผิด");
+                if (checkFarmingDate(inputDate, selectedFarmingDate)){
+
+                    if (qcList.latestQC(farmingId) == null) {
+                        QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                        qc.insertToSql();
+                        qcList.addQC(qc);
+                        warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                    }
+                    else {
+                        if (checkQCDate(inputDate, farmingId)){
+                            QC qc = new QC(qcIDString, inputDate, qcStatus, note, userID, farmingId);
+                            qc.insertToSql();
+                            qcList.addQC(qc);
+                            warningLabel.setText("ดำเนินการเสร็จสิ้น !");
+                        }
+                    }
                 }
             }
         }

@@ -36,27 +36,32 @@ public class ManagePrawnList {
 
     public static boolean validateJavaDate(String strDate)
     {
-        if (strDate.trim().equals(""))
-        {
-            return false;
-        }
-        else
-        {
-
-            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
-            sdfrmt.setLenient(false);
-
-            try
+        if (strDate.length() == 10){
+            if (strDate.trim().equals(""))
             {
-                Date javaDate = sdfrmt.parse(strDate);
-                System.out.println(strDate+" is valid date format");
-            }
-            catch (ParseException e)
-            {
-                System.out.println(strDate+" is Invalid Date format");
                 return false;
             }
-            return true;
+            else
+            {
+
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+                sdfrmt.setLenient(false);
+
+                try
+                {
+                    Date javaDate = sdfrmt.parse(strDate);
+                    System.out.println(strDate+" is valid date format");
+                }
+                catch (ParseException e)
+                {
+                    System.out.println(strDate+" is Invalid Date format");
+                    return false;
+                }
+                return true;
+            }
+        }
+        else {
+            return false;
         }
     }
 
@@ -81,5 +86,30 @@ public class ManagePrawnList {
         System.out.println("max is: " + max);
         String managePrawnGetID = "TK"+ max;
         return  getManagePrawnById(managePrawnGetID);
+    }
+
+    public boolean checkDateInManagePrawn(String inputDate, String farmingId){
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        ManagePrawn managePrawn = latestManagePrawn(farmingId);
+        try
+        {
+            Date managePrawnDate = sdfrmt.parse(inputDate);
+            Date latestManagePrawnDate = sdfrmt.parse(managePrawn.getDate());
+
+            if (managePrawnDate.compareTo(latestManagePrawnDate) > 0){
+                return true;
+            }
+            else if (managePrawnDate.compareTo(latestManagePrawnDate) == 0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
     }
 }

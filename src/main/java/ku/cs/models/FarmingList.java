@@ -34,27 +34,32 @@ public class FarmingList {
 
     public static boolean validateJavaDate(String strDate)
     {
-        if (strDate.trim().equals(""))
-        {
-            return false;
-        }
-        else
-        {
-
-            SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
-            sdfrmt.setLenient(false);
-
-            try
+        if (strDate.length() == 10){
+            if (strDate.trim().equals(""))
             {
-                Date javaDate = sdfrmt.parse(strDate);
-                System.out.println(strDate+" is valid date format");
-            }
-            catch (ParseException e)
-            {
-                System.out.println(strDate+" is Invalid Date format");
                 return false;
             }
-            return true;
+            else
+            {
+
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+                sdfrmt.setLenient(false);
+
+                try
+                {
+                    Date javaDate = sdfrmt.parse(strDate);
+                    System.out.println(strDate+" is valid date format");
+                }
+                catch (ParseException e)
+                {
+                    System.out.println(strDate+" is Invalid Date format");
+                    return false;
+                }
+                return true;
+            }
+        }
+        else {
+            return false;
         }
     }
 
@@ -62,6 +67,7 @@ public class FarmingList {
         try
         {
             Integer.parseInt(round);
+            int intRound  = Integer.parseInt(round);
             System.out.println(round + " is a valid integer");
         }
         catch (NumberFormatException e)
@@ -92,5 +98,56 @@ public class FarmingList {
         }
 
         return managerFarming;
+    }
+
+    public boolean checkDateInManagePrawn(String inputDate, String selectedFarmingDate){
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        try
+        {
+            Date managePrawnDate = sdfrmt.parse(inputDate);
+            Date farmingDate = sdfrmt.parse(selectedFarmingDate);
+
+            if (managePrawnDate.compareTo(farmingDate) > 0){
+                return true;
+            }
+            else if (managePrawnDate.compareTo(farmingDate) == 0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
+    }
+
+    public boolean checkDateInQc(String inputDate, String selectedFarmingDate){
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
+        sdfrmt.setLenient(false);
+        try
+        {
+            Date qcDate = sdfrmt.parse(inputDate);
+            Date farmingDate = sdfrmt.parse(selectedFarmingDate);
+
+            System.out.println("qcDate is " + qcDate);
+            System.out.println("farmingDate is " + farmingDate);
+
+            if (qcDate.compareTo(farmingDate) > 0){
+                return true;
+            }
+            else if (qcDate.compareTo(farmingDate) == 0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ParseException e)
+        {
+            return false;
+        }
     }
 }

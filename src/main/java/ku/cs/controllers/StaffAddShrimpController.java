@@ -98,6 +98,19 @@ public class StaffAddShrimpController {
         }
     }
 
+    public boolean isStringInt(String round)
+    {
+        try
+        {
+            Integer.parseInt(round);
+            return true;
+        } catch (NumberFormatException ex)
+        {
+            warningLabel.setText("โปรดใส่จำนวนเป็นเลขจำนวนเต็ม");
+            return false;
+        }
+    }
+
     private void showProductData() {
         pondTableView.getItems().clear();
         pondTableView.getColumns().clear();

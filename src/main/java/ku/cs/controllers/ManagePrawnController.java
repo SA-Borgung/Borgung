@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,6 +101,40 @@ public class ManagePrawnController {
         warningLabel.setText("");
     }
 
+    private boolean checkFarmingDate(String inputDate, String selectedFarmingDate){
+        if (farmingList.validateJavaDate(inputDate)){
+            if (farmingList.checkDateInManagePrawn(inputDate, selectedFarmingDate)){
+                return true;
+            }
+            else {
+                warningLabel.setText("ไม่สามารถบันทึกวันที่ก่อนลงบ่อได้");
+                return false;
+            }
+        }
+        else {
+            warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
+            System.out.println("วันที่ผิด");
+            return false;
+        }
+    }
+
+    private boolean checkManagePrawnDate(String inputDate, String farmingId){
+        if (farmingList.validateJavaDate(inputDate)){
+            if (managePrawnList.checkDateInManagePrawn(inputDate, farmingId)){
+                return true;
+            }
+            else {
+                warningLabel.setText("ไม่สามารถบันทึกวันที่ในอดีตได้");
+                return false;
+            }
+        }
+        else {
+            warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
+            System.out.println("วันที่ผิด");
+            return false;
+        }
+    }
+
     @FXML
     private void pressSave() {
         try {
@@ -110,22 +142,37 @@ public class ManagePrawnController {
             String manageIDString = "TK"+ manageID;
             String manageType = noteType;
             String manageNote = textNote.getText();
-            String date = dateTextField.getText();
+            String inputDate = dateTextField.getText();
             String farmingId = selectedFarming().getFarmingID();
+            String selectedFarmingDate = selectedFarming().getGetDate();
 
-            if (managePrawnList.validateJavaDate(date)){
-                ManagePrawn managePrawn = new ManagePrawn(manageIDString, manageType, manageNote, date, farmingId);
-                managePrawn.insertToSql();
-                managePrawnList.addManagePrawn(managePrawn);
-                Farming farming = farmingList.getFarmingById(farmingId);
-                farming.setFarmingStatus(statusType);
-                farming.updateToSql();
+            if (checkFarmingDate(inputDate, selectedFarmingDate)){
+                if (managePrawnList.latestManagePrawn(farmingId) == null){
+                    ManagePrawn managePrawn = new ManagePrawn(manageIDString, manageType, manageNote, inputDate, farmingId);
+                    managePrawn.insertToSql();
+                    managePrawnList.addManagePrawn(managePrawn);
+                    Farming farming = farmingList.getFarmingById(farmingId);
+                    farming.setFarmingStatus(statusType);
+                    farming.updateToSql();
 //                farmingList.addFarming(farming);
-                warningLabel.setText("บันทึกเสร็จสิ้น");
-                System.out.println("บันทึกแล้ว");
-            }else {
-                warningLabel.setText("โปรดใส่วันที่รูปแบบนี้ yyyy-mm-dd");
-                System.out.println("ใส่วันที่ผิดพลาด");
+                    warningLabel.setText("บันทึกเสร็จสิ้น");
+                    System.out.println("บันทึกแล้ว");
+                }
+                else{
+                    if (checkManagePrawnDate(inputDate, farmingId)){
+                        ManagePrawn managePrawn = new ManagePrawn(manageIDString, manageType, manageNote, inputDate, farmingId);
+                        managePrawn.insertToSql();
+                        managePrawnList.addManagePrawn(managePrawn);
+                        Farming farming = farmingList.getFarmingById(farmingId);
+                        farming.setFarmingStatus(statusType);
+                        farming.updateToSql();
+//                farmingList.addFarming(farming);
+                        warningLabel.setText("บันทึกเสร็จสิ้น");
+                        System.out.println("บันทึกแล้ว");
+                    }
+                }
+
+
             }
         }catch (Exception e) {
             warningLabel.setText("กรุณากรอกข้อมูลให้ครบถ้วน");
