@@ -21,11 +21,11 @@ public class PreparePondDataSource implements DataSource<PreparePondList> {
 
 
     @Override
-    public PreparePondList readData() {
+    public PreparePondList managerReadData() {
         PreparePondList list = new PreparePondList();
 
         databaseConnection = new DatabaseConnection();
-        Connection connectDB = databaseConnection.getConnection();
+        Connection connectDB = databaseConnection.getManagerConnection();
         String connectQuery = "SELECT * FROM prepare_pond";
 
         try{
@@ -59,9 +59,43 @@ public class PreparePondDataSource implements DataSource<PreparePondList> {
     }
 
     @Override
-    public void insertData(PreparePondList preparePondList) {
+    public PreparePondList staffReadData() {
+        PreparePondList list = new PreparePondList();
 
+        databaseConnection = new DatabaseConnection();
+        Connection connectDB = databaseConnection.getStaffConnection();
+        String connectQuery = "SELECT * FROM prepare_pond";
+
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQuery);
+
+            while (queryOutput != null && queryOutput.next()){
+                String prepareID = queryOutput.getString("T_ID");
+                String status = queryOutput.getString("T_STATUS");
+                String note = queryOutput.getString("T_NOTE");
+                String employeeID = queryOutput.getString("E_ID");
+                String pondID = queryOutput.getString("W_ID");
+
+                list.addPreparePond(
+                        new PreparePond(
+                                prepareID,
+                                status,
+                                note,
+                                employeeID,
+                                pondID
+
+                        )
+                );
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
+
 
 }
 

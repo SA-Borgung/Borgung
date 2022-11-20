@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,13 +40,13 @@ public class StaffDeliveryController {
     @FXML
     public void initialize() {
         purchaseOrderListDataSource = new PurchaseOrderDataSource();
-        purchaseOrderList = purchaseOrderListDataSource.readData();
+        purchaseOrderList = purchaseOrderListDataSource.managerReadData();
         customerListDataSource = new CustomerDataSource();
-        customerList = customerListDataSource.readData();
+        customerList = customerListDataSource.managerReadData();
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.readData();
+        farmingList = farmingListDataSource.managerReadData();
         prawnDataSource = new PrawnDataSource();
-        prawnList = prawnDataSource.readData();
+        prawnList = prawnDataSource.managerReadData();
 
         showProductData();
         clearSelectedProduct();

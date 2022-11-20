@@ -44,14 +44,14 @@ public class ManagerCreatePurchaseOrderController {
         String sellDate  = getItem.get(6);
 
         purchaseOrderListDataSource = new PurchaseOrderDataSource();
-        purchaseOrderList = purchaseOrderListDataSource.readData();
+        purchaseOrderList = purchaseOrderListDataSource.managerReadData();
         customerListDataSource = new CustomerDataSource();
-        customerList = customerListDataSource.readData();
+        customerList = customerListDataSource.managerReadData();
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.readData();prawnDataSource = new PrawnDataSource();
-        prawnList = prawnDataSource.readData();
+        farmingList = farmingListDataSource.managerReadData();prawnDataSource = new PrawnDataSource();
+        prawnList = prawnDataSource.managerReadData();
         pondListDataSource = new PondDataSource();
-        pondList = pondListDataSource.readData();
+        pondList = pondListDataSource.managerReadData();
 
         showData();
 

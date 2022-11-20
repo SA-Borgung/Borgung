@@ -20,11 +20,11 @@ public class PondDataSource implements DataSource<PondList> {
 
 
     @Override
-    public PondList readData() {
+    public PondList managerReadData() {
         PondList list = new PondList();
 
         databaseConnection = new DatabaseConnection();
-        Connection connectDB = databaseConnection.getConnection();
+        Connection connectDB = databaseConnection.getManagerConnection();
         String connectQuery = "SELECT * FROM pond";
 
         try{
@@ -55,8 +55,39 @@ public class PondDataSource implements DataSource<PondList> {
     }
 
     @Override
-    public void insertData(PondList pondList) {
+    public PondList staffReadData() {
+        PondList list = new PondList();
 
+        databaseConnection = new DatabaseConnection();
+        Connection connectDB = databaseConnection.getStaffConnection();
+        String connectQuery = "SELECT * FROM pond";
+
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQuery);
+
+            while (queryOutput != null && queryOutput.next()){
+                String id = queryOutput.getString("W_ID");
+                String status = queryOutput.getString("W_STATUS");
+                String detail = queryOutput.getString("W_DETAILS");
+
+
+                list.addPond(
+                        new Pond(
+                                id,
+                                status,
+                                detail
+
+                        )
+                );
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
+
 
 }

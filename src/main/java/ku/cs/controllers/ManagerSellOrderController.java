@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
 import ku.cs.models.*;
 import ku.cs.services.*;
 
@@ -39,7 +36,7 @@ public class ManagerSellOrderController {
     @FXML
     public void initialize() {
         customerListDataSource = new CustomerDataSource();
-        customerList = customerListDataSource.readData();
+        customerList = customerListDataSource.managerReadData();
         passItem = new ArrayList<>();
         showProductData();
         clearSelectedProduct();

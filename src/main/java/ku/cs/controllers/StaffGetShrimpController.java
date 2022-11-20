@@ -11,7 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import ku.cs.models.Prawn;
 import ku.cs.models.PrawnList;
 import ku.cs.models.VendorOrder;
 import ku.cs.models.VendorOrderList;
@@ -49,9 +48,9 @@ public class StaffGetShrimpController {
         String userID  = getItem.get(0);
 
         dataSource = new VendorOrderDataSource();
-        vendorOrderList = dataSource.readData();
+        vendorOrderList = dataSource.managerReadData();
         prawnListDataSource = new PrawnDataSource();
-        prawnList = prawnListDataSource.readData();
+        prawnList = prawnListDataSource.managerReadData();
         passItem = new ArrayList<>();
 
 

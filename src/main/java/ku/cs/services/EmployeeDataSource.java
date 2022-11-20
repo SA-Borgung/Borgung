@@ -20,13 +20,13 @@ public class EmployeeDataSource implements DataSource<EmployeeList> {
 
 
     @Override
-    public EmployeeList readData() {
+    public EmployeeList managerReadData() {
 
         EmployeeList list = new EmployeeList();
 
         databaseConnection = new DatabaseConnection();
 
-        Connection connectDB = databaseConnection.getConnection();
+        Connection connectDB = databaseConnection.getManagerConnection();
         String connectQuery = "SELECT * FROM employee";
 
         try{
@@ -68,8 +68,50 @@ public class EmployeeDataSource implements DataSource<EmployeeList> {
     }
 
     @Override
-    public void insertData(EmployeeList employeeList) {
+    public EmployeeList staffReadData() {
+        EmployeeList list = new EmployeeList();
 
+        databaseConnection = new DatabaseConnection();
+
+        Connection connectDB = databaseConnection.getStaffConnection();
+        String connectQuery = "SELECT * FROM employee";
+
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQuery);
+
+            while (queryOutput != null && queryOutput.next()){
+
+                String id = queryOutput.getString("E_ID");
+                String name = queryOutput.getString("E_NAME");
+                String dateOfBirth = queryOutput.getString("E_DOB");
+                String sex = queryOutput.getString("E_SEX");
+                String address = queryOutput.getString("E_ADDRESS");
+                String phoneNumber = queryOutput.getString("E_TEL");
+                String startWorkingDate = queryOutput.getString("E_STARTWORK");
+                String password = queryOutput.getString("E_PASSWORD");
+                String role = queryOutput.getString("E_ROLE");
+
+                list.addEmployee(
+                        new Employee(
+                                id,
+                                name,
+                                dateOfBirth,
+                                Integer.parseInt(sex),
+                                address,
+                                phoneNumber,
+                                startWorkingDate,
+                                password,
+                                role
+                        )
+                );
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }

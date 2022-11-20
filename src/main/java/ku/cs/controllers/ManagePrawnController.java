@@ -38,9 +38,9 @@ public class ManagePrawnController {
     @FXML
     public void initialize() {
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.readData();
+        farmingList = farmingListDataSource.managerReadData();
         managePrawnListDataSource = new ManagePrawnDataSource();
-        managePrawnList = managePrawnListDataSource.readData();
+        managePrawnList = managePrawnListDataSource.managerReadData();
 
         showProductData();
         clearSelectedProduct();

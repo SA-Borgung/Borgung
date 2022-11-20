@@ -41,11 +41,11 @@ public class StaffQcController {
         String userID  = getItem.get(0);
 
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.readData();
+        farmingList = farmingListDataSource.managerReadData();
         managePrawnListDataSource = new ManagePrawnDataSource();
-        managePrawnList = managePrawnListDataSource.readData();
+        managePrawnList = managePrawnListDataSource.managerReadData();
         qcListDataSource = new QCDataSource();
-        qcList = qcListDataSource.readData();
+        qcList = qcListDataSource.managerReadData();
 
         showProductData();
         clearSelectedProduct();

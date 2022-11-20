@@ -1,7 +1,5 @@
 package ku.cs.services;
 
-import ku.cs.models.Pond;
-import ku.cs.models.PondList;
 import ku.cs.models.Prawn;
 import ku.cs.models.PrawnList;
 
@@ -21,11 +19,11 @@ public class PrawnDataSource implements DataSource<PrawnList> {
 
 
     @Override
-    public PrawnList readData() {
+    public PrawnList managerReadData() {
         PrawnList list = new PrawnList();
 
         databaseConnection = new DatabaseConnection();
-        Connection connectDB = databaseConnection.getConnection();
+        Connection connectDB = databaseConnection.getManagerConnection();
         String connectQuery = "SELECT * FROM prawn";
 
         try{
@@ -56,8 +54,39 @@ public class PrawnDataSource implements DataSource<PrawnList> {
     }
 
     @Override
-    public void insertData(PrawnList prawnList) {
+    public PrawnList staffReadData() {
+        PrawnList list = new PrawnList();
 
+        databaseConnection = new DatabaseConnection();
+        Connection connectDB = databaseConnection.getStaffConnection();
+        String connectQuery = "SELECT * FROM prawn";
+
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQuery);
+
+            while (queryOutput != null && queryOutput.next()){
+                String id = queryOutput.getString("P_ID");
+                String species = queryOutput.getString("P_SPECIES");
+                String detail = queryOutput.getString("P_DETAILS");
+
+
+                list.addPrawn(
+                        new Prawn(
+                                id,
+                                species,
+                                detail
+
+                        )
+                );
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
+
 
 }

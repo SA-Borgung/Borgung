@@ -48,13 +48,13 @@ public class ManagerPrepareBorgungController {
     public void initialize() {
 
         dataSource = new PondDataSource();
-        pondList = dataSource.readData();
+        pondList = dataSource.managerReadData();
 
         employeeDataSource = new EmployeeDataSource();
-        employeeList = employeeDataSource.readData();
+        employeeList = employeeDataSource.managerReadData();
 
         preparePondListDataSource = new PreparePondDataSource();
-        preparePondList = preparePondListDataSource.readData();
+        preparePondList = preparePondListDataSource.managerReadData();
 
 //        showEmployeeListView();
 //        clearSelectedRow();

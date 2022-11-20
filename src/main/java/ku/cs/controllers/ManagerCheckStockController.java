@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,13 +64,13 @@ public class ManagerCheckStockController {
         passItem = new ArrayList<>();
 
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.readData();
+        farmingList = farmingListDataSource.managerReadData();
         managePrawnListDataSource = new ManagePrawnDataSource();
-        managePrawnList = managePrawnListDataSource.readData();
+        managePrawnList = managePrawnListDataSource.managerReadData();
         prawnListDataSource = new PrawnDataSource();
-        prawnList = prawnListDataSource.readData();
+        prawnList = prawnListDataSource.managerReadData();
         qcListDataSource = new QCDataSource();
-        qcList = qcListDataSource.readData();
+        qcList = qcListDataSource.managerReadData();
 
         farmingCheckQC = new FarmingList();
 

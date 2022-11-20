@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,9 +38,9 @@ public class StaffPrepareBorgungController {
         getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
         String userID  = getItem.get(0);
         pondListDataSource = new PondDataSource();
-        pondList = pondListDataSource.readData();
+        pondList = pondListDataSource.managerReadData();
         preparePondListDataSource = new PreparePondDataSource();
-        preparePondList = preparePondListDataSource.readData();
+        preparePondList = preparePondListDataSource.managerReadData();
 
         showProductData();
         clearSelectedProduct();

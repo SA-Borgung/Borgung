@@ -8,12 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import ku.cs.models.*;
 import ku.cs.services.DataSource;
-import ku.cs.services.DatabaseConnection;
 import ku.cs.services.EmployeeDataSource;
 
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class LoginController {
@@ -38,7 +36,7 @@ public class LoginController {
     public void initialize() {
         passItem = new ArrayList<>();
         employeeListDataSource = new EmployeeDataSource();
-        employeeList = employeeListDataSource.readData();
+        employeeList = employeeListDataSource.managerReadData();
     }
 
     @FXML

@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,15 +47,15 @@ public class StaffAddShrimpController {
         String userID = getItem.get(1);
 
         dataSource = new PondDataSource();
-        pondList = dataSource.readData();
+        pondList = dataSource.managerReadData();
         vendorOrderListDataSource = new VendorOrderDataSource();
-        vendorOrderList = vendorOrderListDataSource.readData();
+        vendorOrderList = vendorOrderListDataSource.managerReadData();
         vendorOrder = vendorOrderList.getVendorOrderById(R_ID);
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.readData();
+        farmingList = farmingListDataSource.managerReadData();
 
         prawnListDataSource = new PrawnDataSource();
-        prawnList = prawnListDataSource.readData();
+        prawnList = prawnListDataSource.managerReadData();
         Prawn prawn =prawnList.getPrawnById("1");
         clearSelectedProduct();
         showProductData();

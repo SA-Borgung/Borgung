@@ -1,7 +1,5 @@
 package ku.cs.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,13 +36,13 @@ public class ManagerOrderShrimpController {
     @FXML
     public void initialize() {
         employeeDataSource = new EmployeeDataSource();
-        employeeList = employeeDataSource.readData();
+        employeeList = employeeDataSource.managerReadData();
 
         prawnDataSource = new PrawnDataSource();
-        prawnList = prawnDataSource.readData();
+        prawnList = prawnDataSource.managerReadData();
 
         vendorDataSource = new VendorOrderDataSource();
-        vendorOrderList = vendorDataSource.readData();
+        vendorOrderList = vendorDataSource.managerReadData();
 
 
 

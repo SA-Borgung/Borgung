@@ -2,8 +2,6 @@ package ku.cs.services;
 
 import ku.cs.models.Customer;
 import ku.cs.models.CustomerList;
-import ku.cs.models.ManagePrawn;
-import ku.cs.models.ManagePrawnList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,12 +18,12 @@ public class CustomerDataSource implements DataSource<CustomerList>{
         this.databaseConnection = databaseConnection;
     }
     @Override
-    public CustomerList readData() {
+    public CustomerList managerReadData() {
         CustomerList list = new CustomerList();
 
         databaseConnection = new DatabaseConnection();
 
-        Connection connectDB = databaseConnection.getConnection();
+        Connection connectDB = databaseConnection.getManagerConnection();
 
         String connectQuery = "SELECT * FROM customer";
 
@@ -59,8 +57,8 @@ public class CustomerDataSource implements DataSource<CustomerList>{
     }
 
     @Override
-    public void insertData(CustomerList customerList) {
-
+    public CustomerList staffReadData() {
+        return null;
     }
 
 
