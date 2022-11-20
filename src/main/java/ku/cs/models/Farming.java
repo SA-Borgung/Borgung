@@ -131,7 +131,7 @@ public class Farming {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into farming(F_ID,W_ID,P_ID,F_ROUND,F_AMOUNT,F_GETDATE,F_SELLDATE,F_STATUS,R_ID)values(?,?,?,?,?,?,?,?,?)");
             pst.setString(1, this.farmingID);
             pst.setString(2, this.pondID);
@@ -156,7 +156,51 @@ public class Farming {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
+            pst = connection.prepareStatement("UPDATE farming SET F_SELLDATE = ?,F_STATUS = ? WHERE F_ID=?");
+            pst.setString(1, this.sellDate);
+            pst.setString(2, this.farmingStatus);
+            pst.setString(3, this.farmingID);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void staffInsertToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "Staff","staffpass");
+            pst = connection.prepareStatement("Insert into farming(F_ID,W_ID,P_ID,F_ROUND,F_AMOUNT,F_GETDATE,F_SELLDATE,F_STATUS,R_ID)values(?,?,?,?,?,?,?,?,?)");
+            pst.setString(1, this.farmingID);
+            pst.setString(2, this.pondID);
+            pst.setString(3, this.prawnID);
+            pst.setString(4, Integer.toString(this.round));
+            pst.setString(5, Integer.toString(this.prawnAmount));
+            pst.setString(6, this.getDate);
+            pst.setString(7, this.sellDate);
+            pst.setString(8, this.farmingStatus);
+            pst.setString(9, this.vendorOrderID);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void staffUpdateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "Staff","staffpass");
             pst = connection.prepareStatement("UPDATE farming SET F_SELLDATE = ?,F_STATUS = ? WHERE F_ID=?");
             pst.setString(1, this.sellDate);
             pst.setString(2, this.farmingStatus);

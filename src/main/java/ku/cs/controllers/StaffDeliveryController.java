@@ -40,13 +40,13 @@ public class StaffDeliveryController {
     @FXML
     public void initialize() {
         purchaseOrderListDataSource = new PurchaseOrderDataSource();
-        purchaseOrderList = purchaseOrderListDataSource.managerReadData();
+        purchaseOrderList = purchaseOrderListDataSource.staffReadData();
         customerListDataSource = new CustomerDataSource();
-        customerList = customerListDataSource.managerReadData();
+        customerList = customerListDataSource.staffReadData();
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.managerReadData();
+        farmingList = farmingListDataSource.staffReadData();
         prawnDataSource = new PrawnDataSource();
-        prawnList = prawnDataSource.managerReadData();
+        prawnList = prawnDataSource.staffReadData();
 
         showProductData();
         clearSelectedProduct();
@@ -112,7 +112,7 @@ public class StaffDeliveryController {
     private void enterButton(ActionEvent actionEvent){
         try{
             selectedPurchaseOrder().setStatus("ส่งของเสร็จสิิ้น");
-            selectedPurchaseOrder().updateToSql();
+            selectedPurchaseOrder().staffUpdateToSql();
             warningLabel.setText("ส่งของเสร็จสิิ้น");
             System.out.println("กดติดแล้ว");
         }catch (Exception e) {

@@ -38,9 +38,9 @@ public class StaffPrepareBorgungController {
         getItem = (ArrayList<String>) com.github.saacsos.FXRouter.getData();
         String userID  = getItem.get(0);
         pondListDataSource = new PondDataSource();
-        pondList = pondListDataSource.managerReadData();
+        pondList = pondListDataSource.staffReadData();
         preparePondListDataSource = new PreparePondDataSource();
-        preparePondList = preparePondListDataSource.managerReadData();
+        preparePondList = preparePondListDataSource.staffReadData();
 
         showProductData();
         clearSelectedProduct();
@@ -56,9 +56,9 @@ public class StaffPrepareBorgungController {
     public void enterInProgressButton(ActionEvent actionEvent){
         try {
             pond.setStatus("กำลังดำเนินการ");
-            pond.updateToSql();
+            pond.staffUpdateToSql();
             preparePond.setStatus("กำลังดำเนินการ");
-            preparePond.updateToSql();
+            preparePond.staffUpdateToSql();
             showPond();
             System.out.println(pond.getStatus());
         }catch (Exception e) {
@@ -70,9 +70,9 @@ public class StaffPrepareBorgungController {
     public void enterFinishProgressButton(ActionEvent actionEvent){
         try {
             pond.setStatus("เตรียมบ่อเสร็จสิ้น");
-            pond.updateToSql();
+            pond.staffUpdateToSql();
             preparePond.setStatus("ดำเนินการเสร็จสิ้น");
-            preparePond.updateToSql();
+            preparePond.staffUpdateToSql();
             showPond();
             System.out.println(pond.getStatus());
         }catch (Exception e) {

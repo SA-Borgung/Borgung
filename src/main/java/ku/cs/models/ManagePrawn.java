@@ -76,7 +76,7 @@ public class ManagePrawn {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into manage_prawn(D_ID,D_TYPE,D_NOTE,D_DATE,F_ID)values(?,?,?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.type);

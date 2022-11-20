@@ -40,7 +40,7 @@ public class CustomerList {
         return null;
     }
 
-    public boolean checkCustomerByName(String name){
+    public boolean checkCustomerByName(String name){ //หาเพื่อให้ไม่เจอ
         for (Customer customer : customers) {
             if (customer.checkName(name)) {
                 return false;

@@ -113,15 +113,14 @@ public class ManagerCreatePurchaseOrderController {
         String priceString  = getItem.get(5);
         int price = Integer.parseInt(priceString);
 
-        if (customerList.checkCustomerByName(customer.getName())) {
+        if (customerList.checkCustomerByName(name)) {
             PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customer.getId(), farmingID);
             purchaseOrder.insertToSql();
         }
         else {
-            customerID = customerList.count();
-            customerIDString = "C" + customerID;
+            Customer oldCustomer = customerList.getCustomerByName(name);
 
-            PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", customerIDString, farmingID);
+            PurchaseOrder purchaseOrder = new PurchaseOrder(orderIDString, purchaseType, price, "ยังไม่ส่ง", oldCustomer.getId(), farmingID);
             purchaseOrder.insertToSql();
         }
 

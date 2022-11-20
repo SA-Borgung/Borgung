@@ -47,15 +47,15 @@ public class StaffAddShrimpController {
         String userID = getItem.get(1);
 
         dataSource = new PondDataSource();
-        pondList = dataSource.managerReadData();
+        pondList = dataSource.staffReadData();
         vendorOrderListDataSource = new VendorOrderDataSource();
-        vendorOrderList = vendorOrderListDataSource.managerReadData();
+        vendorOrderList = vendorOrderListDataSource.staffReadData();
         vendorOrder = vendorOrderList.getVendorOrderById(R_ID);
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.managerReadData();
+        farmingList = farmingListDataSource.staffReadData();
 
         prawnListDataSource = new PrawnDataSource();
-        prawnList = prawnListDataSource.managerReadData();
+        prawnList = prawnListDataSource.staffReadData();
         Prawn prawn =prawnList.getPrawnById("1");
         clearSelectedProduct();
         showProductData();
@@ -145,17 +145,17 @@ public class StaffAddShrimpController {
                 if (handleAddRound(round)){
                     farming = new Farming(farmingIDString, pondID, round, amount, prawnId, dateString,null, "ปกติ", vendorId);
                     handleAddFarming(roundString,dateString);
-                    farming.insertToSql();
+                    farming.staffInsertToSql();
                     vendorOrder.setStatus("ดำเนินการเสร็จสิ้น");
                     String userID = getItem.get(1);
                     vendorOrder.setEmployeeID(userID);
                     System.out.println("vendor status change");
                     warningLabel.setText("ดำเนินการเสร็จสิ้น");
-                    vendorOrder.updateToSql();
+                    vendorOrder.staffUpdateToSql();
 
                     Pond pond = pondList.getPondById(pondIdLabel.getText());
                     pond.setStatus("เลี้ยงกุ้ง");
-                    pond.updateToSql();
+                    pond.staffUpdateToSql();
                     staffHome();
                 }
             }

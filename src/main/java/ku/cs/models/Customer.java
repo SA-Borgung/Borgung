@@ -68,7 +68,7 @@ public class Customer {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into customer(C_ID,C_NAME,C_TEL,C_ADDRESS)values(?,?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.name);
@@ -92,7 +92,7 @@ public class Customer {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("UPDATE customer SET C_TEL = ?,C_ADDRESS = ? WHERE C_ID=?");
             pst.setString(1, this.phoneNumber);
             pst.setString(2, this.address);

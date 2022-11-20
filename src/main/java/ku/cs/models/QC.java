@@ -95,7 +95,7 @@ public class QC {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Staff","staffpass");
             pst = connection.prepareStatement("Insert into qc(Q_ID,Q_TIME,Q_STATUS,Q_NOTE,E_ID,F_ID)values(?,?,?,?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.time);

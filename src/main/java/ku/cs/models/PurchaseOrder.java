@@ -81,7 +81,7 @@ public class PurchaseOrder {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into purchase_order(O_ID,O_PURCHASE_TYPE,O_PRICE,O_STATUS,C_ID,F_ID )values(?,?,?,?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.purchaseType);
@@ -104,7 +104,27 @@ public class PurchaseOrder {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
+            pst = connection.prepareStatement("UPDATE purchase_order SET O_STATUS = ? WHERE O_ID=?");
+            pst.setString(1, this.status);
+            pst.setString(2, this.id);
+
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void staffUpdateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "Staff","staffpass");
             pst = connection.prepareStatement("UPDATE purchase_order SET O_STATUS = ? WHERE O_ID=?");
             pst.setString(1, this.status);
             pst.setString(2, this.id);

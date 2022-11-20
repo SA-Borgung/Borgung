@@ -58,7 +58,41 @@ public class CustomerDataSource implements DataSource<CustomerList>{
 
     @Override
     public CustomerList staffReadData() {
-        return null;
+        CustomerList list = new CustomerList();
+
+        databaseConnection = new DatabaseConnection();
+
+        Connection connectDB = databaseConnection.getStaffConnection();
+
+        String connectQuery = "SELECT * FROM customer";
+
+        try{
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(connectQuery);
+
+            while (queryOutput != null && queryOutput.next()){
+                String id = queryOutput.getString("C_ID");
+                String name = queryOutput.getString("C_NAME");
+                String phoneNumber = queryOutput.getString("C_TEL");
+                String address = queryOutput.getString("C_ADDRESS");
+
+
+                list.addCustomer(
+                        new Customer(
+                                id,
+                                name,
+                                phoneNumber,
+                                address
+
+                        )
+                );
+
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 

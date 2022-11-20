@@ -71,7 +71,7 @@ public class PreparePond {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into prepare_pond(T_ID ,T_STATUS,T_NOTE,E_ID, W_ID)values(?,?,?,?,?)");
             pst.setString(1, this.prepareID);
             pst.setString(2, this.status);
@@ -97,7 +97,26 @@ public class PreparePond {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
+            pst = connection.prepareStatement("UPDATE prepare_pond SET T_STATUS = ?WHERE T_ID=?");
+            pst.setString(1, this.status);
+            pst.setString(2, this.prepareID);
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void staffUpdateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "Staff","staffpass");
             pst = connection.prepareStatement("UPDATE prepare_pond SET T_STATUS = ?WHERE T_ID=?");
             pst.setString(1, this.status);
             pst.setString(2, this.prepareID);

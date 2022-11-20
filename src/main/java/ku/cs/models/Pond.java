@@ -55,7 +55,7 @@ public class Pond {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into pond(W_NO ,W_STATUS,W_DETAILS)values(?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.status);
@@ -80,7 +80,27 @@ public class Pond {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
+            pst = connection.prepareStatement("UPDATE pond SET W_STATUS = ?,W_DETAILS = ? WHERE W_ID=?");
+            pst.setString(1, this.status);
+            pst.setString(2, this.detail);
+            pst.setString(3, this.id);
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void staffUpdateToSql() {
+        try {
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            String url = "jdbc:mysql://localhost:3306/" + databaseName;
+            connection = DriverManager.getConnection(url , "Staff","staffpass");
             pst = connection.prepareStatement("UPDATE pond SET W_STATUS = ?,W_DETAILS = ? WHERE W_ID=?");
             pst.setString(1, this.status);
             pst.setString(2, this.detail);

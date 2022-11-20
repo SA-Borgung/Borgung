@@ -115,7 +115,7 @@ public class Employee {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("Insert into employee(E_ID,E_NAME,E_DOB,E_SEX,E_ADDRESS,E_TEL,E_STARTWORK,E_PASSWORD,E_ROLE)values(?,?,?,?,?,?,?,?,?)");
             pst.setString(1, this.id);
             pst.setString(2, this.name);
@@ -142,7 +142,7 @@ public class Employee {
                 System.out.println(e);
             }
             String url = "jdbc:mysql://localhost:3306/" + databaseName;
-            connection = DriverManager.getConnection(url , "root","");
+            connection = DriverManager.getConnection(url , "Manager","managerpass");
             pst = connection.prepareStatement("UPDATE employee SET E_NAME = ?,E_DOB = ?,E_SEX= ? ,E_ADDRESS= ? ,E_TEL= ? ,E_STARTWORK= ?,E_PASSWORD= ?,E_ROLE= ? WHERE E_ID=?");
             pst.setString(1, this.id);
             pst.setString(2, this.name);

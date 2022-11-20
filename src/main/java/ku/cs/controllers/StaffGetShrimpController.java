@@ -48,9 +48,9 @@ public class StaffGetShrimpController {
         String userID  = getItem.get(0);
 
         dataSource = new VendorOrderDataSource();
-        vendorOrderList = dataSource.managerReadData();
+        vendorOrderList = dataSource.staffReadData();
         prawnListDataSource = new PrawnDataSource();
-        prawnList = prawnListDataSource.managerReadData();
+        prawnList = prawnListDataSource.staffReadData();
         passItem = new ArrayList<>();
 
 

@@ -38,9 +38,9 @@ public class ManagePrawnController {
     @FXML
     public void initialize() {
         farmingListDataSource = new FarmingDataSource();
-        farmingList = farmingListDataSource.managerReadData();
+        farmingList = farmingListDataSource.staffReadData();
         managePrawnListDataSource = new ManagePrawnDataSource();
-        managePrawnList = managePrawnListDataSource.managerReadData();
+        managePrawnList = managePrawnListDataSource.staffReadData();
 
         showProductData();
         clearSelectedProduct();
@@ -153,7 +153,7 @@ public class ManagePrawnController {
                     managePrawnList.addManagePrawn(managePrawn);
                     Farming farming = farmingList.getFarmingById(farmingId);
                     farming.setFarmingStatus(statusType);
-                    farming.updateToSql();
+                    farming.staffUpdateToSql();
 //                farmingList.addFarming(farming);
                     warningLabel.setText("บันทึกเสร็จสิ้น");
                     System.out.println("บันทึกแล้ว");
@@ -165,7 +165,7 @@ public class ManagePrawnController {
                         managePrawnList.addManagePrawn(managePrawn);
                         Farming farming = farmingList.getFarmingById(farmingId);
                         farming.setFarmingStatus(statusType);
-                        farming.updateToSql();
+                        farming.staffUpdateToSql();
 //                farmingList.addFarming(farming);
                         warningLabel.setText("บันทึกเสร็จสิ้น");
                         System.out.println("บันทึกแล้ว");
